@@ -31,7 +31,7 @@ All three parts are connected by one running example: an **obstacle-avoiding rob
 
 ### Intended Learners
 
-First-year university students and high-school graduates with **no previous knowledge** of computer hardware, networks or artificial intelligence. No programming is required. Technical terms are explained when they first appear.
+First-year university students and high-school graduates who may have some basic knowledge of computer hardware and networking, but we will cover these topics from scratch. No previous knowledge of Behaviourist AI or programming is expected. Technical terms are explained when they first appear.
 
 ---
 ## 3. Folder Structure and Where to Find the Content
