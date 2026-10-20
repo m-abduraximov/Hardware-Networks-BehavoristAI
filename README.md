@@ -12,7 +12,7 @@ work material for project
 | Batyr | CEO | [@github-username-batyr](https://github.com/batyrkhassanbayev) |
 | Mukhammadamin | CIO | [@github-username-mukhammadamin](https://github.com/github-username-amin) |
 | Zere | Visual Design lead | [@github-username-zere](https://github.com/zererere03) |
-| Merei | Video lead (video editing) | [@github-username-merei](https://github.com/mere1kan) |
+| Merey | Video lead (video editing) | [@github-username-merei](https://github.com/mere1kan) |
 | Ardak | Visual Design lead | [@github-username-ardak](https://github.com/ardyxxie) |
 | Asilbek | Quality lead | [@github-username-asilbek](https://github.com/Asilbek-08) |
 | Altair | Content lead | [@github-username-altair](https://github.com/altron-bit) |
