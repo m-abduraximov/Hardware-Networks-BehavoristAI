@@ -50,18 +50,18 @@ First-year university students and high-school graduates who may have some basic
 ```
 | Folder | What you will find there |
 |--------|--------------------------|
-| [`01-planning/`](01-planning/) | Rough plan, workload distribution, to-do list and meeting notes. |
-| [`02-material-for-research/`](02-material-for-research/) | Books, articles, websites and links we used, examples of previous work and the sources log. |
-| [`03-study-guide/`](03-study-guide/) | The main learning content: Hardware, Networks, Behaviorist AI, the robot case study and the glossary. |
-| [`04-test-bank/`](04-test-bank/) | Quiz and test questions with answer keys and explanations. |
-| [`05-slides/`](05-slides/) | Presentation slides (.pptx and PDF). |
-| [`06-videos/`](06-videos/) | Video scripts and links to the video tutorials. |
+| [`01-planning/`](01-Planning/) | Rough plan, workload distribution, to-do list and meeting notes. |
+| [`02-material-for-research/`](02-Material-for-research/) | Books, articles, websites and links we used, examples of previous work and the sources log. |
+| [`03-study-guide/`](03-Study-guide/) | The main learning content: Hardware, Networks, Behaviorist AI, the robot case study and the glossary. |
+| [`04-test-bank/`](04-Test-bank/) | Quiz and test questions with answer keys and explanations. |
+| [`05-slides/`](05-Slides/) | Presentation slides (.pptx and PDF). |
+| [`06-videos/`](06-Videos/) | Video scripts and links to the video tutorials. |
 | [`07-ai-use-log/`](07-ai-use-log/) | Records of how AI tools were used in this project. |
 | [`assets/`](assets/) | Images and diagrams used in the materials. |
 
 ### Suggested Reading Order
 
-1. Start with the [study guide](03-study-guide/).
-2. Watch the matching [video tutorials](06-videos/).
-3. Review the [slides](05-slides/).
-4. Check your understanding with the [test bank](04-test-bank/).
+1. Start with the [study guide](03-Study-guide/).
+2. Watch the matching [video tutorials](06-Videos/).
+3. Review the [slides](05-Slides/).
+4. Check your understanding with the [test bank](04-Test-bank/).
