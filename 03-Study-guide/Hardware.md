@@ -60,20 +60,11 @@ Program counter
 **Sensors, Actuators and Microcontrollers**
 
 **1. The big idea**
-A robot does three things: it senses, it decides, and it acts. Each step uses a different hardware part:
-Step
-Hardware part
-Meaning
-Sense
-Sensor
-A device that measures something in the real world and turns it into an electrical signal
-Decide
-Microcontroller
-A tiny computer on one chip that reads signals and decides what to do
-Act
-Actuator
-A device that turns an electrical signal into physical action (movement, sound, light)
-Compare with a normal computer: a sensor works like an input device, an actuator like an output device, and the microcontroller like the CPU.
+A robot does three things: it senses, it decides, and it acts. Each step uses a different hardware part.
+To sense, the robot uses a sensor. A sensor is a device that measures something in the real world, such as distance, light or sound, and turns it into an electrical signal.
+To decide, the robot uses a microcontroller. It is a tiny computer on one chip that reads the signals from the sensors and decides what to do.
+To act, the robot uses an actuator. An actuator is a device that turns an electrical signal into physical action, such as movement, sound or light.
+Compare with a normal computer: a sensor works like an input device, an actuator works like an output device, and the microcontroller works like the CPU.
 
 **2. Sensors and actuators**
 Sensors measure the world. Examples: an ultrasonic sensor (distance), a light sensor (brightness), a microphone (sound), a camera (images).
