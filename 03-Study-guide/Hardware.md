@@ -53,9 +53,63 @@ Program counter
 **1.4 The control Unit**
 - Not a single CPU will work without a control unit. As the name suggests, it controls the operation of each subsystem. Controlling is achieved through signals sent from the control unit to other subsystems.
 
+**Sensors, Actuators and Microcontrollers**
+
+**1. The big idea**
+A robot does three things: it senses, it decides, and it acts. Each step uses a different hardware part:
+Step
+Hardware part
+Meaning
+Sense
+Sensor
+A device that measures something in the real world and turns it into an electrical signal
+Decide
+Microcontroller
+A tiny computer on one chip that reads signals and decides what to do
+Act
+Actuator
+A device that turns an electrical signal into physical action (movement, sound, light)
+Compare with a normal computer: a sensor works like an input device, an actuator like an output device, and the microcontroller like the CPU.
+
+**2. Sensors and actuators**
+Sensors measure the world. Examples: an ultrasonic sensor (distance), a light sensor (brightness), a microphone (sound), a camera (images).
+Actuators change the world. Examples: a motor (movement), a speaker (sound), an LED (light), a vibration motor (shaking).
+
+**3. The microcontroller and the sense–act loop**
+A microcontroller is a small computer on a single chip. It has a processor, a little memory and pins for connecting sensors and actuators. It does not run Windows or games: it repeats one small program again and again:
+Read the sensors.
+Apply the rules in the program.
+Send commands to the actuators.
+Go back to step 1.
+This repeating cycle is called the sense–act loop. Part 3 (Behaviorist AI) builds on it.
+
+
+**4. Worked example: the obstacle-avoiding robot**
+This is the running example of our whole project. The robot has an ultrasonic sensor at the front, a microcontroller, and two motors that drive the wheels.
+flowchart LR
+    A[Ultrasonic sensor<br/>measures distance] --> B[Microcontroller<br/>applies the rule]
+    B --> C[Motors<br/>move the wheels]
+    C -. robot moves, distance changes .-> A
+The rule: if the distance is less than 20 cm, stop and turn. Otherwise, drive forward.
+Step by step:
+The sensor sends an ultrasonic pulse and starts a timer.
+The pulse hits a wall and bounces back, and the timer stops.
+The microcontroller converts the echo time into distance. The sound travels there and back, so we divide by 2:
+distance = speed of sound × echo time ÷ 2 (the speed of sound in air is about 343 m/s).
+Echo time 0.0058 s gives 343 × 0.0058 ÷ 2 ≈ 0.995 m, about 1 m. That is more than 20 cm, so the motors keep driving forward.
+A moment later the echo time is 0.001 s, which gives 343 × 0.001 ÷ 2 ≈ 0.17 m, about 17 cm. That is less than 20 cm, so the microcontroller stops the motors and turns the robot away.
+The loop starts again.
+
+
 
 **Terminology**
 - Bit values - 0 is false and 1 is true
 - NOT -  it changes a bit to its opposite value so 0 becomes 1 also 1 becomes 0. It also works only with one bit
 - AND - it gives 1 only when both bits are 1.
 - OR - it gives value 1 when at least one is 1. XOR- it gives 1 when the two bits are different.
+- Sensor – a device that measures something in the real world (distance, light, sound, touch) and turns it into an electrical signal. Works like an input device.
+- Actuator – a device that turns an electrical signal into physical action (movement, sound, light). Examples: motor, speaker, LED. Works like an output device.
+- Microcontroller – a small computer on a single chip with a processor, a little memory and pins for connecting sensors and actuators. It runs one program again and again.
+- Signal – a changing electrical value that carries information.
+- Ultrasonic sensor – a sensor that sends out a sound too high for humans to hear and measures how long the echo takes to come back, to find the distance to an object.
+- Sense–act loop – the cycle a robot repeats all the time: read sensors, apply rules, command actuators, repeat.
