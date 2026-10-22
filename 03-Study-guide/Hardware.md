@@ -12,6 +12,10 @@ By the end of this part, students will be able to:
 - Explain the role of controllers and how different hardware components work together.
 - ⁠Describe how sensors, actuators, and microcontrollers help a robot receive information, process it, and perform actions.
 - ⁠Briefly introduce GPUs, AI accelerators, and the history of computer hardware.
+- Explain the difference between a sensor and an actuator, and give examples of each.
+- Explain what a microcontroller is and how it differs from a normal computer.
+- Describe the sense–decide–act loop of a simple robot: a sensor measures, the microcontroller decides, an actuator acts.
+- Trace how an obstacle-avoiding robot uses an ultrasonic sensor, a microcontroller and motors (the running example of this project).
 
 **Introduction:**
 
