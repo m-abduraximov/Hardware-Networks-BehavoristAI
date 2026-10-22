@@ -22,7 +22,7 @@ If we divide a computer into parts, we will get three broad categories or subsys
 CPU can be considered as a brain of your computer. In general CPU carries out instructions and performs calculations like adding subtracting but a billions times in a second. In general it
 has three parts: an arithmetic logic unit also known as (ALU), a control unit, and a set of registers.
 
-![CPU](file:///Users/alltairasylbek/Downloads/IMG_0072.jpg)
+![CPU](../Material for Research/IMG_0072.jpg)
 
 **1.2 The arithmetic logic unit (ALU)**
 
