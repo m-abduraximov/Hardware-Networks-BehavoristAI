@@ -1,5 +1,8 @@
-# Hardware-Networks-Behavorist AI
-work material for project  
+
+<h1 align="center">Hardware-Networks-Behavorist AI</h1>
+<h1 align="center">Team: DeepThink</h1>
+
+
 ## 1. Team Information
 
 - **Team Name:** DeepThink
@@ -10,24 +13,38 @@ work material for project
 | Name | Role | GitHub Username |
 |------|------|-----------------|
 | Batyr 巴图 | CEO | [batyrkhassanbayev](https://github.com/batyrkhassanbayev) |
-| Mukhammadamin 安明信 | CIO | [amin](https://github.com/github-username-amin) |
+| Mukhammadamin 安明信 | CIO | [m-abduraximov](https://github.com/m-abduraximov) |
 | Zere ​梦璃 | Visual Design lead | [zererere03](https://github.com/zererere03) |
 | Merey 袁媄芮 | Video lead (video editing) | [mere1kan](https://github.com/mere1kan) |
 | Ardak 诺安 | Visual Design lead | [ardyxxie](https://github.com/ardyxxie) |
 | Asilbek 苏昀 | Quality lead | [Asilbek-08](https://github.com/Asilbek-08) |
 | Altair 阿勒泰尔 | Content lead | [altron-bit](https://github.com/altron-bit) |
 
+---
+
 ## 2. Project Purpose and Intended Learners
+
+### Brief Introduction to the Topic and Purpose
+
+#### Our module combines three topics that together explain how a simple smart machine works.
+
+| Topic | In simple words | Everyday example |
+|-------|-----------------|------------------|
+| **Hardware** | The physical parts of a computer or robot: processor, memory, storage, sensors and motors. | The parts inside your phone or a robot vacuum cleaner. |
+| **Networks** | Connections that let devices send information to each other using agreed rules. | Sending a message from your phone to a friend. |
+| **Behaviorist AI** | Artificial intelligence that works by reacting to the environment with simple rules, instead of building a complex plan first. | A robot that turns when its sensor detects a wall. |
+
+**How they fit together:** hardware lets a machine sense and act, networks let it share information, and behaviorist AI decides how it reacts. In this project we follow one example, an obstacle-avoiding robot, through all three topics.
 
 ### Purpose
 
-This project explains three connected topics in simple language:
+Make beginner-friendly guide that answers three practical questions:
 
-- **Hardware:** the physical parts of a computer and of a robot (CPU, memory, storage, sensors, actuators).
-- **Networks:** how devices send messages to each other (TCP/IP layers, IP addresses, packets, protocols).
-- **Behaviorist AI:** how intelligence can come from direct interaction with the environment (reactive behavior, subsumption architecture).
+1. **What is a machine made of?** (CPU, memory, storage, sensors, actuators.)
+2. **How do devices talk to each other?** (TCP/IP layers, IP addresses, packets, protocols.)
+3. **How can a machine act intelligently without complex planning?** (Simple reaction rules -> useful behavior.)
 
-All three parts are connected by one running example: an **obstacle-avoiding robot** that senses its environment, sends data over a network and chooses actions using layered behavior rules.
+By the end, a learner should be able to explain, in their own words, how these three parts work together in one simple robot.
 
 ### Intended Learners
 
