@@ -83,20 +83,37 @@ This repeating cycle is called the sense–act loop. Part 3 (Behaviorist AI) bui
 
 
 **4. Worked example: the obstacle-avoiding robot**
-This is the running example of our whole project. The robot has an ultrasonic sensor at the front, a microcontroller, and two motors that drive the wheels.
-flowchart LR
-    A[Ultrasonic sensor<br/>measures distance] --> B[Microcontroller<br/>applies the rule]
-    B --> C[Motors<br/>move the wheels]
-    C -. robot moves, distance changes .-> A
-The rule: if the distance is less than 20 cm, stop and turn. Otherwise, drive forward.
-Step by step:
-The sensor sends an ultrasonic pulse and starts a timer.
-The pulse hits a wall and bounces back, and the timer stops.
-The microcontroller converts the echo time into distance. The sound travels there and back, so we divide by 2:
-distance = speed of sound × echo time ÷ 2 (the speed of sound in air is about 343 m/s).
-Echo time 0.0058 s gives 343 × 0.0058 ÷ 2 ≈ 0.995 m, about 1 m. That is more than 20 cm, so the motors keep driving forward.
-A moment later the echo time is 0.001 s, which gives 343 × 0.001 ÷ 2 ≈ 0.17 m, about 17 cm. That is less than 20 cm, so the microcontroller stops the motors and turns the robot away.
-The loop starts again.
+
+Our project uses an obstacle-avoiding robot to demonstrate how hardware components work together. The robot has an ultrasonic sensor to detect obstacles, a microcontroller to process information and make decisions, and two motors to control its wheels.
+
+How the system works
+The robot follows a continuous sense–decide–act cycle:
+
+1. Sense: The ultrasonic sensor sends out a sound pulse and measures how long it takes for the echo to return after bouncing off an obstacle.
+2. Decide: The microcontroller uses the echo time to calculate the distance and compares it with a safety threshold of 20 cm.
+3. Act: If the obstacle is closer than 20 cm, the robot stops and turns away. If the distance is 20 cm or greater, it continues moving forward.
+
+Calculating the distance
+
+To calculate the distance, the microcontroller uses the speed of sound and the echo time. Because the sound travels to the obstacle and back, the measured time must be divided by two.
+
+Distance = (Speed of sound × Echo time) ÷ 2
+
+The speed of sound in air is approximately 343 m/s.
+
+For example, if the echo time is 0.0058 seconds:
+
+Distance = (343 × 0.0058) ÷ 2 = 0.9947 m
+
+This is approximately 99.5 cm. Since the obstacle is farther than 20 cm, the robot continues moving forward.
+
+When the echo time decreases to 0.001 seconds, the calculation becomes:
+
+Distance = (343 × 0.001) ÷ 2 = 0.1715 m
+
+This is approximately 17.2 cm. Since the obstacle is now closer than 20 cm, the microcontroller instructs the motors to stop and turn the robot away.
+
+After turning, the sensor measures the distance again, and the cycle repeats. This example demonstrates how a robot combines sensing, decision-making, and movement to respond to its surroundings.
 
 
 
