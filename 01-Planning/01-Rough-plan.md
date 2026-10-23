@@ -81,3 +81,54 @@ After using our materials, a beginner should be able to:
 explain how it differs from AI that first builds an internal model of the world; 
 connect reward-based learning with the idea of behaviorism.
 - **Integration:** for a simple robot, point out which hardware senses, which network link carries the data and which behavior rule decides the action.
+
+# Workflow & Coordination Plan
+
+## 1. Content Development
+
+- **Phase 1: Research & Vetting**  
+  Conduct in-depth research and verify the reliability of all sources.
+
+- **Phase 2: Drafting & Scripting**  
+  Develop the project content, write explanations, and prepare scripts for media production.
+
+- **Phase 3: Peer Review**  
+  Review all content critically for accuracy, clarity, and completeness before beginning media production.
+
+## 2. GitHub Usage
+
+- **Central Repository:** Store Markdown files, project documentation, and tracking materials in a shared GitHub repository.
+- **Task Tracking:** Use GitHub Projects with a Kanban board to organize tasks into To Do, In Progress, In Review, and Done.
+- **Version Control:** Maintain a clear version history through structured commits and pull requests.
+- **Collaboration:** Review changes and resolve issues before merging updates into the main branch.
+
+## 3. Communication
+
+- **WeChat Group:** Share daily progress updates, ask quick questions, and send deadline reminders.
+- **Daily Stand-ups:** Conduct short meetings to review progress, identify obstacles, and coordinate immediate tasks.
+- **Weekly Meetings:** Hold in-depth discussions for brainstorming, evaluating progress, and planning upcoming work.
+- **Real-Time Collaboration:** Use Google Drive for collaborative document editing and sharing resources.
+
+## 4. Quality Assurance
+
+- **Peer Review:** Require a peer review of every deliverable immediately after completion and before final approval.
+- **Quality Lead Checklist:** Use a standardized checklist to assess:
+  - Factual accuracy and source reliability.
+  - Clarity and beginner-friendliness.
+  - Design consistency and visual quality.
+  - Functionality and interactivity.
+  - Completeness and adherence to project requirements.
+- **Final Approval:** Address review feedback and verify that all quality requirements are met before publication.
+
+## 5. Risk Management
+
+- **Mid-Deadline Reviews:** Schedule progress checks before major deadlines to identify delays and potential issues early.
+- **Contingency Meetings:** Arrange quick meetings when a team member falls behind to redistribute tasks or provide additional support.
+- **Data Protection:** Back up project files regularly and maintain copies of essential documents.
+- **Issue Tracking:** Record major risks, blockers, and corrective actions in the project tracker.
+
+## 6. Workflow Summary
+
+Research → Drafting → Peer Review → Media Production → Quality Assurance → Final Publication
+
+All team members are responsible for communicating progress, meeting deadlines, reviewing assigned work, and maintaining the quality of the final project.
