@@ -628,3 +628,4 @@ Behaviorist AI borrows the focus on observable behavior from psychology, but it 
 3. Murphy, R. R. *Introduction to AI Robotics.* MIT Press.
 4. Sutton, R. S., & Barto, A. G. (2018). *Reinforcement Learning: An Introduction* (2nd ed.). MIT Press.
 5. Brookshear, J. G., Smith, D., & Brylow, D. (2012). *Computer Science: An Overview* (11th ed.). Pearson. (Chapter 11, Artificial Intelligence.)
+6. Russel, S., Norvig, P. (2021) Artificial Intelligence: A modern approach (4-th edition).Pearson
