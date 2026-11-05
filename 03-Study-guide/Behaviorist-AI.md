@@ -12,17 +12,86 @@ Audience: first-year university students and school graduates with no previous A
 
 ## Contents
 
-- [Unit 0. Start Here](unit-00-start-here.md)
-- [Unit 1. Behaviorism: Learning from Behavior](unit-01-behaviorism-learning-from-behavior.md)
-- [Unit 2. Reactive Agents and the Sense-Act Loop](unit-02-reactive-agents-and-the-sense-act-loop.md)
-- [Unit 3. Behavior Rules and Priorities](unit-03-behavior-rules-and-priorities.md)
-- [Unit 4. Brooks’s Subsumption Architecture](unit-04-brooks-subsumption-architecture.md)
-- [Unit 5. Case Study: Hardware, Network and Behavior in One Robot](unit-05-case-study.md)
-- [Unit 6. Three Short Introductions: Reinforcement Learning, Limits and Ethics](unit-06-rl-limits-and-ethics.md)
-- [Unit 7. Review and Final Challenge](unit-07-review-and-final-challenge.md)
-- [Glossary](glossary.md)
-- [References](references.md)
+- 3.0. Start Here
+    - 3.0.1. The big question
+    - 3.0.2. What you will learn
+    - 3.0.3. What you should know before you start
+    - 3.0.4. How to use this chapter
+    - 3.0.5. Labels used in this chapter
+- 3.1. Behaviorism: Learning from Behavior
+    - 3.1.1. Think first
+    - 3.1.2. What is behaviorism?
+    - 3.1.3. Pavlov and classical conditioning
+    - 3.1.4. Skinner and operant conditioning
+    - 3.1.5. Why do AI students study behaviorism?
+    - 3.1.6. Activity 1.1: Spot the Conditioning
+    - 3.1.7. Check yourself
+    - 3.1.8. Answer key
+- 3.2. Reactive Agents and the Sense-Act Loop
+    - 3.2.1. Think first
+    - 3.2.2. Agents, environments and actions
+    - 3.2.3. What is a reactive agent?
+    - 3.2.4. The sense-act loop
+    - 3.2.5. The three hardware parts
+    - 3.2.6. Example: how an ultrasonic sensor measures distance
+    - 3.2.7. Worked example: the obstacle-avoiding robot
+    - 3.2.8. Activity 2.1: Be the Robot
+    - 3.2.9. Check yourself
+    - 3.2.10. Answer key
+- 3.3. Behavior Rules and Priorities
+    - 3.3.1. Think first
+    - 3.3.2. Behavior rules
+    - 3.3.3. Priorities decide conflicts
+    - 3.3.4. Example: a robot with three behaviors
+    - 3.3.5. The same idea as a program
+    - 3.3.6. Choosing priorities is a design decision
+    - 3.3.7. A common problem: flickering at a threshold
+    - 3.3.8. Activity 3.1: Predict, Trace and Debug
+    - 3.3.9. Check yourself
+    - 3.3.10. Answer key
+- 3.4. Brooks's Subsumption Architecture
+    - 3.4.1. Think first
+    - 3.4.2. The historical background
+    - 3.4.3. Layers: levels of competence
+    - 3.4.4. How layers talk to each other
+    - 3.4.5. Layers versus priorities
+    - 3.4.6. Worked example: a three-layer cleaning robot
+    - 3.4.7. Activity 4.1: Design a Layered Robot
+    - 3.4.8. Check yourself
+    - 3.4.9. Answer key
+- 3.5. Case Study: Hardware, Network and Behavior in One Robot
+    - 3.5.1. Think first
+    - 3.5.2. Meet the case-study robot
+    - 3.5.3. Three ways to look at the same robot
+    - 3.5.4. The hardware path
+    - 3.5.5. The network path
+    - 3.5.6. Where should each decision be made?
+    - 3.5.7. Worked example: why safety must be local
+    - 3.5.8. Worked example: tracing the robot with five behaviors
+    - 3.5.9. Activity 5.1: Follow the Data
+    - 3.5.10. Activity 5.2: Network Breakdown Drill
+    - 3.5.11. Check yourself
+    - 3.5.12. Answer key
+- 3.6. Three Short Introductions: Reinforcement Learning, Limits and Ethics
+    - 3.6.1. Reinforcement learning
+    - 3.6.2. Limits of behavior-based AI compared with symbolic AI
+    - 3.6.3. Activity 6.1: The Corner Trap
+    - 3.6.4. Ethical questions
+    - 3.6.5. Activity 6.2: Whose Fault, Whose Decision?
+    - 3.6.6. Check yourself
+    - 3.6.7. Answer key
+- 3.7. Review and Final Challenge
+    - 3.7.1. Chapter summary
+    - 3.7.2. Concept map
+    - 3.7.3. Misconceptions to avoid
+    - 3.7.4. Mixed review
+    - 3.7.5. Final Challenge: Design Your Own Behavior-Based Robot
+    - 3.7.6. Answer key (mixed review)
+    - 3.7.7. Self-check
+- Glossary
+- References
 
+- 
   # Unit 0. Start Here
 
 ## 0.1 The big question
