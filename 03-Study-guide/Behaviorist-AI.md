@@ -8,8 +8,6 @@ Chapter: Behaviorist AI\
 Version: V2.0 (Stage 2, Markdown Content)\
 Audience: first-year university students and school graduates with no previous AI or robotics background
 
-> A note on spelling. The module title uses the British spelling *Behaviourist*. In this chapter we use the American spelling *behavior* and *behaviorism* everywhere, because that is how the main sources spell them. They mean the same thing.
-
 —
 
 ## Contents
@@ -1359,3 +1357,24 @@ Local decisions: lift stop, avoid, boundary. The network (an app) may show statu
 - Timeout: a rule that makes old information or commands invalid after a fixed time.
 - Ultrasonic sensor: a sensor that measures distance using the echo of high-frequency sound.
 - World model (internal model): a map or description of the world that a system builds and uses to plan.
+
+## References
+
+1. Asimov, I. *Runaround*.
+2. Brooks, R. A. *A Robust Layered Control System for a Mobile Robot*.
+3. Brooks, R. A. *Elephants Don't Play Chess*.
+4. Brooks, R. A. *Intelligence Without Representation*.
+5. Brookshear, J. G., Smith, D., & Brylow, D. *Computer Science: An Overview*.
+6. Chomsky, N. *A Review of B. F. Skinner's Verbal Behavior*.
+7. Clark, J., & Amodei, D. *Faulty Reward Functions in the Wild*.
+8. Nilsson, N. J. *Shakey the Robot*.
+9. Pavlov, I. P. *Conditioned Reflexes*.
+10. Russell, S., & Norvig, P. *Artificial Intelligence: A Modern Approach*.
+11. Skinner, B. F. *The Behavior of Organisms*.
+12. Sutton, R. S., & Barto, A. G. *Reinforcement Learning: An Introduction*.
+13. Thorndike, E. L. *Animal Intelligence*.
+14. Turing, A. M. *Computing Machinery and Intelligence*.
+15. Watson, J. B. *Psychology as the Behaviorist Views It*.
+16. The Nobel Prize in Physiology or Medicine 1904 (Ivan Pavlov). NobelPrize.org.
+
+**Team contribution.** The worked examples, activities, diagrams and Python programs in this chapter were created by the team for this guide. The Python programs were run and their printed outputs checked. Concepts follow the sources above.
