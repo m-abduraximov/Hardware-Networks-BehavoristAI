@@ -1,3 +1,104 @@
+# Behaviorist AI: Robots That Act Before They Think
+
+*Version 2.0, rewritten and expanded from the first draft.*
+
+Team: Team DeepThink\
+Module: Hardware, Networks and Behaviorist AI\
+Chapter: Behaviorist AI\
+Version: V2.0 (Stage 2, Markdown Content)\
+Audience: first-year university students and school graduates with no previous AI or robotics background
+
+> A note on spelling. The module title uses the British spelling *Behaviourist*. In this chapter we use the American spelling *behavior* and *behaviorism* everywhere, because that is how the main sources spell them. They mean the same thing.
+
+—
+
+## Contents
+
+- [Unit 0. Start Here](unit-00-start-here.md)
+- [Unit 1. Behaviorism: Learning from Behavior](unit-01-behaviorism-learning-from-behavior.md)
+- [Unit 2. Reactive Agents and the Sense-Act Loop](unit-02-reactive-agents-and-the-sense-act-loop.md)
+- [Unit 3. Behavior Rules and Priorities](unit-03-behavior-rules-and-priorities.md)
+- [Unit 4. Brooks’s Subsumption Architecture](unit-04-brooks-subsumption-architecture.md)
+- [Unit 5. Case Study: Hardware, Network and Behavior in One Robot](unit-05-case-study.md)
+- [Unit 6. Three Short Introductions: Reinforcement Learning, Limits and Ethics](unit-06-rl-limits-and-ethics.md)
+- [Unit 7. Review and Final Challenge](unit-07-review-and-final-challenge.md)
+- [Glossary](glossary.md)
+- [References](references.md)
+
+  # Unit 0. Start Here
+
+## 0.1 The big question
+
+Imagine you have to build a small robot that drives around a room without crashing into anything.
+
+There are two very different ways to do it:
+
+1. Think first. The robot builds a detailed map of the room, plans a perfect route, and only then moves.
+2. React. The robot just looks at what is directly in front of it and, if something is in the way, turns. It does this again and again, many times per second.
+
+The second way sounds too simple to be “intelligent”. Yet in the 1980s the roboticist Rodney Brooks showed that robots built in this way could do surprisingly well. This chapter explains how they work, where the idea comes from, where it breaks down, and how it connects to the hardware and networks you studied in the other chapters.
+
+## 0.2 What you will learn
+
+By the end of this chapter you will be able to:
+
+Core topics (studied in detail)
+
+1. Explain the basic ideas of behaviorism in psychology, with the examples of Pavlov and Skinner.
+2. Explain why “Behaviorist AI” is an analogy and not a direct application of psychology.
+3. Define a reactive agent and describe the sense-act loop.
+4. Identify the sensor, controller and actuator in a simple robot.
+5. Write behavior rules (IF condition THEN action) and predict what a robot does when several rules apply.
+6. Use priorities to decide which behavior controls the robot.
+7. Describe Rodney Brooks’s subsumption architecture and its layers in simple words.
+8. Follow a case study in which hardware (sensors, microcontroller, motors), a network (Wi-Fi, packets, delay) and behavior rules work together, and explain why the safety behavior must run on the robot itself.
+
+Short introductions (overview level)
+
+9. Describe what reinforcement learning is and how rewards and punishments are used.
+10. State the main limitations of behavior-based AI compared with symbolic AI.
+11. Name important ethical questions raised by AI systems that act in the real world.
+
+## 0.3 What you should know before you start
+
+You do not need any programming experience. You only need a few ideas from the other chapters of this guide. Here is a quick refresher so that this chapter can be read on its own.
+
+| Idea | One-sentence reminder | Where it comes from |
+|—|—|—|
+| Sensor | A device that measures something in the world (distance, light, temperature). | Hardware chapter |
+| Microcontroller | A tiny computer on one chip that reads sensors and controls other devices. | Hardware chapter |
+| Actuator / motor | A device that makes something move. | Hardware chapter |
+| Packet | A small piece of data sent across a network. | Networks chapter |
+| IP address | A number that identifies a device on a network, for example 192.168.1.50. | Networks chapter |
+| Wi-Fi | A wireless way to connect devices to a local network. | Networks chapter |
+| Latency (delay) | The time a message needs to travel from sender to receiver. | Networks chapter |
+
+## 0.4 How to use this chapter (suggested route)
+
+| Step | Unit | What you do | Time |
+|—|—|—|—|
+| 1 | Unit 1 | Learn where the word “behaviorist” comes from. Sort real-life examples. | 30-40 min |
+| 2 | Unit 2 | Meet the reactive agent. Trace a robot on paper. | 40-50 min |
+| 3 | Unit 3 | Write rules, solve conflicts with priorities, trace a program. | 40-50 min |
+| 4 | Unit 4 | Learn Brooks’s layers. Design a layered robot. | 40-50 min |
+| 5 | Unit 5 | Follow the case study: hardware, network and behavior together. | 50-60 min |
+| 6 | Unit 6 | Three short introductions (reinforcement learning, limits, ethics). | 30-40 min |
+| 7 | Unit 7 | Review, fix misconceptions, final design challenge. | 40-60 min |
+
+You need: pen and paper (or a notes app). A computer with Python 3 is useful for the “Run it” activities, but every Python activity also has a paper version and a printed expected result, so you can complete the chapter without installing anything. If you want to run Python without installing it, you can paste the code into any online Python editor.
+
+## 0.5 Labels used in this chapter
+
+| Label | Meaning |
+|—|—|
+| Think | A question to consider before you read the explanation. |
+| Example | A fully worked example. Follow every step. |
+| Activity | A hands-on task with Goal, Preparation, Task, Observation, Reflection and Feedback. |
+| Misconception alert | A common wrong idea, and the correct version. |
+| Check yourself | Quick questions. Answers are in the Answer key at the end of each unit. |
+| Key idea | The one thing to remember from a section. |
+
+
 ## Unit 1. Behaviorism: Learning from Behavior
 
 **Question for this unit:** *If you cannot see inside a mind, what can you still study?*
@@ -1102,4 +1203,159 @@ When an AI system acts in the real world, mistakes can hurt people. Here are fou
 4. The reactive layer gives fast, reliable reactions (safety, basic movement) and the planning layer gives long-term goals and reasoning. Together they cover each other's weaknesses.
 
 
-   
+   # Unit 7. Review and Final Challenge
+
+## 7.1 Chapter summary
+
+- Behaviorism studies observable behavior. Pavlov showed that animals learn to connect two events (**classical conditioning**). Skinner showed that consequences change future behavior (**operant conditioning**: reinforcement and punishment).
+- Behaviorist AI (behavior-based AI) is an analogy to this idea: intelligence is shown in observable behavior and comes from direct interaction with the environment. It is an engineering approach.
+- A reactive agent chooses an action from current sensor information only. It repeats the sense-act loop: sense → decide → act → sense again.
+- A simple robot has a sensor, a controller and an actuator.
+- Behavior rules (IF condition THEN action) connect situations with actions. When several rules are true, priorities decide which behavior controls the robot. Safety behaviors get the highest priority.
+- Brooks’s subsumption architecture builds behavior in layers (Level 0, 1, 2...). Each layer is a complete behavior. Higher layers can suppress or inhibit lower ones where the designer connects them, but lower layers keep running. There is no central world model.
+- In a robot that uses a network, safety behavior should stay on the robot, because network delay, packet loss and disconnection can make remote decisions too slow or unavailable. Commands should expire (timeout).
+- Reinforcement learning lets a robot learn from reward numbers. Limits: reactive robots lack long-term planning and memory and can be trapped. Symbolic AI reasons and plans but needs a good model. Hybrid systems combine both. Ethical questions include responsibility, reward design, human control, explainability and privacy.
+
+## 7.2 Concept map
+Behaviorism (Pavlov, Skinner)
+      │  analogy
+      ▼
+Behaviorist AI ──► Reactive agent ──► Sense-act loop (sensor → controller → actuator)
+      │                                   │
+      │                                   ▼
+      │                          Behavior rules  ──► conflicts ──► Priorities
+      │                                   │
+      ▼                                   ▼
+Reward-based learning (RL)      Subsumption architecture (layers)
+      │                                   │
+      └────────────► Case study: hardware + network + behavior ◄──┘
+                                  │
+                                  ▼
+              Limits (vs symbolic AI, hybrids) and ethics
+
+## 7.3 Misconceptions to avoid
+
+| Misconception | Correct idea |
+|—|—|
+| “Engineers built Behaviorist AI by applying Skinner’s theory.” | It is an engineering approach; the link to behaviorism is an analogy. |
+| “Negative reinforcement means punishment.” | Negative reinforcement removes something unpleasant and makes behavior more likely. |
+| “A reactive robot builds a map and plans.” | A reactive robot uses only current sensor information. |
+| “The sense-act loop runs once.” | It runs continuously because every action changes what the robot senses next. |
+| “A higher layer always overrides a lower layer.” | Only where the designer has wired suppression or inhibition. Safety behavior is kept in control. |
+| “Layer level and priority rank are the same number.” | Level 0 = most basic; rank 1 = most important. In our robot, Avoid is both Level 0 and rank 1. |
+| “Safety rules can run on the phone over Wi-Fi.” | Network delay can be longer than the safety margin. Safety stays on the robot. |
+| “In RL, the robot feels rewards.” | The reward is a number chosen by the designer. |
+| “A more complex rule always helps.” | Activity 6.1: the alternating rule made the robot worse. |
+
+## 7.4 Mixed review
+
+Try these without looking back. Answers are in section 7.6.
+
+1. In Pavlov’s experiment, which stimulus is unconditioned and which is conditioned (after training)?
+2. A robot has these ranked behaviors: 1 Avoid (distance < 20 cm), 2 Go to light, 3 Wander. The distance is 18 cm and there is bright light ahead. Which behavior wins?
+3. An echo returns after 583 microseconds. What is the distance (343 m/s)? Round to the nearest centimetre.
+4.Explain the difference between *layer level* and *priority rank*.
+5. A robot moves at 0.2 m/s. A network message takes 0.5 s. How far does the robot move during the delay?
+6. Why is an RL reward not the same as a reward in Skinner’s experiments?
+7. Which of these tasks is more suitable for symbolic AI than for a purely reactive robot: *playing chess*, or *stopping when a person steps in front of the robot*? Explain.
+8. The CoastRunners agent circled a lagoon instead of finishing the race. What lesson does this teach about designing rewards?
+9. The Wi-Fi of the case-study robot drops. Which behaviors keep working, and which stops having an effect?
+10. Explain why the robot in Activity 2.1 never visits the centre square.
+
+## 7.5 Final Challenge: Design Your Own Behavior-Based Robot
+
+Goal. Combine everything in this chapter in one design.
+
+Preparation. Re-read Units 3 to 5. Choose one robot: a robot lawn mower, a hospital delivery robot, a warehouse robot, or a school-corridor cleaning robot.
+
+Task. Produce a one-page design with:
+
+1. The task and the environment of the robot.
+2. A list of sensors and actuators.
+3. At least four behaviors, each with a layer level and a priority rank, and a one-sentence rule.
+4. A block diagram showing sensors, behaviors and motors.
+5. A trace table of three situations, including one where two behaviors conflict.
+6. If the robot has a network connection: which decisions stay local, which can use the network, and what happens if the network fails.
+7. One limitation of your robot (what it cannot do without memory or planning).
+8. One ethical question that your robot raises, with a suggested safeguard.
+
+Observation. Keep the one-page design.
+
+Reflection. Which of your design decisions would be the most dangerous if you got it wrong?
+
+Feedback (sample outline: robot lawn mower).
+
+| Behavior | Rule | Level | Rank |
+|—|—|—|—|
+| Lift/tilt stop | IF the robot is lifted or tilted THEN stop the blades and the wheels | 0 | 1 |
+| Avoid | IF an obstacle is closer than 30 cm THEN stop and turn | 0 | 2 |
+| Stay inside | IF the boundary wire is detected THEN turn back into the garden | 1 | 3 |
+| Return to charger | IF battery < 20 % THEN head to the charging station | 2 | 4 |
+| Mow | Always: drive forward with the blades on | 1 | 5 |
+
+Local decisions: lift stop, avoid, boundary. The network (an app) may show status and send a start/stop command that expires after a short time. If the network fails: the robot still stays in the garden and stays safe. Limitation: it cannot plan an efficient mowing route. Ethical question: a child or a pet in the grass, so a second sensor and an emergency stop are needed. Other valid designs are acceptable if each decision is justified.
+
+## 7.6 Answer key (mixed review)
+
+1. Unconditioned stimulus: the food. Conditioned stimulus: the bell (sound) after training.
+2. Avoid (18 cm < 20 cm, rank 1).
+3. (343 × 0.000583) ÷ 2 ≈ 0.100 m = 10 cm.
+4. Layer level says how advanced the competence is (0 = most basic). Priority rank says which active behavior controls the motors (1 = most important). The two numbers are different things.
+5. 0.2 m/s × 0.5 s = 0.1 m = 10 cm.
+6. In RL the reward is a number chosen by the designer, and the robot does not feel anything. Skinner’s rewards were real consequences (such as food) for living animals.
+7. Playing chess. It needs a representation of the game and planning many moves ahead. Stopping for a person needs a fast reaction to current sensor data, which a reactive behavior does well.
+8. The agent maximizes the reward that was measured (points from targets), not what the designers meant (finishing the race). Rewards must be designed and tested carefully.
+9. The local behaviors (Avoid, Go to light, Wander) keep working. Remote drive commands stop having an effect once they expire (after 0.5 s), and a remote STOP cannot arrive. This is why safety stays local.
+10. The robot only looks at the square ahead and always turns right, so it circles the edge of the room. It has no memory of visited squares and no plan to cover the middle.
+
+## 7.7 Self-check: can you do these?
+
+- [ ] Explain Pavlov’s and Skinner’s ideas with an example each.
+- [ ] Explain why “Behaviorist AI” is an analogy.
+- [ ] Draw the sense-act loop and name sensor, controller and actuator.
+- [ ] Trace a robot with several behaviors and priorities.
+- [ ] Explain suppression and inhibition, and the difference between layer level and priority rank.
+- [ ] Explain why safety behavior stays on the robot in a networked design (with a calculation).
+- [ ] Describe, in two sentences each, reinforcement learning, the limits of reactive AI, and two ethical questions.
+
+# Glossary
+
+- Actuator: a component that produces a physical action, such as a motor.
+- Agent: anything that perceives its environment through sensors and acts on it through actuators.
+- Behavior: a specific way in which an agent responds to a situation.
+- Behavior-based AI (Behaviorist AI): AI in which intelligence comes from simple behaviors that respond directly to the environment. The name is an analogy with psychological behaviorism.
+- Behavior rule: a rule that connects a condition with an action (IF ... THEN ...).
+- Behaviorism: an approach in psychology that studies observable behavior.
+- Classical conditioning: learning to connect two events that occur together (Pavlov).
+- Condition: a situation that is checked before a behavior rule is applied.
+- Conditioned stimulus / response: a stimulus (and its response) that was learned through pairing.
+- Controller: a component that processes information and decides the system’s actions.
+- Dynamic environment: an environment that can change while the system is operating.
+- Environment: the surroundings in which an agent operates.
+- Exploration / exploitation: trying new actions versus repeating actions that worked.
+- Extinction: the weakening of a conditioned response when the pairing stops.
+- Fail safe: designing a system so that, when something goes wrong, it ends up in a safe state.
+- Hybrid system: a system that combines reactive behavior with planning.
+- Hysteresis: using two thresholds (one to enter a state and another to leave it) to prevent rapid switching.
+- Inhibition: a higher layer’s signal blocks the output of a lower module.
+- IP address: a number that identifies a device on a network.
+- Latency: the time a message needs to travel from sender to receiver.
+- Layer / level of competence: one complete, simple behavior in a layered system.
+- Microcontroller: a small computer on a single chip that can read sensors and control devices.
+- Motor driver: a board that switches the larger current needed by motors, controlled by small signals from the microcontroller.
+- Operant conditioning: learning in which consequences (reinforcement, punishment) change future behavior (Skinner).
+- Packet: a small piece of data sent over a network.
+- Priority (rank): the order that decides which active behavior controls the robot. Rank 1 is the highest.
+- Reactive agent: an agent that chooses actions only from current sensor information (a simple reflex agent).
+- Reinforcement learning (RL): learning from experience by trying actions and receiving rewards.
+- Reinforcement / punishment: consequences that make a behavior more / less likely.
+- Reward: a number given to a learning agent after an action. A negative reward acts as a punishment.
+- Sense-act loop: the repeated cycle of sensing, deciding, acting and sensing again.
+- Sensor: a device that collects information from the environment.
+- Subsumption architecture: Brooks’s way of organizing behaviors in layers.
+- Suppression: a higher layer’s signal replaces a signal entering a lower module.
+- Symbolic AI: AI that represents knowledge as symbols and reasons about them.
+- Threshold: a limit value used in a condition (for example 20 cm).
+- Timeout: a rule that makes old information or commands invalid after a fixed time.
+- Ultrasonic sensor: a sensor that measures distance using the echo of high-frequency sound.
+- World model (internal model): a map or description of the world that a system builds and uses to plan.
