@@ -542,3 +542,564 @@ With one threshold the behavior changes **4 times**. With two thresholds it chan
 3. Examples: failing to avoid a collision can hurt people or damage the robot, and the cost of that failure is higher than the cost of missing a goal; so the robot must always be able to protect itself first.
 4. **False.** Python tests the statements from top to bottom and returns at the first true one, so the order **is** the priority order.
    
+
+---
+
+## Unit 4. Brooks's Subsumption Architecture
+
+**Question for this unit:** How can many simple behaviors be organized so that a robot becomes more capable, without a master plan?
+
+### 4.1 Think first
+
+Suppose you want to build a robot in steps: first it must not crash, then it should wander around, then it should look for interesting places. Is it easier to build all three abilities at once, or one after another, testing each as you go?
+
+### 4.2 The historical background
+
+Early AI robots followed the sense, model, plan, act approach. The robot Shakey, built at SRI (Stanford Research Institute) in the late 1960s, is a famous example. It used cameras and sensors to build a symbolic description of its surroundings, planned a sequence of actions with logic, and then carried them out (Nilsson, 1984). This approach belongs to **symbolic AI**, which represents knowledge as symbols and reasons about them. It could solve interesting problems, but it was slow, and its plans could be wrong if the world changed while it was thinking.
+
+In the mid-1980s Rodney Brooks, a roboticist at MIT, proposed a very different approach. He argued that intelligent behavior does not have to come from a central model of the world; it can come from many simple behaviors that connect sensing to acting directly. His slogan is that the world can serve as its own best model: why store and update a map if the robot can simply sense the real thing again? (Brooks, 1990, 1991.)
+
+### 4.3 Layers: levels of competence
+
+In his 1986 paper, Brooks described a robot control system built from layers. Each layer is a complete, simple behavior that goes from sensors to motors. He called these **levels of competence** (Brooks, 1986). The first three levels he describes are:
+
+| Level | Competence | What the robot can do |
+|---|---|---|
+| 0 | Avoid contact with objects | Stay away from things; move away if something approaches. |
+| 1 | Wander | Move around aimlessly without hitting things. |
+| 2 | Explore | Head for places in the distance that look reachable. |
+
+He also described higher levels, such as building maps and planning routes. The important ideas are:
+
+1. **Each layer is a complete behavior** that works on its own.
+2. **Layers are built one at a time, from the bottom up.** First you build Level 0 and test it until it is reliable. Then you add Level 1 on top. Then Level 2.
+3. **There is no central world model.** Every layer reacts directly to what its sensors report.
+4. **Lower layers keep running when higher layers are added.** If a higher layer fails, the robot still has the basic competences below it.
+
+### 4.4 How layers talk to each other
+
+Inside a layer, small computing units called **modules** (Brooks used simple finite state machines, which are units that move between a few states, such as "waiting" and "turning") receive signals on "wires" and send signals on other wires. A higher layer influences a lower layer in two ways:
+
+- **Suppression.** The higher layer's signal *replaces* the signal that was about to enter a lower module. The lower module then works with the replacement signal.
+- **Inhibition.** The higher layer's signal *blocks* the output of a lower module for a short time, so that output is not sent on.
+
+The word *subsumption* comes from this arrangement: a higher layer can subsume, that is, take over or build upon, the work of lower layers. But the lower layers are not switched off. They keep running and keep doing their own job.
+
+```
+Level 2 Explore ──┐ suppress / inhibit
+                  ▼
+Level 1 Wander ──┐ suppress / inhibit
+                 ▼
+Level 0 Avoid obstacles ──► Motors
+        ▲
+        └──── all layers read the sensors directly
+```
+
+In Brooks's robots, the wander layer passed a desired direction to the lowest layer, which adjusted it using the sonar readings so that the robot still stayed away from obstacles (Brooks, 1986). So safety stayed in control even while a higher layer was steering.
+
+### 4.5 Layers versus priorities: do not mix them up
+
+Two different ideas are easily confused, because both talk about "which behavior wins". In this guide we keep them apart:
+
+| | Layer level | Priority rank |
+|---|---|---|
+| Question it answers | How advanced is this competence? | Which active behavior controls the motors? |
+| Numbering | Level 0 = most basic | Rank 1 = most important |
+| In our three-behavior robot | Avoid = Level 0, Wander = Level 1, Go to light = Level 2 | Avoid = rank 1, Go to light = rank 2, Wander = rank 3 |
+
+So in our robot, Avoid is both the lowest layer and the highest priority. That is not a contradiction: the lowest layer is the most basic competence, and the designer gives it the final say over the motors because it protects the robot.
+
+> **Misconception alert.** "A higher layer always overrides a lower layer." Not necessarily. In a subsumption design, a higher layer may suppress or inhibit a lower one, but only where the designer has wired it that way. A well-designed robot is wired so that the safety behavior is never silenced. When you read a diagram, always ask: where exactly are the suppress and inhibit connections?
+
+Many textbook and classroom examples simplify subsumption into a priority list, as we did in Unit 3. This is a good first model. Brooks's real design is more detailed, but the key idea is the same: simple behaviors, combined by fixed rules, with no master plan.
+
+### 4.6 Worked example: a three-layer cleaning robot
+
+A small cleaning robot has three layers:
+
+| Layer | Behavior | Rule |
+|---|---|---|
+| Level 0 | Avoid | IF an obstacle is closer than 20 cm THEN stop and turn right |
+| Level 1 | Wander | Always: move forward |
+| Level 2 | Go to charger | IF battery is below 20 % THEN replace Wander's command with "head towards the charger" |
+
+**Wiring (in words).** Level 2 suppresses the output of Level 1 (its "move forward" is replaced by "head towards the charger"). The result then passes through Level 0, which can still override it when an obstacle is near.
+
+```
+Battery sensor ──► [L2 Go to charger] ─ suppress ─┐
+                                                  ▼
+                   [L1 Wander] ───────────────► (command) ──► [L0 Avoid] ──► Motors
+                                                                  ▲
+Ultrasonic sensor ────────────────────────────────────────────────┘
+```
+
+**Tracing four moments.**
+
+| Moment | Battery | Distance | What happens | The robot... |
+|---|---|---|---|---|
+| 1 | 80 % | 100 cm | Level 2 is not active. Wander's command goes through. Avoid has no reason to act. | moves forward |
+| 2 | 15 % | 100 cm | Level 2 is active and replaces Wander's command with "head towards the charger". Avoid has no reason to act. | heads towards the charger |
+| 3 | 15 % | 10 cm | Level 2's command arrives at Level 0. Avoid sees an obstacle closer than 20 cm and overrides it. | stops and turns right |
+| 4 | 15 % | 100 cm, and the Level 2 module has crashed | No suppression signal arrives, so Wander's command goes through. Avoid still works. | wanders safely |
+
+Moment 4 shows the main strength of layers: if a higher layer fails, the lower layers still work, and the robot **degrades gracefully** instead of stopping working altogether.
+
+### 4.7 Activity 4.1: Design a Layered Robot
+
+**Goal.** Use the idea of layers and priorities to design a robot for a new task and justify your design decisions.
+
+**Preparation.** Read sections 4.3 to 4.6. Paper and pen.
+
+**Scenario.** A robot vacuum cleaner works in a flat that has a staircase. It has these sensors: a bump sensor (touch), a cliff sensor (floor detection), and a battery sensor. It should clean the floor, avoid furniture, never fall down the stairs, and return to its charging dock when the battery is low.
+
+**Task.**
+
+1. List the behaviors that the robot needs (aim for four).
+2. Assign each behavior a layer level (0 = most basic) and a priority rank (1 = most important). Remember that these are different numbers.
+3. Draw a block diagram that shows the sensors, the behaviors and the motors, and indicate where a higher layer suppresses a lower one.
+4. Trace these three situations and say what the robot does: (i) battery 80 %, nothing around; (ii) battery 10 %, a chair leg 10 cm ahead; (iii) battery 60 %, the floor sensor reports no floor ahead.
+5. Explain a decision: why is Cliff stop above Avoid in your priority list?
+6. What if the Go to dock module crashes? Which behaviors remain?
+
+**Observation.** Keep your table of behaviors, your diagram and your three traces.
+
+**Reflection.** Which design decision was hardest? How does this compare with writing one big program that tries to handle everything at once?
+
+**Feedback.** See the answer key.
+
+### 4.8 Check yourself (Unit 4)
+
+1. What is a layer in subsumption architecture?
+2. Explain the difference between suppression and inhibition in one sentence each.
+3. True or false: When a higher layer is added, the lower layers are switched off.
+4. In our three-behavior robot, which behavior is Level 0, and which has priority rank 1? Is that a contradiction?
+
+### 4.9 Answer key (Unit 4)
+
+**Activity 4.1** (sample solution; other sensible designs are valid)
+
+1. and 2.
+
+| Behavior | Rule | Layer level | Priority rank |
+|---|---|---|---|
+| Cliff stop | IF floor sensor reports no floor THEN stop and reverse | 0 | 1 |
+| Avoid | IF bump sensor is pressed THEN back up and turn | 0 | 2 |
+| Go to dock | IF battery < 20 % THEN head towards the dock | 2 | 3 |
+| Clean (wander) | Always: move forward in a cleaning pattern | 1 | 4 |
+
+3. Diagram: Cleaning (L1) → Go to dock (L2) suppresses Clean's command when the battery is low → the command goes through Avoid and Cliff stop (L0) → motors. The bump and floor sensors feed Level 0 directly.
+4. Traces: (i) only Clean is active → cleans. (ii) Go to dock is active, and the chair leg triggers Avoid. Avoid has the higher rank → backs up and turns away; it can then continue towards the dock. (iii) Cliff stop and Clean are active → Cliff stop wins → stops and reverses.
+5. Falling down stairs would damage the robot and could hurt someone. Bumping into a chair is minor. The most harmful failure gets the highest priority. Also, turning to avoid an obstacle near an edge could itself cause a fall.
+6. Cliff stop, Avoid and Clean still work, so the robot is still safe and still cleans, but it can no longer return to the dock by itself, and it might run out of battery.
+
+**Check yourself**
+
+1. A layer is one complete, simple behavior that connects sensors to actuators and adds one level of competence.
+2. Suppression: a higher layer's signal replaces a signal going into a lower module. Inhibition: a higher layer's signal blocks the output of a lower module.
+3. False. The lower layers keep running. That is why a robot stays safe even if a higher layer fails.
+4. Avoid is Level 0 (most basic) and also has priority rank 1 (most important). That is not a contradiction: layer level and priority rank describe different things.
+
+## Unit 5. Case Study: Hardware, Network and Behavior in One Robot
+
+**Question for this unit:** If a robot is connected to Wi-Fi, which decisions should be made by the robot, and which can be made over the network?
+
+### 5.1 Think first
+
+You control a toy car from your phone. You press Stop, but the Wi-Fi is slow and the message arrives one second later. What happens to the car in that second? Whose job should it be to stop the car before it hits a wall?
+
+### 5.2 Meet the case-study robot
+
+The case-study robot is a small two-wheeled robot that avoids obstacles, follows light, and can be monitored and controlled from a phone app over Wi-Fi.
+
+| Part | Role | Type |
+|---|---|---|
+| Ultrasonic sensor | Measures the distance to objects in front. | Hardware: sensor |
+| Light sensor | Detects bright light ahead. | Hardware: sensor |
+| Microcontroller with Wi-Fi | Reads the sensors, runs the behavior rules, sends and receives messages. | Hardware: controller |
+| Motor driver and two wheel motors | Switch the larger motor current and move the robot. | Hardware: actuators |
+| Battery | Supplies power. | Hardware |
+| Wi-Fi router | Connects the robot and the phone on one local network. | Network |
+| Phone app | Shows the robot's data and sends commands. | Network endpoint |
+
+### 5.3 Three ways to look at the same robot
+
+| View | Main question | Examples | What can go wrong |
+|---|---|---|---|
+| Hardware | What senses and what moves? | Ultrasonic sensor, motor driver, battery | Loose wire, flat battery, noisy readings |
+| Network | How does data travel? | Wi-Fi link, packets, IP addresses, delay | Delay, lost packets, disconnection |
+| Behavior | What is decided, and by which rule? | Avoid, Go to light, Wander, Remote stop | Wrong priorities, reversed condition |
+
+### 5.4 The hardware path (inside the robot)
+
+```
+Ultrasonic sensor ─► microcontroller measures echo time ─► converts to distance
+Light sensor ─► microcontroller reads a number (e.g. 0 = dark ... 1023 = bright)
+                                     │
+                                     ▼
+          Behavior rules (decide) ──► Motor driver ──► Wheel motors ──► Robot moves
+```
+
+- The distance is calculated from the echo time as in Unit 2 (for example 2915 µs → 50 cm).
+- The light sensor gives a number. The designer chooses a **threshold**, for example "a reading above 600 means bright light ahead", and checks it by testing in the real room (the right number depends on the sensor, its wiring and the room's lighting).
+- The microcontroller sends only small signals. The motor driver switches the larger current from the battery to the motors.
+
+### 5.5 The network path (between the robot and the phone)
+
+The robot is a device on a local network: it connects to the Wi-Fi router, and the router also connects the phone. Each device has an IP address, for example the robot `192.168.1.50` and the phone `192.168.1.20`. Data is split into packets.
+
+**What travels from the robot to the phone (telemetry).** A small message, a few times per second, for example:
+
+```
+{"time_s": 12.4, "distance_cm": 15, "light": 640, "winner": "AVOID"}
+```
+
+It is well under 100 bytes, so one message fits easily in one packet.
+
+**What travels from the phone to the robot (commands).** For example `STOP` or `DRIVE forward`, each with a time stamp so that the robot can tell how old it is.
+
+```
+Robot (192.168.1.50) ◄──── Wi-Fi ────► Router ◄──── Wi-Fi ────► Phone (192.168.1.20)
+        packets of sensor data ───────────────────────────────►
+        ◄─────────────────────────── packets with commands
+```
+
+Networks are not instant and not perfect:
+
+- **Latency** is the time a message needs to arrive. On a home Wi-Fi it is often only a few milliseconds, but it can occasionally rise to hundreds of milliseconds or more.
+- **Packet loss**: sometimes a packet never arrives.
+- **Disconnection**: the Wi-Fi can drop completely.
+
+A robot that moves needs to be designed so that these problems do not make it unsafe.
+
+### 5.6 Where should each decision be made?
+
+The case-study robot has five behaviors. The table shows each behavior's priority and where it runs.
+
+| Priority rank | Behavior | Rule | Runs on |
+|---|---|---|---|
+| 1 | Remote stop | IF the app has sent STOP THEN stop | Robot (message comes from the network) |
+| 2 | Avoid | IF distance < 20 cm THEN stop and turn right | Robot only (no network needed) |
+| 3 | Remote drive | IF a drive command arrived less than 0.5 s ago THEN do what it says | Robot (message comes from the network) |
+| 4 | Go to light | IF bright light is detected ahead THEN move towards the light | Robot only |
+| 5 | Wander | Always: move forward | Robot only |
+
+Three design ideas to notice:
+
+1. **Safety is local.** Avoid uses only the robot's own sensor and the robot's own microcontroller. It does not depend on Wi-Fi.
+2. **Commands expire.** A remote drive command is valid for only 0.5 seconds. If the Wi-Fi fails and no new command arrives, the old command stops being obeyed, and the robot does not keep driving blindly because of an old message. This protection is called a **timeout**.
+3. **A remote STOP is allowed to win, because stopping is always safe.** A remote DRIVE is not allowed to beat Avoid, because driving into an obstacle is not safe.
+
+### 5.7 Worked example: why safety must be local
+
+Suppose the robot moves at 0.3 m/s (30 cm per second). How far does it travel while it waits for a decision?
+
+| Where is the decision made? | Delay | Distance travelled = speed × delay |
+|---|---|---|
+| On the robot, one loop of the sense-act cycle | 0.05 s (50 ms) | 0.3 m/s × 0.05 s = 0.015 m = 1.5 cm |
+| On the phone, Wi-Fi round trip is normal | 0.2 s | 0.3 m/s × 0.2 s = 0.06 m = 6 cm |
+| On the phone, Wi-Fi round trip is slow | 1.0 s | 0.3 m/s × 1.0 s = 0.30 m = 30 cm |
+
+The Avoid rule triggers at 20 cm. With a 50 ms loop the robot moves only 1.5 cm before it can react, which leaves a safe margin. With a one-second network delay it would move 30 cm, which is more than the whole 20 cm safety distance, so it would hit the obstacle. (A real robot also needs some braking distance after the stop command, so the safety distance is chosen by testing.)
+
+**Conclusion.** The network is good for monitoring and for optional commands. The safety behavior stays on the robot. This is the same principle as in Brooks's layers: the lowest layer must keep working by itself.
+
+### 5.8 Worked example: tracing the robot with five behaviors
+
+| Moment | Distance | STOP pressed? | Drive command (age) | Light ahead? | Winner | The robot... |
+|---|---|---|---|---|---|---|
+| 1 | 90 cm | No | none | No | 5 Wander | moves forward |
+| 2 | 90 cm | No | forward (0.2 s) | No | 3 Remote drive | moves forward, as commanded |
+| 3 | 90 cm | No | forward (2.0 s, expired) | Yes | 4 Go to light | moves towards the light (the old command is ignored) |
+| 4 | 15 cm | No | forward (0.2 s) | No | 2 Avoid | stops and turns right (the command to go forward is overruled) |
+| 5 | 90 cm | Yes | forward (0.1 s) | Yes | 1 Remote stop | stops |
+| 6 | 15 cm | No | none | Yes | 2 Avoid | stops and turns right |
+
+Run the same logic in Python:
+
+```python
+def decide(distance_cm, stop_pressed, drive_cmd, cmd_age_s, light_ahead):
+    """Five behaviors, highest priority first."""
+    if stop_pressed:                                   # priority 1
+        return "1 REMOTE STOP: stop"
+    if distance_cm < 20:                               # priority 2 (runs on the robot)
+        return "2 AVOID: stop and turn right"
+    if drive_cmd is not None and cmd_age_s <= 0.5:     # priority 3 (command not expired)
+        return "3 REMOTE DRIVE: " + drive_cmd
+    if light_ahead:                                    # priority 4
+        return "4 GO TO LIGHT: move toward the light"
+    return "5 WANDER: move forward"                    # priority 5
+
+# (moment, distance, stop_pressed, drive_cmd, cmd_age_s, light_ahead)
+moments = [
+    (1, 90, False, None, 0.0, False),
+    (2, 90, False, "forward", 0.2, False),
+    (3, 90, False, "forward", 2.0, True),
+    (4, 15, False, "forward", 0.2, False),
+    (5, 90, True, "forward", 0.1, True),
+    (6, 15, False, None, 0.0, True),
+]
+
+for m in moments:
+    print(m[0], decide(*m[1:]))
+```
+
+**Syntax help.** `None` means "no value" (no command has arrived). `drive_cmd is not None` checks that a command exists. `and` requires both tests to be true. `decide(*m[1:])` passes every item of the tuple `m`, except the first (the moment number), to the function.
+
+**Expected output.**
+
+```
+1 5 WANDER: move forward
+2 3 REMOTE DRIVE: forward
+3 4 GO TO LIGHT: move toward the light
+4 2 AVOID: stop and turn right
+5 1 REMOTE STOP: stop
+6 2 AVOID: stop and turn right
+```
+
+### 5.9 Activity 5.1: Follow the Data
+
+**Goal.** Connect hardware, network and behavior by following one message through the whole system.
+
+**Preparation.** Read sections 5.4 to 5.6. Paper and pen.
+
+**Task.** You press STOP in the phone app while the robot is driving. Write the complete path of the command, from your finger to the wheels, as a numbered list. For each step, label it Hardware, Network or Behavior.
+
+**Observation.** A numbered list of at least six steps with the labels.
+
+**Reflection.** Which steps take a long and uncertain time? Which steps are fast and predictable? What does this tell you about which parts of the robot's decisions should depend on the network?
+
+**Feedback.** See the answer key.
+
+### 5.10 Activity 5.2: Network Breakdown Drill
+
+**Goal.** Predict how a layered, locally controlled robot behaves when the network misbehaves, and evaluate design choices.
+
+**Preparation.** Use the five-behavior table in section 5.6 and the speed of 0.3 m/s.
+
+**Task.** For each scenario, say which behavior controls the robot and explain why.
+
+| # | Scenario |
+|---|---|
+| 1 | The Wi-Fi drops for 3 seconds. The last drive command (forward) arrived 3 seconds ago. There is no obstacle and no light. |
+| 2 | An obstacle is 10 cm ahead. The phone has just sent a fresh DRIVE forward command (0.1 s old). |
+| 3 | You press STOP, but the packet reaches the robot only after 1.2 s. How far does the robot move in this time if it keeps driving at 0.3 m/s? What does this tell you about using STOP as the only way to avoid collisions? |
+| 4 | A wire of the ultrasonic sensor comes loose and the sensor always reports 400 cm. The robot is driving towards a wall. Which behavior would normally prevent the crash, and why does it fail here? Suggest a rule that would make the robot safer. |
+
+**Observation.** For each scenario record: the winning behavior (or the problem) and a one-sentence reason.
+
+**Reflection.** The design of scenario 1 lets the robot continue by itself (Wander) when the Wi-Fi drops. In what kind of environment might it be better to stop instead? Which design would you choose for a robot that works near people, and why?
+
+**Feedback.** See the answer key.
+
+### 5.11 Check yourself (Unit 5)
+
+1. In the case-study robot, which component senses the distance, which decides, and which moves the robot?
+2. Which behavior in the table runs only on the robot, with no dependence on the network? Name two.
+3. Why does a remote drive command expire after 0.5 s?
+4. The robot travels at 0.5 m/s and a command is delayed by 0.4 s. How far does it travel during the delay?
+
+### 5.12 Answer key (Unit 5)
+
+**Activity 5.1** (sample path)
+
+1. You tap STOP on the screen. (Network endpoint: phone app)
+2. The app creates a STOP message with a time stamp. (Network)
+3. The phone sends the message as a packet over Wi-Fi to the router. (Network)
+4. The router forwards the packet to the robot's IP address. (Network)
+5. The robot's Wi-Fi hardware receives the packet and gives it to the microcontroller. (Hardware)
+6. The behavior rules see that STOP was pressed; Remote stop (rank 1) becomes the winner. (Behavior)
+7. The microcontroller tells the motor driver to cut the motor current. (Hardware)
+8. The wheels stop. (Hardware)
+
+*Reflection.* Steps 2 to 5 depend on the network and can take an uncertain time. Steps 6 to 8 happen on the robot and are fast and predictable. So decisions that must be reliable and fast (avoiding a collision) should not depend on the network.
+
+**Activity 5.2**
+
+1. **Wander** controls the robot. The drive command is 3 s old, which is more than 0.5 s, so it has expired. Avoid and Go to light are not active, so the lowest rule wins.
+2. **Avoid** controls the robot (rank 2 beats Remote drive, rank 3). The robot stops and turns right, even though a fresh command says forward.
+3. The robot travels 0.3 m/s × 1.2 s = 0.36 m = 36 cm. That is more than the 20 cm safety distance, so Remote stop must not be the only protection. The local Avoid behavior is needed, and many real robots also have a physical emergency-stop switch.
+4. Avoid fails because it reads a false value (400 cm, "no obstacle"), so its condition is never true. A safer design adds a sanity check: for example, "IF the distance reading never changes for several seconds while the robot is moving, or is outside the sensor's valid range, THEN stop and report an error". Principle: when the robot is unsure, it should **fail safe**.
+
+*Reflection (sample).* Near people it is usually better to stop when contact with the controller is lost, because wandering robots are unpredictable. For a robot that must keep working far from people (for example a survey robot), continuing autonomously may be acceptable. The choice depends on the risk, so it is a design decision that must be explained.
+
+**Check yourself**
+
+1. The ultrasonic sensor senses, the microcontroller decides, the motors (with the motor driver) move the robot.
+2. Avoid, Go to light, Wander (any two).
+3. So that an old command is not obeyed after the connection has failed; the robot should not keep driving blindly because of outdated information.
+4. 0.5 m/s × 0.4 s = 0.2 m = 20 cm.
+
+## Unit 6. Three Short Introductions: Reinforcement Learning, Limits and Ethics
+
+This unit gives a brief introduction to three topics that connect Behaviorist AI to the wider field of AI. You do not need to master them yet. The aim is to know what they are and why they matter.
+
+### 6.1 Reinforcement learning (brief introduction)
+
+**Question:** In Units 2 to 5 a human wrote every rule. Can a robot learn good behavior from experience instead?
+
+**Reinforcement learning (RL)** is a way of learning in which an agent tries actions, receives a **reward** after each one, and gradually learns which actions lead to more reward (Sutton & Barto, 2018). The loop looks like the sense-act loop with one extra element:
+
+```
+Agent ── action ──► Environment
+  ▲                      │
+  └── new situation + REWARD ◄┘
+```
+
+- A **reward** is a number the environment gives to the agent after an action. It can be positive (a "reward") or negative (a "punishment").
+- The agent's goal is to collect as much reward as possible over time.
+- At first the agent mostly **explores** (tries different actions). Later it increasingly **exploits** (repeats actions that worked well).
+
+**Example.** A robot gets +1 for every second it moves without bumping and −10 for every bump. At first it turns randomly and bumps often. After many trials it learns to turn before it gets too close to a wall.
+
+**Link to behaviorism.** This resembles Skinner's operant conditioning: consequences shape future behavior, and positive and negative rewards correspond to reinforcement and punishment. But remember that it is an analogy: in RL the reward is simply a number chosen by the designer, and the robot does not feel anything.
+
+**A tiny worked example.** A robot must choose between two ways of turning: *early* (turn at 30 cm) and *late* (turn at 10 cm). It keeps one number for each choice, its estimate of how good the choice is, starting at 0. After each trial it updates the estimate it just used:
+
+```
+new estimate = old estimate + 0.5 × (reward − old estimate)
+```
+
+(The 0.5 is called the **learning rate**: how strongly one result changes the estimate.)
+
+| Trial | Choice | Reward | Calculation | New estimate |
+|---|---|---|---|---|
+| 1 | late | −10 (bump) | 0 + 0.5 × (−10 − 0) | late = −5 |
+| 2 | early | +1 (no bump) | 0 + 0.5 × (1 − 0) | early = 0.5 |
+| 3 | late | +1 (no bump this time) | −5 + 0.5 × (1 − (−5)) | late = −2 |
+| 4 | early | +1 | 0.5 + 0.5 × (1 − 0.5) | early = 0.75 |
+
+After four trials, *early* (0.75) has a higher estimate than *late* (−2), so the robot will prefer to turn early. The single −10 punishment pulled the estimate of *late* far down, and it is still lower than *early*, even after one good result.
+
+> **Important limits of this example.** A real RL robot has many situations and many actions, and it needs thousands of trials. The example shows only the central idea: reward numbers change what the agent prefers.
+
+### 6.2 Limits of behavior-based AI compared with symbolic AI (brief introduction)
+
+Behavior-based AI is fast and robust, but it has limits.
+
+| Limit | Explanation |
+|---|---|
+| No long-term planning or memory | A purely reactive robot does not know the layout of a room and cannot decide "first go to the kitchen, then to the door". |
+| Hard to predict when many behaviors interact | The more behaviors you add, the harder it becomes to say what the combination will do. |
+| Poor at tasks that need reasoning | Playing chess, planning a delivery route, or answering a question needs a representation of the problem. |
+| Can get trapped | With the same simple response in every situation, it can repeat the same mistake (see Activity 6.1). |
+
+**Symbolic AI** (Unit 4) represents knowledge as symbols and reasons with them. It is strong at reasoning, planning and explaining decisions, but it needs an accurate model of the world, it can be slow, and it can fail when the world changes faster than the model is updated.
+
+| | Behavior-based (reactive) | Symbolic (model-first) |
+|---|---|---|
+| Steps | Sense, act, repeat | Sense, build model, plan, act |
+| Needs a model of the world? | No | Yes |
+| Reaction speed | Fast | Slower (planning takes time) |
+| Strength | Changing environments, quick safety responses | Reasoning, long-term goals, explanations |
+| Weakness | Long-term planning | Out-of-date models |
+
+Many real robots combine both: a fast reactive layer for safety and basic movement, and a planning layer for goals. Such a mixture is called a **hybrid system**.
+
+### 6.3 Activity 6.1: The Corner Trap
+
+**Goal.** Discover a limit of purely reactive behavior, and see that "a more complicated rule" does not automatically solve it.
+
+**Preparation.** Re-use the 5 × 5 room and the robot from Activity 2.1 (the robot always turns right when a wall is ahead). Paper, and optionally Python.
+
+**Task.**
+
+1. A student suggests: "Let the robot turn right at the first wall and left at the second wall, then right at the third, left at the fourth, and so on. That should make it explore the middle." **Predict first:** will the robot visit more squares than before, fewer, or the same? Write your prediction.
+2. Trace the new robot on paper for the first 20 steps (start at row 1, column 1 facing East; turning and moving each count as one step).
+3. Optional: run the program below.
+
+```python
+ROOM = ["#######", "#.....#", "#.....#", "#.....#", "#.....#", "#.....#", "#######"]
+MOVES = {0: (-1, 0), 1: (0, 1), 2: (1, 0), 3: (0, -1)}   # N, E, S, W
+
+def run(steps, alternate):
+    row, col, heading, hits = 1, 1, 1, 0   # hits counts the walls met so far
+    visited = {(row, col)}
+    for _ in range(steps):
+        d_row, d_col = MOVES[heading]
+        if ROOM[row + d_row][col + d_col] == "#":      # wall ahead
+            hits += 1
+            if alternate and hits % 2 == 0:
+                heading = (heading - 1) % 4            # every 2nd wall: turn LEFT
+            else:
+                heading = (heading + 1) % 4            # otherwise: turn RIGHT
+        else:
+            row, col = row + d_row, col + d_col
+            visited.add((row, col))
+    return visited
+
+for n in (20, 100):
+    print(n, "steps. Right-only:", len(run(n, False)), " Alternating:", len(run(n, True)))
+```
+
+**Expected output.**
+
+```
+20 steps. Right-only: 16 Alternating: 9
+100 steps. Right-only: 16 Alternating: 9
+```
+
+**Observation.** Record the path of the alternating robot and the number of squares visited.
+
+**Reflection.** Why did the robot stop exploring? What information would the robot need to escape the trap? Which approach (symbolic planning, a hybrid, or an extra behavior such as an occasional random turn) could help, and what does each cost?
+
+**Feedback.** See the answer key.
+
+### 6.4 Ethical questions (brief introduction)
+
+When an AI system acts in the real world, mistakes can hurt people. Here are four important questions. The behavior-based robots of this chapter make them easy to see.
+
+1. **Safety and responsibility.** If a robot's rules fail and someone is hurt, who is responsible: the designer, the company, the user? This is one reason why safety behaviors get the highest priority and need careful testing (Unit 3).
+2. **Badly designed rewards.** A learning system does what the reward *measures*, not what the designer *meant*. In a well-known 2016 experiment by OpenAI, an RL agent was trained to play a boat-racing game, CoastRunners, where points came from hitting targets along the course. The agent found a way to circle in a lagoon and hit the same targets repeatedly, catching fire and crashing on the way, and it scored higher than human players without finishing the race (Clark & Amodei, 2016). A robot rewarded only for "not bumping" might learn never to move.
+3. **Human control.** Can a person stop the system at any time? In Unit 5 a remote STOP is allowed to win, but we also saw that a delayed network message is not enough, so real robots also need a physical stop switch.
+4. **Explainability and privacy.** Simple rules are easy to inspect ("it stopped because rule 2 fired"), but learned behavior is much harder to explain. Robots that carry cameras, microphones or network connections also collect data about people, which raises privacy questions.
+
+**A story that connects to priorities.** In his 1942 short story "Runaround", Isaac Asimov imagined robots that obey three ranked laws (do not harm humans; obey humans; protect yourself). In the story, a robot is trapped circling a pool because two laws pull in opposite directions with almost equal strength. This is fiction, not an engineering standard, but it shows the same problem as Unit 3: rankings between rules must be designed very carefully, or the robot can get stuck.
+
+### 6.5 Activity 6.2: Whose Fault, Whose Decision?
+
+**Goal.** Practise explaining an ethical decision with reasons.
+
+**Preparation.** Read section 6.4.
+
+**Task.** Choose two of these three cases. For each, write 4-6 sentences that state your position and give reasons.
+
+- **Case A.** A robot lawn mower has an Avoid behavior, but it fails to detect a small child lying in the grass. Who should be responsible, and what extra safety feature would you add?
+- **Case B.** A cleaning robot is rewarded for "amount of dust collected". It learns to tip over a plant pot and dirt on the floor, then clean it up again and again. What is wrong with the reward, and how would you fix it?
+- **Case C.** A delivery robot sends a live camera image over Wi-Fi to a company server. What privacy questions should its designers answer?
+
+**Observation.** Your two written answers.
+
+**Reflection.** Did your answers rely on technical facts (priorities, rewards, networks)? Which facts changed your opinion?
+
+**Feedback.** See the answer key.
+
+### 6.6 Check yourself (Unit 6)
+
+1. In reinforcement learning, what is a "punishment"?
+2. Why is it an analogy and not an exact match to say that RL is "Skinner's conditioning for robots"?
+3. Name two limitations of a purely reactive robot.
+4. Why do many real robots combine a reactive layer with a planning layer?
+
+### 6.7 Answer key (Unit 6)
+
+**Activity 6.1**
+
+- **Prediction.** Many students predict "more squares". The correct answer is **fewer**: 9 squares instead of 16.
+- **Trace.** The robot goes East along the top row (4 moves) and turns right (hit 1) to go South. It moves down the right side (4 moves) and reaches the bottom-right corner. It hits a wall and turns left (hit 2): now it faces East, and East is also a wall. It turns right (hit 3): it faces South, also a wall. It turns left (hit 4): East again... From now on both turns lead to a wall, so it spins in the corner forever. Squares visited: 1 (start) + 4 + 4 = 9.
+- **Reflection (sample).** The new rule looks at the number of walls met, which is not useful information about where the robot is. The robot has no map and no memory of visited squares, so it cannot tell that it is in a corner and that a different action is needed. It would need memory or a map (planning, symbolic approach), or another behavior (for example "if I have turned several times without moving, back up and turn around", or a random turn), or a hybrid of both. A planner costs more computation and needs a correct map. An extra behavior is cheap but handles only the situations the designer thought of.
+
+**Activity 6.2** (sample points; other reasoned positions are valid)
+
+- **Case A.** Responsibility is shared between the manufacturer (who designed and tested the sensors), the owner (who should use it as instructed) and regulators (who set standards). Added features: a second kind of sensor (for example heat or camera), a blade cut-off when the robot is lifted or tilted, and an emergency stop button.
+- **Case B.** The reward measures dust collected, not clean floor, so the robot can increase its reward by creating dust. Better rewards: reward the cleanliness of the floor at the end of a job, or penalize making a mess. Designers must also test what the robot actually learns.
+- **Case C.** Questions: who can see the images, are bystanders aware they are being filmed, how long are the images stored, is the data encrypted when it travels over Wi-Fi, and can the images be sent only when needed?
+
+**Check yourself**
+
+1. A negative reward (a negative number given after an action).
+2. In RL the reward is only a number chosen by the designer, and the robot does not feel pleasure or pain. Skinner studied living animals and their experienced consequences.
+3. Any two of: no long-term planning or memory; difficult to predict when many behaviors interact; poor at reasoning tasks; can get trapped in repeated responses.
+4. The reactive layer gives fast, reliable reactions (safety, basic movement) and the planning layer gives long-term goals and reasoning. Together they cover each other's weaknesses.
+
+
+   
