@@ -11,8 +11,8 @@ By the end of this part, students will be able to:
 ​●​Describe the stored-program concept and the fetch–decode–execute cycle.
 ​●​ Explain how the CPU, memory, and input/output devices exchange information through buses and controllers.
 ​●​ Give a simple explanation of GPUs and AI accelerators.
-​●​ Explain the difference between sensors and actuators and the role of a microcontroller.
-​●​ Trace how an obstacle-avoiding robot uses a sensor, microcontroller, and motors to respond to an obstacle.
+​●​ Explain the difference between sensors and actuators, how a sensor signal becomes numbers (sampling, quantization, encoding), and the role of a microcontroller.
+​●​ Calculate a distance from an ultrasonic echo time and trace how an obstacle-avoiding robot uses a sensor, microcontroller, and motors to respond to an obstacle.
 
 Complete Content Structure:
 
@@ -50,10 +50,11 @@ Complete Content Structure:
 ​●​ 7.2 GPUs, AI accelerators, and parallel work
 
 ​8.​ Sensors, Actuators, and Microcontrollers
-​●​ 8.1 The big idea: sense, decide, and act
-​● ​8.2 Sensors and actuators
-​●​ 8.3 Microcontrollers and the sense–act loop
-​●​ 8.4 Worked example: obstacle-avoiding robot
+​●​ 8.1 Sensors: how a machine senses the world
+​●​ 8.2 Actuators: how a machine acts
+​●​ 8.3 Microcontrollers: the tiny computer inside a machine
+​●​ 8.4 The sense–decide–act loop
+​●​ 8.5 Worked example: obstacle-avoiding robot
 
 ​9.​Review and Practice
 ​●​ 9.1 Key terms
@@ -220,7 +221,7 @@ Learning Objectives:
 Students will be able to explain memory addresses, compare RAM and ROM, and describe why computers use registers, cache, and main memory.
 
 3.1 Memory Locations and Addresses:
-Main memory is the econd major subsystem of a computer. It consists of many storage locations. Each location has its own identifier called an address. An address helps the computer find the information it needs.
+Main memory is the second major subsystem of a computer. It consists of many storage locations. Each location has its own identifier called an address. An address helps the computer find the information it needs.
 We can imagine memory as a long row of numbered boxes. Every box has a number, and the computer uses this number to find its contents. The boxes hold information as bits, which are 0s and 1s.
 A byte is a group of 8 bits. A word is a group of bits that a processor handles as a unit, often 16, 32, or 64 bits depending on the computer and operation. The word size is not always the same as the size of one memory addressable location.
 For example, a simplified memory might look like this:
@@ -533,146 +534,279 @@ Key Terms:
 8. Sensors, Actuators, and Microcontrollers:
 
 Goal:
-To understand how hardware helps a robot receive information, make decisions using simple rules, and act in the real world.
+To help beginners understand how a machine can sense the physical world, make a decision with a tiny computer, and act on that decision, using one robot example from start to finish.
 
 Learning Objectives:
-Students will be able to identify sensors, actuators, and microcontrollers, explain their roles, and follow the sense–decide–act loop using the obstacle-avoiding robot.
+Students will be able to:
+- Explain the difference between a sensor and an actuator, and give examples of each.
+- Describe how a sensor signal becomes numbers a computer can use (sampling, quantization, encoding).
+- Explain what a microcontroller is and how it differs from a general-purpose computer such as a laptop.
+- Describe the sense–decide–act loop of a simple robot.
+- Calculate a distance from the echo time of an ultrasonic sensor.
+- Trace the program of an obstacle-avoiding robot and predict what it will do.
 
-8.1 The Big Idea: Sense, Decide, and Act:
-A robot needs to receive information from the environment, decide what to do with this information, and perform an action. We can describe this process as sense, decide, and act.
-- Sense: A sensor measures something in the environment.
-- Decide: A microcontroller or another controller follows programmed rules.
-- Act: An actuator performs an action.
-For example, a robot may detect a wall in front of it, decide that it is too close, and turn away from the wall.
+Before You Start:
+You should already know (earlier sections of this chapter): the CPU, memory, input and output devices, bits, the program counter, and the fetch–decode–execute cycle.
+Predict first: A robot is driving toward a wall. How could it know the wall is there? Write your guess in one sentence, then compare it with the worked example in Section 8.5.
 
-8.2 Sensors and Actuators:
-A sensor is a device that measures something in the real world and produces a signal the system can use. Sensors work like input devices because they provide information to the robot.
+![An obstacle-avoiding robot measures the distance to a wall with sound.](../assets/hw-robot-overview.png)
+Figure 8.1. The running example of this section.
 
-Examples of sensors include:
-- An ultrasonic sensor measures distance.
-- A light sensor measures brightness.
-- A microphone detects sound.
-- A camera captures images.
-An actuator is a device that turns a control signal into an action. Motors are a common example because they create movement. Other output devices, such as speakers and LEDs, can also produce actions or signals in a system, although the word actuator is most commonly used for devices that produce physical movement.
+8.1 Sensors: How a Machine Senses the World:
+A sensor is a device that measures something in the physical world (sound, light, distance, temperature, movement, pressure) and turns it into an electrical signal. A sensor is an input device, but instead of a person typing, the "input" comes from the real world.
 
-Examples include:
-- A motor moves a wheel.
-- A speaker produces sound.
-- An LED produces light.
-- A vibration motor produces vibration.
-The main difference is that sensors receive information from the environment, while actuators or other output devices affect the environment.
+|Sensor|What it measures|Example use|
+|------|----------------|-----------|
+|Microphone|sound|voice commands|
+|Camera|light (images)|face unlock, robot vision|
+|Range (distance) sensor, e.g. ultrasonic|distance to an object|obstacle-avoiding robot|
+|Gyroscope / accelerometer|rotation / motion|a phone knows its orientation|
+|Touch or force sensor|pressure|a robot hand holding an egg without crushing it|
 
-8.3 Microcontrollers and the Sense–Act Loop:
-A microcontroller is a small computer on a single chip. It usually includes a processor, memory, and connections for other electronic components. It is often used to control one device or perform a specific task.
+From Signal to Numbers:
+Many sensors produce a smoothly changing (analog) signal, but a computer works with bits. The conversion is called analog-to-digital conversion and has three steps:
+1. Sampling: measure the signal at regular moments. The number of measurements per second is the sampling rate.
+2. Quantization: round each measured value to the nearest whole number.
+3. Encoding: write that whole number as a pattern of bits. The number of bits per sample is the bit depth.
 
-For example, a microcontroller can read a distance sensor and decide whether a robot should continue moving. It then sends control signals to the motor driver, which controls the motors.
+Worked Example: A 3-Bit Converter
+An imaginary converter has 3 bits, so it can output the whole numbers 0 to 7 (2³ = 8 values).
 
-The robot repeats the following steps:
-1. Read information from the sensor.
-2. Compare the information with the rule in the program.
-3. Send a command to the actuator.
-4. Measure the environment again.
-This is a sense–act loop. When we show the decision step separately, we can call it the sense–decide–act loop. The loop is also important for understanding Behaviorist AI later in our module.
+|Sample|Real value (volts)|After quantization|3-bit code|
+|------|------------------|------------------|----------|
+|1     |1.3               |1                 |001       |
+|2     |3.8               |4                 |100       |
+|3     |5.2               |5                 |101       |
+|4     |4.1               |4                 |100       |
+|5     |2.2               |2                 |010       |
+|6     |0.8               |1                 |001       |
+
+The converter never sees the values between the samples, and rounding throws away small differences. More samples per second and more bits per sample give a more accurate picture, but need more storage.
+
+![Six samples of a smooth signal rounded to whole numbers and written as 3-bit codes.](../assets/hw-sampling.png)
+Figure 8.2. Sampling, quantization and encoding.
+
+Common Misconception:
+"The robot sees the wall."
+The sensor only produces a number. The program turns that number into a distance and compares it with a limit. "Seeing" is just data plus a rule.
+
+Activity 14: Round It Like a Converter
+Goal: Practise sampling, quantization and encoding.
+Preparation: Paper and pen. Use the same imaginary 3-bit converter (values 0 to 7).
+
+A sensor gives these five samples in volts: 0.4, 2.2, 5.7, 6.6, 3.1.
+1. Quantize each sample to the nearest whole number.
+2. Write the 3-bit code of each result.
+3. Another sample is 1.8 V. Does it get the same code as 2.2 V? What information is lost?
+4. Predict: what changes if the converter has 4 bits instead of 3?
+5. The sensor is sampled 10 times per second with 3 bits per sample. How many bits per second is that?
+Observe and reflect: Which step loses information, sampling or quantization?
+
+Suggested answers:
+1. 0, 2, 6, 7, 3.
+2. 000, 010, 110, 111, 011.
+3. Yes, 1.8 rounds to 2, so it also gets 010. The small difference between 1.8 and 2.2 is lost.
+4. 4 bits give 2⁴ = 16 values, so the steps are finer and the rounding error is smaller.
+5. Bit rate = samples per second × bits per sample = 10 × 3 = 30 bits per second.
+Reflection: both. Sampling skips what happens between samples, and quantization rounds each value.
+
+8.2 Actuators: How a Machine Acts:
+An actuator is a device that turns a signal from the computer into a physical action: movement, sound, light or heat. Examples: wheel motors, robot grippers, speakers (including speech output).
+
+|             |Sensor                            |Actuator                           |
+|-------------|----------------------------------|-----------------------------------|
+|Direction    |world → computer                  |computer → world                   |
+|Main question|"What is happening out there?"    |"What should happen out there?"    |
+|Examples     |microphone, camera, range sensor  |wheel motor, gripper, speaker      |
+
+Why a Driver Is Needed:
+Input/output devices cannot be wired straight to the CPU and memory, because they work differently and much more slowly. A controller sits between them (see Section 5.2, Input/Output Controllers). A robot follows the same idea: the microcontroller sends only a small signal, so a motor driver (a small circuit) sits between it and the motors and supplies enough power.
+
+Why Sensors Matter:
+Some industrial robot arms work without sensors: they repeat programmed moves and assume every part arrives in exactly the right place. A robot with sensors can adapt to a world that changes.
+
+Activity 15: Sensor or Actuator?
+Goal: Decide whether a device measures the world or changes it.
+Preparation: Paper and pen.
+
+Label each device S (sensor), A (actuator) or B (both):
+1. microphone, 2. wheel motor, 3. camera, 4. speaker, 5. gyroscope, 6. robot gripper, 7. ultrasonic range sensor, 8. touchscreen.
+Then answer: a robot has a camera and wheels but no microcontroller. Can it react to what the camera sees? Why or why not?
+Observe and reflect: What question did you ask yourself for each device?
+
+Suggested answers:
+1. S, 2. A, 3. S, 4. A, 5. S, 6. A, 7. S, 8. B (it shows images and also senses touch).
+- No. The camera produces signals and the wheels can turn, but nothing decides what the wheels should do. A microcontroller (or other processor) running a program is needed in the middle.
+- Useful question: "Does it measure the world, or change it?"
+
+8.3 Microcontrollers: The Tiny Computer Inside a Machine:
+A microcontroller is a tiny computer on a single chip, built to run one dedicated program inside a device. On the chip there is a CPU, a small amount of memory, and connection pins to which sensors and actuators are attached. It still follows the model from the earlier sections: CPU, memory, input/output, a stored program, and the fetch–decode–execute cycle.
+Microcontrollers are the heart of embedded systems: computer systems built into devices with dedicated tasks, such as home appliances, vehicle electronics, medical devices and phones. They are often expected to save battery power, meet strict timing deadlines, or run for a long time with little or no human attention.
+
+![A laptop has many separate parts; a microcontroller has CPU, memory and pins on one chip.](../assets/hw-laptop-vs-microcontroller.png)
+Figure 8.3. A laptop compared with a microcontroller.
+
+|                 |Laptop / PC                                                    |Microcontroller                                                     |
+|-----------------|---------------------------------------------------------------|--------------------------------------------------------------------|
+|Purpose          |general-purpose: many different programs                        |one dedicated program                                               |
+|Parts            |CPU, RAM, storage, GPU and more, as separate parts on a motherboard|CPU, memory and connection pins together on one chip             |
+|User interface   |screen, keyboard, mouse                                         |usually none: it talks to the world through sensors and actuators   |
+|Memory (example) |gigabytes of RAM                                                |kilobytes (an Arduino Uno chip has about 2 KB of RAM and 32 KB of program memory)|
+|Power            |needs a lot                                                     |can run on small batteries                                          |
+|Example          |writing an essay                                                |the robot's obstacle-avoiding program                               |
+
+Common Misconception:
+"A microcontroller is just a weak laptop processor."
+It is not a weaker copy. It is designed for a different job: one task, low power, direct connections to sensors and motors. A washing machine does not need to run a web browser.
+
+8.4 The Sense–Decide–Act Loop:
+A robot repeats the same three steps over and over:
+1. Sense: the sensor measures.
+2. Decide: the microcontroller runs its program (fetch–decode–execute again and again) and chooses an action.
+3. Act: the actuators carry out the action.
+4. Repeat: acting changes the world, so the next measurement is different.
+
 ```mermaid
 flowchart LR
-
-A[Sensor measures environment] --> B[Microcontroller follows rule]
-
-B --> C[Motor performs action]
-
-C --> D[Environment changes]
-
+A[SENSE: ultrasonic sensor measures] --> B[DECIDE: microcontroller compares and chooses]
+B --> C[ACT: motor driver and motors move]
+C --> D[The world changes]
 D --> A
-
 ```
-8.4 Worked Example: The Obstacle-Avoiding Robot
-Our running example is a simple robot that can avoid obstacles. It has an ultrasonic sensor at the front, a microcontroller, and motors that move its wheels.
 
-The robot follows one rule:
+![The sense, decide, act loop.](../assets/hw-sense-decide-act.png)
+Figure 8.4. The sense–decide–act loop.
 
-If the measured distance is less than 20 cm, stop and turn. Otherwise, drive forward.
-How the Sensor Measures Distance
-The ultrasonic sensor sends out a sound pulse that humans cannot hear. The sound travels to an object and returns as an echo. The system measures how long this takes.
+The simplest kind of response is a reflex: a fixed, predetermined reaction to the input. A robot that follows simple rules moment by moment, without building a detailed plan, is called a reactive robot. A robot vacuum cleaner works this way. You will meet this idea again in the Behaviorist AI part.
 
-Because the sound travels to the object and back, we divide the total distance by two:
+8.5 Worked Example: The Obstacle-Avoiding Robot
+Setup: The robot has one ultrasonic sensor at the front, two wheel motors with a motor driver, and a microcontroller.
+Rule: If the wall is 20 cm away or closer, stop and turn. Otherwise, drive forward.
 
-Distance = Speed of sound × Echo time ÷ 2
+![Sound travels to the wall and back; the echo time gives the distance.](../assets/hw-echo-distance.png)
+Figure 8.5. Echo time and distance.
 
-At around room temperature, the speed of sound in air is approximately 343 metres per second.
-Example 1: The Object Is Far Away
-Suppose the echo time is 0.0058 seconds.
+Step 1: Sense. The sensor sends out a short pulse of sound and measures how long the echo takes to come back. Example: 1166 µs (microseconds; 1 µs = 0.000001 s).
 
-Distance = 343 × 0.0058 ÷ 2 ≈ 0.995 m, or about 100 cm.
+Step 2: Calculate. The speed of sound in air is about 343 m/s (at around 20 °C).
 
-The object is farther than 20 cm, so the robot continues driving forward.
-Example 2: The Object Is Close
-Now suppose the echo time is 0.001 seconds.
+distance = speed of sound × echo time ÷ 2
+         = 343 m/s × 0.001166 s ÷ 2
+         = 0.4 m ÷ 2
+         = 0.2 m = 20 cm
 
-Distance = 343 × 0.001 ÷ 2 = 0.1715 m, or about 17 cm.
+Why ÷ 2? The sound travels to the wall and back, so the measured time covers the distance twice.
+Shortcut: sound travels 34 300 cm per second, so the round trip for 1 cm of distance takes about 58 µs. That gives distance (cm) = echo time (µs) ÷ 58. Check: 1166 ÷ 58 = 20.
 
-The object is closer than 20 cm, so the microcontroller commands the motors to stop and turn the robot.
-The Complete Process
-1. The ultrasonic sensor measures the distance to an obstacle.
-2. The microcontroller receives the measurement.
-3. The program compares the distance with 20 cm.
-4. The microcontroller sends a command to the motor driver.
-5. The motors move or turn the robot.
-6. The sensor measures the distance again, and the process repeats.
-This example connects the Hardware and Behaviorist AI parts of our module. Hardware allows the robot to sense and act. The rules determine how the robot responds to what it senses.
-Mini Activity: Predict the Robot’s Action
-The robot follows the same rule: less than 20 cm → stop and turn; otherwise → drive forward.
-Measured distance	Robot’s action
-50 cm	?
-15 cm	?
-20 cm	?
-10 cm	?
+Step 3: Decide. Compare 20 cm with the limit (threshold) of 20 cm. The wall is close enough, so the robot must turn.
 
+Step 4: Act. The microcontroller stops the motors and turns the robot.
 
-Answers: 50 cm → drive forward; 15 cm → stop and turn; 20 cm → drive forward; 10 cm → stop and turn.
-Check Yourself
-1. What is the difference between a sensor and an actuator?
-2. Why does the robot divide the sound travel distance by two?
-3. What does the microcontroller do after receiving the measurement?
-4. Why does the robot need to repeat the loop?
-Answers: 1. A sensor measures; an actuator performs an action. 2. The sound travels to the object and back. 3. It compares the distance with the rule and sends a command. 4. The environment changes as the robot moves.
+The Program in Plain English
+This program looks like the one in Activity 11 (Section 6), but it has no HALT instruction, so it never stops.
 
-- Study Guide idea: A labelled robot diagram, the distance calculation, and a completed example with two different measurements.
-- PPT idea: Show the robot, reveal the 20 cm rule, and ask students to predict what happens at 50 cm and 15 cm.
-- Video idea: Animate the ultrasonic pulse, the returned echo, the distance calculation, and the motor response.
+|Address|Instruction                                          |
+|-------|-----------------------------------------------------|
+|00     |SEND a sound pulse                                   |
+|01     |MEASURE the echo time and put it in Register A (µs)  |
+|02     |CALCULATE A ÷ 58 and put the distance (cm) in Register B|
+|03     |IF B is more than 20, JUMP to address 06             |
+|04     |STOP both motors, then TURN right a little           |
+|05     |JUMP to address 00                                   |
+|06     |GO FORWARD                                           |
+|07     |JUMP to address 00                                   |
 
-Activity 14: You Are the Robot’s Controller
-Work in pairs. One student is the Sensor and the other is the Microcontroller. A third student can act as the Motors.
-The Sensor reads one distance at a time: 60 cm, 35 cm, 19 cm, 8 cm, 25 cm. The Microcontroller applies the rule from our example. The Motors student says the action out loud.
+A JUMP changes the program counter, so the CPU goes back to address 00 instead of continuing to the next address. That is how the robot repeats forever.
 
-Expected actions: Forward, forward, stop and turn, stop and turn, forward.
+Activity 16: From Echo to Distance
+Goal: Calculate distances from echo times and spot a typical mistake.
+Preparation: Paper, pen, calculator. Use distance = 343 m/s × time ÷ 2.
 
-Activity 15: Change the Rule
-Our robot turns when the distance is less than 20 cm. Now imagine that the threshold changes to 30 cm.
-1. What happens when the sensor measures 25 cm?
-2. What happens at exactly 30 cm?
-3. Did we need to change the sensor or motors to make this new rule?
-4. What does this tell us about the difference between hardware and the instructions it follows?
+Part A: Calculate
+1. The echo time is 2332 µs. What is the distance?
+2. The echo time is 583 µs. What is the distance?
+3. Use the shortcut (÷ 58) for an echo time of 2900 µs.
+Part B: Predict
+4. The wall moves twice as far away. What happens to the echo time?
+5. The robot should react to walls closer than 30 cm. Roughly which echo time is that?
+Part C: Find the error
+6. A student writes: "Echo time 1166 µs. Distance = 343 × 0.001166 = 0.4 m, so the wall is 40 cm away." What mistake did the student make, and what would the robot do wrongly?
+Observe and reflect: Why does the program need the conversion from time to distance before it can decide?
 
-Answers: 1. Stop and turn; 2. Drive forward; 3. No, in this simplified example we only changed the program rule; 4. The same hardware can perform different actions depending on the instructions.
+Suggested answers:
+1. 343 × 0.002332 = 0.8 m, ÷ 2 = 0.4 m = 40 cm.
+2. 343 × 0.000583 = 0.2 m, ÷ 2 = 0.1 m = 10 cm.
+3. 2900 ÷ 58 = 50 cm (the exact formula gives about 49.7 cm).
+4. The echo time doubles, because sound has to travel twice the distance.
+5. About 30 × 58 = 1740 µs (the exact formula gives about 1749 µs), so roughly 1750 µs.
+6. The student forgot to divide by 2. The real distance is 20 cm. The robot would think the wall is 40 cm away, keep driving forward, and turn only when the wall is really about 10 cm away, which may be too late.
+Reflection: the threshold (20 cm) is a distance, but the sensor gives a time, so the units must be converted first.
 
-Activity 16: Find the Problem
-A student says: “The ultrasonic sensor sees an obstacle and decides to turn the robot. The motors calculate the distance.”
+Activity 17: Be the Microcontroller
+Goal: Trace the robot program and predict what changes if the program or the sensor changes.
+Preparation: Copy the program table above. Draw a table with columns: Loop, Echo time, Register B, "B more than 20?", Action.
 
-Find two mistakes and correct them.
+Part A: Trace
+The sensor gives these echo times in order: 4660, 3500, 1749 and 1166 µs. Use integer division (ignore decimals).
+1. Fill in the table for loops 1 to 4.
+2. Which addresses are executed in loop 1? Which in loop 4?
+3. After the turn, the next echo time is 2332 µs. What does the robot do?
+Part B: Predict
+4. The threshold in address 03 is changed from 20 to 30. In which loop does the robot first turn?
+5. The sensor is covered by tape and always reports 0 µs. What does the robot do?
+6. Address 07 is deleted. What happens after the robot drives forward once?
+Part C: Find the error
+7. A classmate says: "Address 03 makes the robot turn when the wall is farther than 20 cm." Is the classmate right?
+Observe and reflect: Which addresses belong to sensing, deciding and acting?
 
-Suggested answer: The sensor measures the distance; it does not make the decision in our example. The microcontroller uses the measured distance and the rule to decide what to do. The motors carry out the movement.
-Visual placeholder: Diagram(Obstacle-avoiding robot from above. Label ultrasonic sensor at the front, microcontroller inside, motor driver, wheels/motors, obstacle, and 20 cm threshold. Draw a separate arrow loop: Sense → Decide → Act → Sense.)
+Suggested answers:
+1. 4660 ÷ 58 = 80 → more than 20 → forward. 3500 ÷ 58 = 60 → forward. 1749 ÷ 58 = 30 → forward. 1166 ÷ 58 = 20 → not more than 20 → turn.
+2. Loop 1: 00, 01, 02, 03, 06, 07. Loop 4: 00, 01, 02, 03, 04, 05.
+3. 2332 ÷ 58 = 40, more than 20, so it drives forward.
+4. Loop 3: B = 30 is not more than 30, so the robot turns.
+5. B = 0 is not more than 20, so the robot turns in every loop and never drives forward. It is safe but useless.
+6. The program counter moves past the last instruction and nothing tells the robot to check again, so it stops reacting after one check.
+7. No. If B is more than 20, the JUMP skips the turn and goes forward. The robot turns when B is 20 or less.
+Reflection: addresses 00–01 sense, 02–03 decide, 04 and 06 act, 05 and 07 repeat the loop.
 
-Visual placeholder: Picture(Simple physical obstacle-avoiding robot or a clear original illustration with its sensor, wheels, and controller visible.)
+Summary:
+- A sensor measures the world; an actuator changes it.
+- A converter turns a smooth signal into numbers by sampling, quantization and encoding.
+- A microcontroller is a tiny computer on one chip, built to run one dedicated program.
+- Robots repeat the sense–decide–act loop; acting changes what the sensor measures next.
+- The obstacle-avoiding robot turns an echo time into a distance (time × 343 m/s ÷ 2) and compares it with a threshold.
+Back to the starting question: the robot "knows" about the wall because the ultrasonic sensor times an echo, the microcontroller converts the time into a distance, and a simple rule compares it with 20 cm.
 
-Key Terms
-- Sensor: A component that measures information from the environment.
-- Actuator: A component that produces an action or movement.
-- Microcontroller: A small computer that can read inputs and control outputs.
-- Ultrasonic Sensor: Measures distance using high-frequency sound and its echo.
-- Motor Driver: Hardware that controls power delivered to motors.
-- Threshold: A value used to decide when a particular action should happen.
-- Sense–Decide–Act Loop: Repeatedly measure the environment, choose an action, and perform it.
+- Study Guide idea: Figures 8.1–8.5, the 3-bit converter table, the laptop vs. microcontroller table, and the robot program table.
+- PPT idea: "How does a machine sense?" (signal → numbers), "Measure or move?" comparison table, laptop vs. microcontroller diagram, sense–decide–act loop, and animated echo and formula slides.
+- Video idea: Video 1 "Inside the machine" (sensing, acting, microcontroller) with a "pause and predict" at 2332 µs; the sense–decide–act loop also leads into the integration video with Behaviorist AI.
+
+Key Terms:
+- Sensor: A device that measures something in the physical world and turns it into a signal.
+- Actuator: A device that turns a signal into physical action, such as movement or sound.
+- Analog Signal: A signal that changes smoothly and can take any value in a range.
+- Sampling: Measuring a signal at regular moments.
+- Sampling Rate: The number of samples taken per second.
+- Quantization: Rounding each sample to the nearest whole number.
+- Encoding: Writing a quantized value as a pattern of bits.
+- Bit Depth: The number of bits used for each sample.
+- Analog-to-Digital Conversion: Turning an analog signal into digital data by sampling, quantization and encoding.
+- Controller / Driver: A circuit between the processor and a device that handles differences in speed and power.
+- Microcontroller: A tiny computer on one chip, built to run one dedicated program.
+- Embedded System: A computer system built into a device with a dedicated task.
+- Ultrasonic Sensor: A sensor that measures distance by sending a sound pulse and timing its echo.
+- Echo Time: The time between sending a sound pulse and receiving its echo.
+- Threshold: A limit value; the robot reacts when the distance is at or below it.
+- Reflex Action: A fixed, predetermined response to an input.
+- Reactive Robot: A robot that follows simple rules moment by moment instead of making detailed plans.
+- Sense–Decide–Act Loop: The repeating cycle of measuring, deciding and acting.
+
+Sources for Section 8:
+- Brookshear, J. G. (2011). Computer Science: An Overview (11th ed.). Addison-Wesley. Pages 9 (sensors in smartphones), 114 (embedded systems), 462–463 (agents, sensors, actuators, perception, reflex action), 497–499 (robotics, reactive robots).
+- Forouzan, B. A. (2018). Foundations of Computer Science (4th ed.). Cengage Learning. Pages 62–63 (sampling, quantization, encoding, bit rate), 97–98 (input/output subsystem), 105 (connecting I/O devices, controllers), 176 (analog-to-digital conversion).
+- von Neumann, J. (2012). The Computer and the Brain (3rd ed.). Yale University Press. Foreword to the third edition, p. xx; pp. 57–58 (receptors and thresholds).
+Facts not taken from these books (check before final submission): speed of sound of about 343 m/s at 20 °C and the 58 µs per cm shortcut (standard physics); the motor-driver explanation (general electronics); the Arduino Uno memory sizes (manufacturer's specification).
+Review status: drafted, not yet reviewed by a teammate (Activities 14–17 and calculations to be checked).
 
 9. Review and Practice
 
@@ -703,7 +837,10 @@ Important terms are introduced near their chapters above. This final list is for
 - Actuator: A device that turns a control signal into an action.
 - Microcontroller: A small computer on a chip often used to control a specific device.
 - Ultrasonic Sensor: A sensor that estimates distance using the travel time of sound pulses.
-- Sense–Act Loop: A repeated process of reading sensors and responding with actions.
+- Sense–Decide–Act Loop: The repeating cycle of measuring the environment, deciding, and acting.
+- Analog-to-Digital Conversion: Turning an analog signal into digital data by sampling, quantization, and encoding.
+- Embedded System: A computer system built into a device with a dedicated task.
+- Threshold: A limit value; the robot reacts when the distance is at or below it.
 - GPU: A processor designed for many parallel calculations, especially graphics and some AI tasks.
 - AI Accelerator: Specialized hardware for certain AI calculations.
 
@@ -760,7 +897,9 @@ Activity C — Robot Rule: Students change the robot’s threshold from 20 cm to
 References:
 - Forouzan, B. A., Foundations of Computer Science, Cengage Learning, 2018, Chapter 5, “Computer Organization.” Used as a reference for CPU, main memory, input/output, buses, and program execution. Confirm the exact book title and edition against the team’s copy before submission.
 - Course materials and lecture notes provided by the professor. Add exact titles or links.
-- Additional references for GPUs, microcontrollers, and ultrasonic sensors. Add the exact sources actually used before submission.
+- Brookshear, J. G., Computer Science: An Overview, 11th ed., Addison-Wesley, 2011, pp. 9, 114, 462–463, 497–499. Used for sensors, actuators, embedded systems, and reactive robots (Section 8).
+- von Neumann, J., The Computer and the Brain, 3rd ed., Yale University Press, 2012, p. xx and pp. 57–58. Used for microcontrollers and thresholds (Section 8).
+- Additional references for GPUs and AI accelerators (Section 7). Add the exact sources actually used before submission.
 The explanations in this Markdown are written in our own words and simplified for beginner students. Figures from the textbook should not be copied into our materials without permission or a suitable license; our team will draw original diagrams based on the concepts.
 How We Will Reuse This Markdown
 - Study Guide: Use the explanations, diagrams, worked examples, key terms, and review questions. Expand examples where students need more detail.
