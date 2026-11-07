@@ -1,9 +1,9 @@
-Goals:
+oals:
 To help students understand the basic parts of a computer, how they work together, how computers store and process information, and how hardware allows a robot to interact with the real world.
-
+ 
 Learning Objectives:
 By the end of this part, students will be able to:
-
+ 
 ​●​ Name the main parts of a computer, including CPU, memory, storage, input/output devices, and buses, and explain their roles.
 ​● ​Explain the role of the ALU, registers, and control unit inside the CPU.
 ​●​ Explain how main memory stores data and instructions and how the CPU accesses them.
@@ -11,181 +11,182 @@ By the end of this part, students will be able to:
 ​●​Describe the stored-program concept and the fetch–decode–execute cycle.
 ​●​ Explain how the CPU, memory, and input/output devices exchange information through buses and controllers.
 ​●​ Give a simple explanation of GPUs and AI accelerators.
-​●​ Explain the difference between sensors and actuators and the role of a microcontroller.
-​●​ Trace how an obstacle-avoiding robot uses a sensor, microcontroller, and motors to respond to an obstacle.
-
+​●​ Explain the difference between sensors and actuators, how a sensor signal becomes numbers, how motors are controlled (PWM, motor driver), and the role of a microcontroller.
+​●​ Calculate a distance from an ultrasonic echo time and trace how an obstacle-avoiding robot uses a sensor, microcontroller, and motors to respond to an obstacle.
+ 
 Complete Content Structure:
-
+ 
 ​1.​ Introduction to Computer Hardware
 ​●​ 1.1 Main computer subsystems: CPU, main memory, input/output
 ​●​ 1.2 How the three subsystems work together
-
+ 
 ​2.​ Central Processing Unit (CPU)
 ​●​ 2.1 What is the CPU?
 ​●​ 2.2 Arithmetic Logic Unit (ALU): arithmetic, logic, and shift operations
 ​●​ 2.3 Registers: data registers, instruction register, program counter
 ​●​ 2.4 Control Unit
-
+ 
 ​3. ​Main Memory
 ​●​ 3.1 Memory locations, addresses, bits, bytes, and words
 ​●​ 3.2 RAM and ROM
 ​●​ 3.3 Memory hierarchy and cache
-
+ 
 ​4.​ Input/Output Subsystem and Storage
 ​●​ 4.1 Input and output devices
 ​●​ 4.2 Secondary storage: HDD and SSD
 ​●​ 4.3 Memory vs. storage
-
+ 
 ​5.​ Subsystem Interconnection
 ​●​ 5.1 Data, address, and control buses
 ​●​ 5.2 Input/output controllers and USB
-
+ 
 ​6. ​Program Execution
 ​●​ 6.1 Stored-program concept
 ​●​ 6.2 Fetch–decode–execute cycle
 ​●​ 6.3 Worked example: adding two numbers
-
+ 
 ​7. ​Brief Introduction to Modern Hardware
 ​●​ 7.1 Development of computer hardware
 ​●​ 7.2 GPUs, AI accelerators, and parallel work
-
+ 
 ​8.​ Sensors, Actuators, and Microcontrollers
-​●​ 8.1 The big idea: sense, decide, and act
-​● ​8.2 Sensors and actuators
-​●​ 8.3 Microcontrollers and the sense–act loop
-​●​ 8.4 Worked example: obstacle-avoiding robot
-
+​●​ 8.1 Sensors: how a machine senses the world
+​●​ 8.2 Actuators: how a machine acts
+​●​ 8.3 Microcontrollers: the tiny computer inside a machine
+​●​ 8.4 The sense–decide–act loop
+​●​ 8.5 Worked example: obstacle-avoiding robot
+ 
 ​9.​Review and Practice
 ​●​ 9.1 Key terms
 ​●​ 9.2 Review questions and answer key
 ​●​ 9.3 Mini activities
-
+ 
 ​10.​ References and planned teaching assets
-
+ 
  1.⁠ ⁠Introduction to Computer Hardware
-
+ 
 Goal
 To introduce the three main subsystems of a computer before studying them separately.
-
+ 
 1.1 Main Computer Subsystems
 If we divide a computer into parts, we will get three broad categories or subsystems which make a computer work. These are the central processing unit (CPU), the main memory, and the input/output subsystem. The next sections discuss these subsystems and how they are connected.
 The CPU processes instructions and performs calculations. Main memory holds data and instructions that are currently needed. The input/output subsystem allows the computer to receive information, show results, and communicate with other devices.
 For example, when we type a number on a keyboard, the computer receives it through an input device. The CPU can process the number, and the result can be shown on a monitor. During this process, memory holds the information the computer is using.
-
+ 
 1.2 How the Subsystems Work Together
 The three subsystems have different roles, but none of them can do everything alone. A CPU needs instructions and data from memory. A user also needs input and output devices to interact with a computer.
-
+ 
 Diagram(Keyboard → CPU ↔️ Main Memory → Monitor. )
-
+ 
 Activity 1: Follow a Keyboard Input
-
+ 
 Imagine that you type the number 7 on a keyboard and a calculator app shows 7 on the screen. Work with a partner and answer:
-
+ 
 ​1.​ Which device gives information to the computer?
 ​2.​ Where can the computer temporarily keep the number while the program is running?
 ​3.​ Which device shows the result?
 ​4.​ Why do we need more than just the CPU for this task?
-
+ 
 Suggested answers: 
 - Keyboard;
 - RAM;
 - monitor; 
 - the computer also needs memory and input/output devices to receive and display information.
-
+ 
 Key Terms:
 ​●​ Hardware: The physical parts of a computer.
 ​●​ Subsystem: A group of components with a particular role.
 ​●​ Input: Information received by a computer.
 ​●​ Output: Information sent or displayed by a computer.
-
+ 
  2.⁠ ⁠Central Processing Unit (CPU)
-
+ 
 Goal
 To understand what the CPU does and how its main parts work together to process instructions.
-
+ 
 Learning Objectives
 Students will be able to identify the ALU, registers, and control unit, explain their roles, and follow a simple CPU operation.
-
+ 
 2.1 What Is the CPU?
 The CPU can be considered the brain of a computer because it follows program instructions and performs operations on data. It does not store all files or work alone. It receives instructions and data, processes them, and sends the results where they are needed.
 There are three important parts inside the CPU: the arithmetic logic unit (ALU), registers, and the control unit. Each part has its own responsibility.
-
+ 
 ​●​The ALU performs calculations and logical operations.
 ​●​ Registers temporarily hold information needed by the CPU.
 ​●​ The control unit coordinates operations and sends control signals.
-
+ 
 Diagram(One large CPU box containing ALU, Registers, and Control Unit.)
-
+ 
 2.2 Arithmetic Logic Unit (ALU)
 The ALU is the part of the CPU that performs arithmetic, logic, and shift operations. These operations are carried out by electronic circuits.
-
+ 
 Arithmetic Operations:
 Arithmetic operations are calculations with numbers, such as addition and subtraction. For example, if a program needs to calculate 5 + 3, the ALU can perform the addition and produce 8. More complicated arithmetic may need several internal steps depending on the processor.
-
+ 
 Logic Operations:
 Logic operations work with bits. A bit is the smallest unit of digital information and can have a value of 0 or 1. The main logic operations we introduce are NOT, AND, OR, and XOR.
-
+ 
 ​●​ NOT changes 0 to 1 or 1 to 0.
 ​●​ AND gives 1 only when both inputs are 1.
 ​●​ OR gives 1 when at least one input is 1.
 ​●​ XOR gives 1 when the two inputs are different.
-
+ 
 |A|B|A AND B|A OR B|A XOR B|
 |-|-|-------|------|-------|
 |0|0|0      |0     |0      |
 |0|1|0      |1     |1      |
 |1|0|0      |1     |1      |
 |1|1|1      |1     |0      |
-
+ 
 For example, a simple electronic system may use AND when it needs two conditions to be true at the same time.
-
+ 
 Shift Operations:
 Shift operations move a pattern of bits to the left or right. A logical shift fills empty positions with zeros. An arithmetic right shift is used with signed binary numbers and normally keeps the sign bit.
 For example, the binary number 0011 represents 3. If we shift it one place to the left, it becomes 0110, which represents 6. In this simple example, shifting left has the same effect as multiplying by two. This does not always work if the result is too large for the available bits.
-
+ 
 2.3 Registers:
 Registers are small storage locations inside the CPU that temporarily hold information. They are very fast, but there are fewer of them than memory locations in RAM.
-
+ 
 Data Registers:
 Data registers hold numbers and other values that the CPU is currently working with. For example, the CPU may place 5 and 3 in two registers before the ALU adds them.
-
+ 
 Instruction Register:
 The instruction register holds the instruction that has been fetched from memory and is currently being processed.
-
+ 
 Program Counter:
 The program counter holds the address of the next instruction that the CPU should fetch. Normally it moves to the following instruction, but a jump instruction can change this order.
-
+ 
 2.4 Control Unit
 No CPU can work properly without a control unit. As the name suggests, it controls and coordinates operations inside the CPU by sending signals to other components.
 For example, when the CPU needs to add two numbers, the control unit helps arrange the operation: it makes sure the needed values are available, directs the ALU to perform the addition, and coordinates where the result goes.
-
+ 
 Worked Example: Adding 5 + 3
-
+ 
 ​1.​ The values 5 and 3 are available to the CPU, for example in two data registers.
 ​2.​ The control unit coordinates the addition instruction.
 ​3.​ The ALU adds the values and produces 8.
 ​4.​ The result can be stored in another register and later moved to memory.
-
+ 
 This example is simplified, but it shows the different roles of the ALU, registers, and control unit.
-
+ 
 Mini Activity:
 A CPU needs to add 7 + 2. Which part performs the addition? Which part temporarily holds the numbers? Which part coordinates the operation?
 Answers: ALU; registers; control unit.
-
+ 
 - Study Guide idea: A labelled CPU diagram and the 5 + 3 worked example.
 - PPT idea: One slide for the three CPU parts, one slide for ALU operations, and one question slide.
 - Video idea: Animate numbers moving into registers, the ALU producing the result, and the control unit coordinating the steps.
-
+ 
 Activity 2: Who Am I?
 Match each statement with ALU, Data Register, Instruction Register, Program Counter, or Control Unit. A term may be used more than once.
-
+ 
 ​1.​ I keep the instruction that the CPU is currently working on.
 ​2.​ I perform an AND operation on two bit patterns.
 ​3.​ I hold a number while the CPU is using it.
 ​4.​ I keep the address of the next instruction to fetch.
 ​5.​ I coordinate what other parts of the CPU do.
 ​6. ​I perform 12 + 8.
-
+ 
 Answers: 
 1. Instruction Register; 
 2. ALU;
@@ -193,16 +194,16 @@ Answers:
 4. Program Counter; 
 5. Control Unit; 
 6. ALU.
-
+ 
 Activity 3: Find the Mistake
 A student writes: “The Control Unit adds two numbers, and the ALU decides which instruction should be executed next.”
-
+ 
 What is wrong with this explanation? Rewrite it in one or two sentences.
-
+ 
 Suggested answer: The ALU performs the addition. The Control Unit coordinates the execution of instructions, while the Program Counter helps the CPU find the next instruction.
-
+ 
 Diagram(CPU box with three labelled parts: ALU, Registers, and Control Unit. Use arrows to show that the Control Unit coordinates operations, but do not suggest that it performs arithmetic itself.)
-
+ 
 Key Terms:
 ​●​ CPU: The component that executes program instructions.
 ​●​ ALU: The CPU component that performs arithmetic and logic operations.
@@ -210,53 +211,53 @@ Key Terms:
 ​●​ Instruction Register: Holds the instruction currently being processed.
 ​●​ Program Counter: Holds the address of the next instruction to fetch.
 ​●​ Control Unit: Coordinates CPU operations by sending control signals.
-
+ 
  3.⁠ ⁠Main Memory
-
+ 
 Goal:
 To understand how computers keep data and instructions while they are working.
-
+ 
 Learning Objectives:
 Students will be able to explain memory addresses, compare RAM and ROM, and describe why computers use registers, cache, and main memory.
-
+ 
 3.1 Memory Locations and Addresses:
-Main memory is the econd major subsystem of a computer. It consists of many storage locations. Each location has its own identifier called an address. An address helps the computer find the information it needs.
+Main memory is the second major subsystem of a computer. It consists of many storage locations. Each location has its own identifier called an address. An address helps the computer find the information it needs.
 We can imagine memory as a long row of numbered boxes. Every box has a number, and the computer uses this number to find its contents. The boxes hold information as bits, which are 0s and 1s.
 A byte is a group of 8 bits. A word is a group of bits that a processor handles as a unit, often 16, 32, or 64 bits depending on the computer and operation. The word size is not always the same as the size of one memory addressable location.
 For example, a simplified memory might look like this:
-
+ 
 |Address|Stored value                    |
 |-------|--------------------------------|
 |0      |5                               |
 |1      |3                               |
 |2      |Empty / not used in this example|
-
+ 
 If the CPU needs the value at address 1, it requests that location and receives 3. In real computers, values are stored as binary patterns rather than the decimal numbers shown here.
 The total number of locations that can be identified by addresses is called the address space. We only need the basic idea here: more available addresses mean that more different locations can be identified.
-
+ 
 Diagram(A row of memory boxes with addresses 0, 1, 2, 3 and example contents.)
-
+ 
 3.2 RAM and ROM
 Two important memory types are RAM and ROM. They have different purposes.
-
+ 
 RAM (Random Access Memory):
 RAM is the main working memory in most computers. It stores data and program instructions that the computer is currently using. The CPU can read information from RAM and write new information into it.
 RAM is volatile, which means its contents are normally lost when the power is turned off.
 For example, when we open a game or a document, the computer loads the information it needs into RAM. This allows the CPU to access the information while the program is running.
-
+ 
 ROM (Read-Only Memory):
 ROM is a type of nonvolatile memory, meaning it can keep information without power. Traditional ROM stores information that is not normally changed during everyday use.
 For example, a device may use nonvolatile memory to keep important startup instructions. Modern computers often store their firmware in rewritable flash memory rather than traditional fixed ROM, but the basic purpose is similar: keeping instructions even when power is off.
-
+ 
 3.3 Memory Hierarchy and Cache:
 A computer needs memory that is fast, large, and affordable. However, faster memory usually costs more per unit of storage. Because of this, computers use different levels of memory.
 Registers are inside the CPU. They are very fast but can hold only a small amount of information.
 Cache memory is small, fast memory that keeps copies of data and instructions the CPU is likely to need soon. If the CPU finds what it needs in the cache, it can often access it faster than going to RAM.
 Main memory (RAM) has much more space than registers or cache, but it is generally slower to access.
 The usual order from fastest and smallest to slower and larger is:
-
+ 
 Registers → Cache → RAM
-
+ 
 For example, imagine that a student is solving a problem. A number currently being used is like something held in their hand (register). Notes they check frequently are like papers on their desk (cache). A larger notebook with more information is like RAM. The analogy is not exact, but it explains why computers keep some information closer to the CPU.
 Worked Example: Finding a Number
 Suppose the CPU needs a value stored in RAM.
@@ -265,19 +266,19 @@ Suppose the CPU needs a value stored in RAM.
 3. If it is not there, the system gets the needed information from a lower level of memory, such as RAM.
 4. The information may also be placed in cache so it can be accessed more quickly later.
 This is one reason cache memory helps computers work faster.
-
+ 
 Mini Activity:
 Choose the correct type of memory for each situation:
 1. A value that the CPU is using in a calculation right now.
 2. Information from RAM that the CPU is likely to use again soon.
 3. An open program and the data it is working with.
 Answers: 1. Register. 2. Cache. 3. RAM.
-
+ 
 - Study Guide idea: A diagram of numbered memory locations, a RAM vs. ROM table, and a memory hierarchy diagram.
 - PPT idea: Use three slides: addresses, RAM/ROM, and memory hierarchy. Add the mini activity as a quiz slide.
 - Video idea: Show the CPU requesting a value, checking cache, and then getting it from RAM if needed.
-
-
+ 
+ 
 Activity 4: Memory Detective
 Look at this imaginary memory. The values are shown in decimal to make the example easier.
 Address	Value
@@ -285,32 +286,32 @@ Address	Value
 01	4
 02	9
 03	12
-
-
+ 
+ 
 1. What value is stored at address 02?
 2. Which two addresses have the same value?
 3. If the value at address 01 changes to 7, does address 01 also change?
 4. A program needs the number 9. What address should it request?
-
+ 
 Answers: 1. 9; 2. 00 and 03; 3. No, the address stays 01; 4. 02.
-
-
+ 
+ 
 Activity 5: What Happens When Power Is Off?
 A student is writing a document. The document is open, but they have not saved the latest changes. Then the computer loses power.
-
+ 
 Discuss: Why might the latest changes disappear? What would be different if the document had been saved to an SSD?
-
+ 
 Suggested answer: The open program and unsaved changes can be held in volatile RAM. Saving writes the document to nonvolatile storage, so saved data remains after power is off. Some apps can recover unsaved work, but we should not depend on this.
-
+ 
 Activity 6: Cache Challenge
 The CPU needs the same piece of data five times. It was not in cache the first time, but the system kept a copy in cache after fetching it from RAM.
 1. Where does the CPU have to get the data the first time?
 2. Why might the next four accesses be faster?
 3. Does cache replace RAM completely?
-
+ 
 Answers: 1. RAM; 2. The needed data may already be in cache; 3. No, cache is much smaller and works together with RAM.
 Visual placeholder: Diagram(Memory hierarchy with Registers at the top, Cache in the middle, and RAM at the bottom. Label top as generally faster/smaller and bottom as generally larger/slower.)
-
+ 
 Key Terms:
 - Main Memory: Memory used to hold instructions and data needed while programs run.
 - Address: A number identifying a memory location.
@@ -321,21 +322,21 @@ Key Terms:
 - Cache: Small, fast memory holding copies of frequently or recently needed information.
 - Volatile: Loses stored information without power.
 4. Input/Output Subsystem and Storage
-
+ 
 Goal:
 To explain how a computer communicates with users and keeps files for later use.
-
+ 
 4.1 Input and Output Devices
 The input/output subsystem is the third major subsystem of a computer. It allows a computer to receive information from the outside world and send information back.
 An input device sends information into the computer. Examples are a keyboard, mouse, microphone, and camera.
 An output device presents information or performs an output action. Examples are a monitor, speaker, and printer.
 For example, when a student types a sentence, the keyboard sends input to the computer and the monitor displays the text. A touchscreen can work as both an input and output device.
-
+ 
 4.2 Secondary Storage:
 Computers need to keep programs, pictures, documents, and other files even after the power is turned off. This is the purpose of secondary storage.
 A Hard Disk Drive (HDD) stores information magnetically on spinning disks. A Solid-State Drive (SSD) stores information electronically using flash memory and has no moving disks. Both are used for long-term storage.
 Optical discs, such as CDs and DVDs, are another type of storage. They are useful examples of how information can be stored using a different technology, but we will not study their internal structure in detail.
-
+ 
 4.3 Memory vs. Storage:
 RAM and storage are not the same thing. RAM holds information that a program is actively using. Storage keeps programs and files so they can be opened again later.
 For example, a game is installed on an SSD. When the user starts the game, the computer loads needed parts into RAM. The CPU then works with the instructions and data during gameplay.
@@ -343,19 +344,19 @@ RAM	SSD / HDD
 Temporary working memory	Long-term storage
 Normally loses contents without power	Keeps contents without power
 Used for currently running programs	Used to save programs and files
-
-
+ 
+ 
 Check Yourself
 Where is a photo kept when it is saved but not open? Where can its data be loaded when we open it?
-
+ 
 Answer: It is kept in storage, such as an SSD. Its data can be loaded into RAM when opened.
 Activity 7: Sort the Devices
 Put these items into the most suitable category: keyboard, monitor, microphone, speakers, SSD, mouse, printer, HDD.
 Input	Output	Storage
 ?	?	?
-
+ 
 Suggested answers: Input: keyboard, microphone, mouse. Output: monitor, speakers, printer. Storage: SSD, HDD. Some real devices can have more than one role.
-
+ 
 Activity 8: RAM or SSD?
 Decide where each item is mainly kept in the situation described:
 1. A game that is installed but not running.
@@ -364,19 +365,19 @@ Decide where each item is mainly kept in the situation described:
 4. Temporary information used by an open browser tab.
 Answers: 1. SSD/HDD; 2. RAM; 3. SSD/HDD; 4. RAM. In real computers, the same information can have copies in different places.
 Visual placeholder: Picture(A laptop with a keyboard, screen, SSD, and RAM labelled. Keep storage and working memory visually separate.)
-
+ 
 Key Terms
 - Input Device: Hardware used to send information to a computer.
 - Output Device: Hardware used to receive results from a computer.
 - Secondary Storage: Hardware that keeps data after power is off.
 - HDD: Storage using spinning magnetic disks.
 - SSD: Storage using flash memory, without spinning disks.
-
+ 
 5. Subsystem Interconnection:
-
+ 
 Goal:
 To understand how the CPU, memory, and input/output devices exchange information.
-
+ 
 5.1 Buses:
 A computer needs connections between its components. A bus is a communication path used to transfer information. In a simplified computer model, we can describe three kinds of buses.
 - The data bus carries the actual data being transferred.
@@ -384,15 +385,15 @@ A computer needs connections between its components. A bus is a communication pa
 - The control bus carries signals that coordinate operations, such as whether information should be read or written.
 For example, if the CPU needs information from a memory location, the address identifies where to look, control signals indicate that the CPU wants to read, and the data is transferred back to the CPU.
 Visual placeholder: Diagram(CPU ↔️ Memory with three labelled paths: Data, Address, and Control.)
-
+ 
 5.2 Input/Output Controllers
 Input/output devices do not all work in the same way or at the same speed as the CPU. A controller helps the computer communicate with a device and manages the transfer of information.
 For example, a USB controller helps the computer communicate with USB devices, such as a keyboard or external storage device. USB is a common way to connect different kinds of devices to a computer.
 We do not need to study every USB version or connector type. The important idea is that controllers help different hardware components communicate.
-
+ 
 Mini Activity:
 The CPU wants to read a value from memory. Which bus carries the address? Which bus carries the data? Which kind of signal tells memory that this is a read operation?
-
+ 
 Answers: Address bus; data bus; control signal.
 Activity 9: Deliver a Message
 Imagine that the CPU wants to read the value stored at memory address 12. Match each message with the correct bus.
@@ -400,48 +401,48 @@ Imagine that the CPU wants to read the value stored at memory address 12. Match 
 - “Please read, not write.”
 - “Here is the value stored at location 12.”
 Choose from Address Bus, Control Bus, and Data Bus.
-
+ 
 Answers: Address Bus; Control Bus; Data Bus.
 Activity 10: Act It Out in Groups
 Three students play the roles of CPU, Memory, and I/O Controller. Another student is the User.
-
+ 
 The User asks the computer to display the number 6. The group should explain, in its own words, how the information reaches the screen. They do not need to reproduce real electronic signals. The goal is to identify which component has which role.
-
+ 
 Suggested sequence: The program and data are available to the computer; the CPU follows instructions; information is sent through the I/O system and controller; the monitor displays 6.
 Visual placeholder: Diagram(CPU on the left and Memory on the right. Between them, three labelled arrow paths: Address Bus, Data Bus, and Control Bus. Below, an I/O controller connects a keyboard or monitor.)
-
+ 
 Key Terms
 - Bus: A communication path between computer components.
 - Data Bus: Carries data.
 - Address Bus: Carries the address of the location or device being accessed.
 - Control Bus: Carries signals that coordinate operations, such as reading or writing.
 - I/O Controller: Hardware that helps a device communicate with the computer.
-
+ 
 6. Program Execution:
-
+ 
 Goal:
 To connect what students have learned about CPU, registers, memory, and buses by showing how a computer follows a program.
-
+ 
 6.1 Stored-Program Concept:
 Modern general-purpose computers can store both program instructions and data in memory. This is called the stored-program concept.
-
+ 
 For example, a calculator program contains instructions telling the computer how to perform calculations. The CPU reads the instructions from memory and carries them out. The same computer can run a calculator, a browser, or a game because it can follow different programs.
-
+ 
 6.2 Fetch–Decode–Execute Cycle:
 The CPU follows instructions through a repeating process called the fetch–decode–execute cycle.
-
+ 
 - Fetch: The CPU gets the next instruction from memory. The program counter holds the address of the instruction to fetch, and the fetched instruction is placed in the instruction register.
-
+ 
 - Decode: The control unit interprets the instruction and determines what operation is required.
-
+ 
 - Execute: The CPU performs the operation. It may use the ALU, read or write data, or perform another action.
-
+ 
 The cycle repeats for the next instruction. Some instructions, such as jumps, can change which instruction comes next.
 Visual placeholder: Diagram(Fetch → Decode → Execute → Fetch. Show the cycle as three arrows forming a loop, with the Program Counter and Instruction Register beside Fetch.)
-
+ 
 6.3 Worked Example: Adding Two Numbers:
 Suppose we want a computer to calculate 5 + 3. This example is simplified so that we can focus on how the components work together.
-
+ 
 Starting situation: Memory holds the two numbers, 5 and 3, and the program instructions.
 1. The CPU fetches an instruction telling it to load the first number from memory.
 2. The value 5 is placed in a register.
@@ -457,23 +458,23 @@ Step	What happens	Main component involved
 4	Hold the numbers	Data registers
 5	Calculate 5 + 3	ALU
 6	Keep the result	Register and/or memory
-
-
+ 
+ 
 This example shows that a computer does not calculate using only one component. The CPU, memory, registers, ALU, and control unit all have different roles.
-
+ 
 Mini Activity:
 Put these actions in the correct order:
 - The ALU adds two numbers.
 - The CPU loads the numbers from memory.
 - The result is stored.
 Answer: Load the numbers → Add them → Store the result.
-
+ 
 - Study Guide idea: A step-by-step diagram with memory, registers, ALU, and result.
-
+ 
 - PPT idea: Reveal one step at a time so students can predict the next operation.
-
+ 
 - Video idea: Animate the two values moving from memory into registers, then to the ALU, and finally back to a register or memory.
-
+ 
 Activity 11: Be the CPU
 This is an imaginary program. The numbers and instructions are written in plain English, not machine code.
 Instruction address	Instruction
@@ -482,8 +483,8 @@ Instruction address	Instruction
 02	ADD A and B, put result in Register C
 03	STORE Register C at memory address 20
 04	HALT
-
-
+ 
+ 
 Fill in the missing parts:
 1. After the first instruction, Register A = _.
 2. After the second instruction, Register B = _.
@@ -493,10 +494,10 @@ Fill in the missing parts:
 Answers: 1. 5; 2. 3; 3. 8; 4. 20; 5. HALT.
 Activity 12: Find the Order
 Your friend says: “First the CPU executes an instruction, then it decodes it, and only after that it fetches it from memory.” What is wrong? Write the correct order and explain what happens in each step.
-
+ 
 Answer: Fetch → Decode → Execute. First the CPU gets an instruction, then it determines what the instruction means, and then it carries out the operation.
 Visual placeholder: Diagram(Instruction table on the left, CPU with Program Counter, Instruction Register, Registers and ALU in the centre, and a result box at memory address 20 on the right. Number arrows to show the five instructions.)
-
+ 
 Key Terms:
 - Program: A set of instructions for a computer.
 - Stored-Program Concept: Program instructions and data can be stored in memory.
@@ -504,183 +505,633 @@ Key Terms:
 - Decode: Determine what the instruction asks the CPU to do.
 - Execute: Carry out the instruction.
 - Machine Cycle: The repeating process of handling instructions.
-
+ 
 7. Brief Introduction to Modern Hardware:
-
+ 
 Goal:
 To show how computer hardware developed and why some tasks use specialized processors.
-
+ 
 7.1 Development of Computer Hardware:
 Early electronic computers were large and used many separate electronic components. Over time, transistors and integrated circuits made computers smaller, faster, and more reliable. The development of microprocessors allowed many CPU functions to fit on a single chip.
 Today, computers can contain multiple CPU cores, large amounts of RAM, and fast storage. We will only briefly introduce this history because the main focus of this part is how hardware works.
-
+ 
 7.2 GPUs and AI Accelerators:
 A CPU is designed to handle many different kinds of tasks and instructions. A GPU (Graphics Processing Unit) is designed to perform many similar calculations in parallel. This is useful for graphics and some AI tasks.
 An AI accelerator is specialized hardware designed to make certain AI calculations faster or more efficient. For example, some machine-learning tasks involve repeating similar mathematical operations on large amounts of data. GPUs and AI accelerators can be useful for this kind of work.
 We do not need to study the internal design of these processors yet. Students only need to understand why computers sometimes use different processors for different tasks.
-
+ 
 Activity 13: Which Hardware Would You Choose?
 Imagine that you need to process a large number of similar image calculations at the same time. Which hardware would be useful: a CPU or a GPU? Explain why we still need the CPU.
-
+ 
 Suggested answer: A GPU can be useful because it can perform many similar operations in parallel. The CPU is still important for running the program and coordinating general tasks. Different tasks benefit from different hardware.
 Visual placeholder: Picture(An ordinary laptop CPU and a GPU shown as two separate components. Use simple labels: CPU — general tasks; GPU — many similar calculations in parallel.)
-
+ 
 Key Terms:
 - GPU: A processor designed for many parallel calculations, including graphics work.
 - AI Accelerator: Specialized hardware that can speed up certain AI calculations.
 - Parallel Processing: Performing multiple operations at the same time.
-
-8. Sensors, Actuators, and Microcontrollers:
-
+ 
+8. Sensors, Actuators and Microcontrollers:
+ 
+![An obstacle-avoiding robot measures the distance to a wall with sound.](../assets/hw-robot-overview.png)
+ 
+Figure 8.1. Our running example: an obstacle-avoiding robot measures the distance to a wall with sound.
+ 
 Goal:
-To understand how hardware helps a robot receive information, make decisions using simple rules, and act in the real world.
-
+ 
+To understand how a machine can sense the physical world, make a decision with a tiny computer, and act on that decision, using one robot example from start to finish.
+ 
 Learning Objectives:
-Students will be able to identify sensors, actuators, and microcontrollers, explain their roles, and follow the sense–decide–act loop using the obstacle-avoiding robot.
-
-8.1 The Big Idea: Sense, Decide, and Act:
-A robot needs to receive information from the environment, decide what to do with this information, and perform an action. We can describe this process as sense, decide, and act.
-- Sense: A sensor measures something in the environment.
-- Decide: A microcontroller or another controller follows programmed rules.
-- Act: An actuator performs an action.
-For example, a robot may detect a wall in front of it, decide that it is too close, and turn away from the wall.
-
-8.2 Sensors and Actuators:
-A sensor is a device that measures something in the real world and produces a signal the system can use. Sensors work like input devices because they provide information to the robot.
-
-Examples of sensors include:
-- An ultrasonic sensor measures distance.
-- A light sensor measures brightness.
-- A microphone detects sound.
-- A camera captures images.
-An actuator is a device that turns a control signal into an action. Motors are a common example because they create movement. Other output devices, such as speakers and LEDs, can also produce actions or signals in a system, although the word actuator is most commonly used for devices that produce physical movement.
-
-Examples include:
-- A motor moves a wheel.
-- A speaker produces sound.
-- An LED produces light.
-- A vibration motor produces vibration.
-The main difference is that sensors receive information from the environment, while actuators or other output devices affect the environment.
-
-8.3 Microcontrollers and the Sense–Act Loop:
-A microcontroller is a small computer on a single chip. It usually includes a processor, memory, and connections for other electronic components. It is often used to control one device or perform a specific task.
-
-For example, a microcontroller can read a distance sensor and decide whether a robot should continue moving. It then sends control signals to the motor driver, which controls the motors.
-
-The robot repeats the following steps:
-1. Read information from the sensor.
-2. Compare the information with the rule in the program.
-3. Send a command to the actuator.
-4. Measure the environment again.
-This is a sense–act loop. When we show the decision step separately, we can call it the sense–decide–act loop. The loop is also important for understanding Behaviorist AI later in our module.
-```mermaid
-flowchart LR
-
-A[Sensor measures environment] --> B[Microcontroller follows rule]
-
-B --> C[Motor performs action]
-
-C --> D[Environment changes]
-
-D --> A
-
-```
-8.4 Worked Example: The Obstacle-Avoiding Robot
-Our running example is a simple robot that can avoid obstacles. It has an ultrasonic sensor at the front, a microcontroller, and motors that move its wheels.
-
-The robot follows one rule:
-
-If the measured distance is less than 20 cm, stop and turn. Otherwise, drive forward.
-How the Sensor Measures Distance
-The ultrasonic sensor sends out a sound pulse that humans cannot hear. The sound travels to an object and returns as an echo. The system measures how long this takes.
-
-Because the sound travels to the object and back, we divide the total distance by two:
-
-Distance = Speed of sound × Echo time ÷ 2
-
-At around room temperature, the speed of sound in air is approximately 343 metres per second.
-Example 1: The Object Is Far Away
-Suppose the echo time is 0.0058 seconds.
-
-Distance = 343 × 0.0058 ÷ 2 ≈ 0.995 m, or about 100 cm.
-
-The object is farther than 20 cm, so the robot continues driving forward.
-Example 2: The Object Is Close
-Now suppose the echo time is 0.001 seconds.
-
-Distance = 343 × 0.001 ÷ 2 = 0.1715 m, or about 17 cm.
-
-The object is closer than 20 cm, so the microcontroller commands the motors to stop and turn the robot.
-The Complete Process
-1. The ultrasonic sensor measures the distance to an obstacle.
-2. The microcontroller receives the measurement.
-3. The program compares the distance with 20 cm.
-4. The microcontroller sends a command to the motor driver.
-5. The motors move or turn the robot.
-6. The sensor measures the distance again, and the process repeats.
-This example connects the Hardware and Behaviorist AI parts of our module. Hardware allows the robot to sense and act. The rules determine how the robot responds to what it senses.
-Mini Activity: Predict the Robot’s Action
-The robot follows the same rule: less than 20 cm → stop and turn; otherwise → drive forward.
-Measured distance	Robot’s action
-50 cm	?
-15 cm	?
-20 cm	?
-10 cm	?
-
-
-Answers: 50 cm → drive forward; 15 cm → stop and turn; 20 cm → drive forward; 10 cm → stop and turn.
-Check Yourself
-1. What is the difference between a sensor and an actuator?
-2. Why does the robot divide the sound travel distance by two?
-3. What does the microcontroller do after receiving the measurement?
-4. Why does the robot need to repeat the loop?
-Answers: 1. A sensor measures; an actuator performs an action. 2. The sound travels to the object and back. 3. It compares the distance with the rule and sends a command. 4. The environment changes as the robot moves.
-
-- Study Guide idea: A labelled robot diagram, the distance calculation, and a completed example with two different measurements.
-- PPT idea: Show the robot, reveal the 20 cm rule, and ask students to predict what happens at 50 cm and 15 cm.
-- Video idea: Animate the ultrasonic pulse, the returned echo, the distance calculation, and the motor response.
-
-Activity 14: You Are the Robot’s Controller
-Work in pairs. One student is the Sensor and the other is the Microcontroller. A third student can act as the Motors.
-The Sensor reads one distance at a time: 60 cm, 35 cm, 19 cm, 8 cm, 25 cm. The Microcontroller applies the rule from our example. The Motors student says the action out loud.
-
-Expected actions: Forward, forward, stop and turn, stop and turn, forward.
-
-Activity 15: Change the Rule
-Our robot turns when the distance is less than 20 cm. Now imagine that the threshold changes to 30 cm.
-1. What happens when the sensor measures 25 cm?
-2. What happens at exactly 30 cm?
-3. Did we need to change the sensor or motors to make this new rule?
-4. What does this tell us about the difference between hardware and the instructions it follows?
-
-Answers: 1. Stop and turn; 2. Drive forward; 3. No, in this simplified example we only changed the program rule; 4. The same hardware can perform different actions depending on the instructions.
-
-Activity 16: Find the Problem
-A student says: “The ultrasonic sensor sees an obstacle and decides to turn the robot. The motors calculate the distance.”
-
-Find two mistakes and correct them.
-
-Suggested answer: The sensor measures the distance; it does not make the decision in our example. The microcontroller uses the measured distance and the rule to decide what to do. The motors carry out the movement.
-Visual placeholder: Diagram(Obstacle-avoiding robot from above. Label ultrasonic sensor at the front, microcontroller inside, motor driver, wheels/motors, obstacle, and 20 cm threshold. Draw a separate arrow loop: Sense → Decide → Act → Sense.)
-
-Visual placeholder: Picture(Simple physical obstacle-avoiding robot or a clear original illustration with its sensor, wheels, and controller visible.)
-
-Key Terms
-- Sensor: A component that measures information from the environment.
-- Actuator: A component that produces an action or movement.
-- Microcontroller: A small computer that can read inputs and control outputs.
-- Ultrasonic Sensor: Measures distance using high-frequency sound and its echo.
-- Motor Driver: Hardware that controls power delivered to motors.
-- Threshold: A value used to decide when a particular action should happen.
-- Sense–Decide–Act Loop: Repeatedly measure the environment, choose an action, and perform it.
-
+ 
+By the end of this section, students will be able to:
+ 
+- Explain the difference between a sensor and an actuator, and give examples of each.
+- Distinguish digital sensors (on/off) from analog sensors (a range of values).
+- Describe how a sensor signal becomes numbers a computer can use (sampling, quantization and encoding), and explain resolution and sampling rate.
+- Explain why sensor readings are noisy and how averaging helps.
+- Explain how a microcontroller controls motor speed with PWM and motor direction with a motor driver (H-bridge).
+- Describe what is inside a microcontroller and how its program is organised (setup and loop).
+- Calculate a distance from the echo time of an ultrasonic sensor.
+- Trace the program of an obstacle-avoiding robot, predict what it will do, and design a simple sensing device of your own.
+ 
+Where this fits. In Section 4 you met input devices (keyboard, microphone, camera) and output devices (monitor, speakers). In Section 6 you watched the CPU repeat the fetch–decode–execute cycle. A robot uses the same ideas, but its "keyboard" is a sensor that measures the world and its "monitor" is a motor that moves it.
+ 
+Predict first. A robot is driving toward a wall. How could it know the wall is there? Write your guess in one sentence, then check it against Section 8.5.
+ 
+8.1 Sensors: How a Machine Senses the World:
+ 
+A sensor is a device that measures something in the physical world (sound, light, distance, temperature, movement, pressure) and turns it into an electrical signal. A sensor is an input device, but instead of a person typing, the "input" comes from the real world.
+ 
+| Sensor | What it measures | Example use |
+|---|---|---|
+| Microphone | sound | voice commands |
+| Camera | light (images) | face unlock, robot vision |
+| Ultrasonic range sensor | distance to an object (by timing an echo) | obstacle-avoiding robot |
+| Infrared (IR) sensor | reflected infrared light | line-following robot, TV remote receiver |
+| Light sensor | brightness | automatic night light, phone screen brightness |
+| Temperature sensor | temperature | thermostat |
+| Bumper (touch) switch | whether it is pressed | robot vacuum hitting a chair |
+| Gyroscope / accelerometer | rotation / motion | a phone knows its orientation |
+| Wheel encoder | how far a wheel has turned | a robot measures how far it drove |
+ 
+Digital and analog sensors:
+ 
+Some sensors can only say yes or no. A bumper switch is either pressed (1) or not pressed (0). We call this a digital sensor: its output is one bit.
+ 
+Other sensors give a value anywhere in a range. A light sensor's voltage rises smoothly as the room gets brighter. We call this an analog sensor. Before a computer can use an analog value, it must be turned into a number.
+ 
+| | Digital sensor | Analog sensor |
+|---|---|---|
+| Output | only two values: 0 or 1 | any value in a range |
+| Example | bumper switch, button | light sensor, temperature sensor |
+| What the program asks | "Is it pressed?" | "How bright is it?" |
+ 
+From signal to numbers:
+ 
+Turning an analog signal into numbers is called analog-to-digital conversion, and it has three steps:
+ 
+1. Sampling: measure the signal at regular moments. The number of measurements per second is the sampling rate.
+2. Quantization: round each measured value to the nearest whole number (the nearest step the converter can store).
+3. Encoding: write that whole number as a pattern of bits. The number of bits per sample is the bit depth.
+ 
+Worked example. An imaginary converter has 3 bits, so it can output the whole numbers 0 to 7 (2³ = 8 values).
+ 
+| Sample | Real value (volts) | After quantization | 3-bit code |
+|---|---|---|---|
+| 1 | 1.3 | 1 | 001 |
+| 2 | 3.8 | 4 | 100 |
+| 3 | 5.2 | 5 | 101 |
+| 4 | 4.1 | 4 | 100 |
+| 5 | 2.2 | 2 | 010 |
+| 6 | 0.8 | 1 | 001 |
+ 
+![Six samples of a smooth signal rounded to whole numbers and written as 3-bit codes.](../assets/hw-sampling.png)
+ 
+Figure 8.2. Sampling, quantization and encoding: a smooth signal becomes a list of 3-bit codes.
+ 
+The converter never sees the values between the samples, and rounding throws away small differences. More samples per second and more bits per sample give a more accurate picture, but they need more storage and more processing.
+ 
+Resolution: how fine are the steps?:
+ 
+The bit depth decides how many different values a converter can tell apart. This is its resolution.
+ 
+| Bits | Number of values | Range of numbers |
+|---|---|---|
+| 3 | 2³ = 8 | 0 to 7 |
+| 8 | 2⁸ = 256 | 0 to 255 |
+| 10 | 2¹⁰ = 1,024 | 0 to 1023 |
+ 
+A real example: the converter inside the Arduino Uno's microcontroller has 10 bits. With the usual 5 V reference it turns 0 V into 0 and 5 V into 1023, so each step is about 5 V ÷ 1024 ≈ 0.005 V (5 millivolts). A sensor voltage of 2.5 V, half of 5 V, is read as about 512.
+ 
+Sampling rate: is the robot looking often enough?:
+ 
+A robot only knows what the world looked like at its last sample. Between samples it is "blind". Suppose our robot drives at 0.3 m/s (30 cm per second):
+ 
+| Readings per second | Time between readings | Distance driven between readings |
+|---|---|---|
+| 2 | 0.5 s | 30 cm/s × 0.5 s = 15 cm |
+| 10 | 0.1 s | 30 cm/s × 0.1 s = 3 cm |
+| 20 | 0.05 s | 30 cm/s × 0.05 s = 1.5 cm |
+ 
+With only 2 readings per second, the wall can come 15 cm closer before the robot notices, which is most of its 20 cm safety distance. A faster or more dangerous machine needs a higher sampling rate.
+ 
+Noise: why readings jump:
+ 
+Real sensors are never perfectly steady. Electrical interference, a soft surface that absorbs sound, or a slightly tilted wall can make the reading jump, even when nothing moves. This unwanted variation is called noise. For example, a robot standing still in front of a wall might read: 21, 19, 26, 20, 21 cm.
+ 
+A simple fix is to take several readings and use their average. The average of the last three readings 26, 20 and 21 is (26 + 20 + 21) ÷ 3 = 22.3 cm, which is much closer to the true distance than the single wrong reading of 26 cm. The price is a small delay, because the robot must wait for several readings. (The Behaviorist AI chapter shows a second fix for noise near a limit, called hysteresis.)
+ 
+Calibration:
+ 
+The number a sensor gives depends on the sensor, its wiring and the room. A light sensor might read 300 in one classroom and 700 in another. So engineers calibrate it: they test it in the real environment and choose the limits (for example, "above 600 means bright") from those tests, instead of guessing.
+ 
+Common Misconception:
+ 
+"The robot sees the wall."
+ 
+The sensor only produces a number. The program turns that number into a distance and compares it with a limit. "Seeing" is just data plus a rule.
+ 
+Activity 14: Round It Like a Converter
+ 
+Goal: Practise sampling, quantization and encoding.
+ 
+Preparation: Paper and pen. Use the same imaginary 3-bit converter (values 0 to 7).
+ 
+A sensor gives these five samples in volts: 0.4, 2.2, 5.7, 6.6, 3.1.
+ 
+1. Quantize each sample to the nearest whole number.
+2. Write the 3-bit code of each result.
+3. Another sample is 1.8 V. Does it get the same code as 2.2 V? What information is lost?
+4. Predict: what changes if the converter has 4 bits instead of 3?
+5. The sensor is sampled 10 times per second with 3 bits per sample. How many bits per second is that?
+ 
+Observe and reflect: Which step loses information, sampling or quantization?
+ 
+Suggested answers:
+1. 0, 2, 6, 7, 3.
+2. 000, 010, 110, 111, 011.
+3. Yes. 1.8 rounds to 2, so it also gets 010. The small difference between 1.8 and 2.2 is lost.
+4. 4 bits give 2⁴ = 16 values, so the steps are finer and the rounding error is smaller.
+5. Bit rate = samples per second × bits per sample = 10 × 3 = 30 bits per second.
+ 
+What to learn: both steps lose information. Sampling skips what happens between samples, and quantization rounds each value.
+ 
+Activity 15: Fast Enough? Sampling and Noise
+ 
+Goal: Connect sampling rate and noise to the robot's safety.
+ 
+Preparation: Paper, pen and a calculator. The robot drives at 30 cm per second and must stop when the wall is 20 cm away or closer.
+ 
+Part A: Predict
+ 
+1. The sensor is read 5 times per second. How far does the robot drive between two readings?
+2. A student changes the program so the sensor is read only once per second. Predict what can go wrong.
+ 
+Part B: Observe
+ 
+3. The robot stands still, 20 cm from a wall. Its readings are 20, 21, 34, 19, 20 cm. Which reading is probably noise?
+4. Calculate the average of the last three readings (34, 19, 20).
+5. Calculate the average of all five readings.
+ 
+Part C: Find the error
+ 
+6. A classmate says: "Averaging makes the sensor more accurate, so we should average the last 100 readings." What is the problem? (Hint: at 20 readings per second, how long do 100 readings take, and how far does the robot drive in that time?)
+ 
+Observe and reflect: Why is there always a trade-off between a steady reading and a fast reaction?
+ 
+Suggested answers:
+1. 30 cm/s ÷ 5 readings per second = 6 cm between readings.
+2. The robot drives 30 cm between readings. A wall that was 40 cm away at one reading can be only 10 cm away at the next, so the robot may react too late or hit the wall.
+3. 34 cm. The robot is not moving, and all the other readings are close to 20 cm.
+4. (34 + 19 + 20) ÷ 3 = 73 ÷ 3 ≈ 24.3 cm.
+5. (20 + 21 + 34 + 19 + 20) ÷ 5 = 114 ÷ 5 = 22.8 cm.
+6. 100 readings at 20 per second take 5 seconds. The average then describes where the wall was over the last 5 seconds, and a robot driving at 30 cm/s covers 150 cm in that time. The reading would be steady but badly out of date.
+ 
+What to learn: averaging a few readings removes noise; averaging too many makes the robot react to the past instead of the present.
+ 
+8.2 Actuators: How a Machine Acts:
+ 
+An actuator is a device that turns a signal from the computer into a physical action: movement, sound, light or heat. Examples: wheel motors, robot grippers, speakers (including speech output) and LEDs.
+ 
+| | Sensor | Actuator |
+|---|---|---|
+| Direction | world → computer | computer → world |
+| Main question | "What is happening out there?" | "What should happen out there?" |
+| Examples | microphone, camera, range sensor | wheel motor, gripper, speaker |
+ 
+Three kinds of motor:
+ 
+Most robots move with electric motors, and three kinds are especially common.
+ 
+| Motor | How it moves | Good for |
+|---|---|---|
+| DC motor | spins continuously while it gets power; more power means faster | wheels of our robot, fans |
+| Servo motor | turns to a chosen angle (often 0° to 180°) and holds it | steering, a robot arm, a gripper |
+| Stepper motor | moves in small, exact steps (often 200 steps per turn, 1.8° per step) | 3D printers, moving something to an exact position |
+ 
+Speed control with PWM:
+ 
+A microcontroller's output pin is digital: it is either fully on (for example 5 V) or fully off (0 V). So how can it make a motor run at half speed?
+ 
+The trick is pulse-width modulation (PWM). The pin switches on and off very quickly, hundreds of times per second. The motor cannot follow such fast changes, so it reacts to the average. The fraction of time the pin is on is called the duty cycle.
+ 
+``text
+average voltage = duty cycle × supply voltage
+25 % duty on 5 V:  0.25 × 5 V = 1.25 V  (slow)
+50 % duty on 5 V:  0.50 × 5 V = 2.5 V   (about half speed)
+100 % duty on 5 V: 1.00 × 5 V = 5 V     (full speed)
+`
+ 
+![PWM signals with 25 %, 50 % and 75 % duty cycle and their average voltage.](../assets/hw-pwm.png)
+ 
+Figure 8.3. Pulse-width modulation: the longer the "on" part of each cycle, the higher the average voltage.
+ 
+On an Arduino, the instruction analogWrite(pin, value) sets the duty cycle with a number from 0 (always off) to 255 (always on). A value of 128 is about 50 %, and 191 is about 75 %. (The motor's real speed is not exactly proportional to the average voltage, because of friction and load, but the idea of "more on-time, more speed" holds.)
+ 
+Why a motor driver is needed:
+ 
+Input/output devices cannot be wired straight to the CPU and memory, because they work differently and much more slowly. A controller sits between them (Section 5.2). A robot follows the same idea. A microcontroller pin can supply only a tiny current (on an Arduino Uno about 20 milliamps is recommended), but a small wheel motor can need hundreds of milliamps. So a motor driver board sits between them: the microcontroller sends small control signals, and the driver switches the large current from the battery to the motor.
+ 
+Direction control with an H-bridge:
+ 
+A DC motor spins one way when current flows through it in one direction, and the other way when the current is reversed. Most motor drivers use a circuit called an H-bridge: four electronic switches arranged like the letter H around the motor. Closing one diagonal pair sends the current one way; closing the other pair reverses it. The microcontroller controls the switches with two pins, often called IN1 and IN2.
+ 
+| IN1 | IN2 | Motor |
+|---|---|---|
+| 1 | 0 | turns forward |
+| 0 | 1 | turns backward |
+| 0 | 0 | stops (no power) |
+ 
+![An H-bridge: four switches around a motor; one diagonal pair makes it turn forward, the other pair backward.](../assets/hw-h-bridge.png)
+ 
+Figure 8.4. An H-bridge lets the microcontroller choose the direction of the current, and so the direction of the motor.
+ 
+Steering with two wheels:
+ 
+Our robot has no steering wheel. It turns by driving its two wheels differently, which is called differential drive:
+ 
+| Left wheel | Right wheel | The robot… |
+|---|---|---|
+| forward | forward | drives straight ahead |
+| forward, fast | forward, slow | curves to the right |
+| forward | backward | spins on the spot to the right |
+| stopped | stopped | stands still |
+ 
+Why sensors matter. Some industrial robot arms work without any sensors. They repeat programmed moves and assume every part arrives in exactly the right place. A robot with sensors can adapt to a world that changes.
+ 
+Activity 16: Sensor or Actuator?
+ 
+Goal: Decide whether a device measures the world or changes it.
+ 
+Preparation: Paper and pen.
+ 
+Label each device S (sensor), A (actuator) or B (both):
+ 
+1. microphone
+2. wheel motor
+3. camera
+4. speaker
+5. gyroscope
+6. robot gripper
+7. ultrasonic range sensor
+8. touchscreen
+9. servo motor
+10. bumper switch
+ 
+Then answer: a robot has a camera and wheels but no microcontroller. Can it react to what the camera sees? Why or why not?
+ 
+Observe and reflect: What question did you ask yourself for each device?
+ 
+Suggested answers:
+1. Labels: 1 S, 2 A, 3 S, 4 A, 5 S, 6 A, 7 S, 8 B (it shows images and also senses touch), 9 A, 10 S.
+2. No. The camera produces signals and the wheels can turn, but nothing decides what the wheels should do. A microcontroller (or another processor) running a program is needed in the middle.
+ 
+What to learn: a useful question is "Does it measure the world, or change it?"
+ 
+Activity 17: Drive the Motors
+ 
+Goal: Predict what PWM values and H-bridge signals do to the robot.
+ 
+Preparation: Paper, pen and a calculator. The motor driver gets 6 V from the battery. Use average voltage = duty cycle × 6 V, and the H-bridge table above.
+ 
+Part A: Calculate
+ 
+1. The duty cycle is 50 %. What is the average voltage?
+2. The duty cycle is 75 %. What is the average voltage?
+3. On an Arduino, which analogWrite value gives about 25 %? (255 means 100 %.)
+ 
+Part B: Predict
+ 
+4. Left motor: IN1 = 1, IN2 = 0. Right motor: IN1 = 0, IN2 = 1. What does the robot do?
+5. Both motors turn forward, but the left motor runs at 100 % and the right motor at 50 %. Which way does the robot curve?
+ 
+Part C: Find the error
+ 
+6. A student connects the wheel motor directly to a microcontroller pin, without a motor driver. The motor does not turn, and the microcontroller keeps restarting. Explain what is wrong.
+ 
+Observe and reflect: Why does the robot need both PWM (how fast) and the H-bridge (which way)?
+ 
+Suggested answers:
+1. 0.5 × 6 V = 3 V.
+2. 0.75 × 6 V = 4.5 V.
+3. About 64, because 0.25 × 255 ≈ 64.
+4. The left wheel turns forward and the right wheel turns backward, so the robot spins on the spot to the right.
+5. To the right. The left wheel travels faster than the right wheel, so the robot turns toward the slower side.
+6. The pin cannot supply the large current the motor needs. The motor gets too little power to turn, and the attempt can overload the pin and disturb the microcontroller's power supply, which makes it restart. A motor driver must switch the battery current instead.
+ 
+What to learn: PWM controls the amount of power, the H-bridge controls its direction, and the motor driver keeps the large current away from the microcontroller.
+ 
+8.3 Microcontrollers: The Tiny Computer Inside a Machine:
+ 
+A microcontroller is a tiny computer on a single chip, built to run one dedicated program inside a device. It still follows the model from the earlier sections: CPU, memory, input/output, a stored program, and the fetch–decode–execute cycle.
+ 
+Microcontrollers are the heart of embedded systems: computer systems built into devices with dedicated tasks, such as home appliances, vehicle electronics, medical devices, toys and phones. They are often expected to save battery power, meet strict timing deadlines, or run for a long time with little or no human attention.
+ 
+What is inside the chip?:
+ 
+| Part | Job | You met this idea in… |
+|---|---|---|
+| CPU | runs the program, one instruction after another | Section 2 |
+| Flash memory | stores the program; keeps it without power | Section 3.2 (non-volatile memory, like ROM) |
+| RAM | holds variables while the program runs; lost without power | Section 3.2 |
+| Input/output pins (GPIO) | read sensors (inputs) and drive motors, LEDs and buzzers (outputs) | Section 4 |
+| Analog-to-digital converter | turns analog sensor voltages into numbers | Section 8.1 |
+| Timers | measure time, for example an echo time or a PWM period | Section 8.2 |
+ 
+![Inside a microcontroller: CPU, flash, RAM, ADC and timers on one chip, with pins to sensors and actuators.](../assets/hw-mcu-inside.png)
+ 
+Figure 8.5. A microcontroller puts a whole small computer on one chip; the pins connect it to sensors and actuators.
+ 
+Laptop or microcontroller?:
+ 
+![A laptop has many separate parts; a microcontroller has CPU, memory and pins on one chip.](../assets/hw-laptop-vs-microcontroller.png)
+ 
+Figure 8.6. A laptop compared with a microcontroller.
+ 
+| | Laptop / PC | Microcontroller |
+|---|---|---|
+| Purpose | general-purpose: many different programs | one dedicated program |
+| Parts | CPU, RAM, storage, GPU and more, as separate parts on a motherboard | CPU, memory and connection pins together on one chip |
+| User interface | screen, keyboard, mouse | usually none: it talks to the world through sensors and actuators |
+| Memory (example) | gigabytes of RAM | kilobytes (an Arduino Uno chip has 2 KB of RAM and 32 KB of flash) |
+| Speed (example) | billions of instructions per second | about 16 million clock cycles per second (Arduino Uno) |
+| Power | needs a lot | can run on small batteries |
+| Example | writing an essay | the robot's obstacle-avoiding program |
+ 
+How a microcontroller program is organised:
+ 
+A microcontroller has no operating system that starts and stops different apps. When it is switched on, it starts its one program and never finishes it. Arduino programs make this visible with two parts:
+ 
+- setup() runs once when the power comes on. It prepares the hardware, for example "this pin is an output for the motor".
+- loop() runs again and again, forever. This is where the robot senses, decides and acts.
+ 
+`text
+setup():      # runs once
+    make the motor pins outputs
+    make the sensor's echo pin an input
+ 
+loop():       # repeats forever
+    distance = read the ultrasonic sensor (cm)
+    if distance > 20:
+        drive forward
+    otherwise:
+        stop, then turn right
+`
+ 
+This is the same idea as the robot program in Section 8.5, written in a higher-level language: the JUMP back to the start is hidden inside "loop".
+ 
+Common Misconception:
+ 
+"A microcontroller is just a weak laptop processor."
+ 
+It is not a weaker copy. It is designed for a different job: one task, low power, direct connections to sensors and motors, and reliable timing. A washing machine does not need to run a web browser.
+ 
+Check yourself. (1) Which part of the microcontroller keeps the robot's program when the battery is removed? (2) Which part turns the light sensor's voltage into a number? (3) Which part of the program runs only once?
+ 
+Answers: (1) flash memory; (2) the analog-to-digital converter; (3) setup().
+ 
+8.4 The Sense–Decide–Act Loop:
+ 
+A robot repeats the same three steps over and over:
+ 
+![The sense, decide, act loop.](../assets/hw-sense-decide-act.png)
+ 
+Figure 8.7. The sense–decide–act loop: acting changes the world, so the next measurement is different.
+ 
+1. Sense: the sensor measures.
+2. Decide: the microcontroller runs its program (fetch–decode–execute again and again) and chooses an action.
+3. Act: the actuators carry out the action.
+4. Repeat: acting changes the world, so the next measurement is different.
+ 
+How fast is the loop? For a small robot, one pass might take about 50 milliseconds, so the loop runs about 20 times per second. At 30 cm per second the robot moves only 1.5 cm between decisions, which is why it can react in time.
+ 
+The simplest kind of response is a reflex: a fixed, predetermined reaction to the input. A robot that follows simple rules moment by moment, without building a detailed plan, is called a reactive robot. A robot vacuum cleaner works this way. You will meet this idea again in the Behaviorist AI chapter, which also explains what happens when several rules want to control the motors at the same time.
+ 
+8.5 Worked Example: The Obstacle-Avoiding Robot:
+ 
+Setup. The robot has one ultrasonic sensor at the front, two wheel motors with a motor driver, and a microcontroller. Rule: if the wall is 20 cm away or closer, stop and turn; otherwise drive forward.
+ 
+![Sound travels to the wall and back; the echo time gives the distance.](../assets/hw-echo-distance.png)
+ 
+Figure 8.8. The sound pulse travels to the wall and back; the echo time gives the distance.
+ 
+Step 1: Sense. The sensor sends out a short pulse of ultrasound (sound too high for humans to hear) and measures how long the echo takes to come back. Example: 1166 µs (microseconds; 1 µs = 0.000001 s). Hobby sensors of this kind typically work from a few centimetres up to a few metres.
+ 
+Step 2: Calculate. The speed of sound in air is about 343 m/s (at around 20 °C).
+ 
+`text
+distance = speed of sound × echo time ÷ 2
+         = 343 m/s × 0.001166 s ÷ 2
+         = 0.4 m ÷ 2
+         = 0.2 m = 20 cm
+`
+ 
+Why ÷ 2? The sound travels to the wall and back, so the measured time covers the distance twice.
+ 
+Shortcut: sound travels 34,300 cm per second, so the round trip for 1 cm of distance takes about 58 µs (2 ÷ 34,300 s ≈ 0.000058 s). That gives distance (cm) = echo time (µs) ÷ 58. Check: 1166 ÷ 58 = 20.
+ 
+Step 3: Decide. Compare 20 cm with the limit (threshold) of 20 cm. The wall is close enough, so the robot must turn.
+ 
+Step 4: Act. The microcontroller stops the motors and turns the robot (left wheel forward, right wheel backward, as in Section 8.2).
+ 
+The program in plain English. It looks like the program in Activity 11 "Be the CPU" (Section 6.3), but it has no HALT instruction, so it never stops.
+ 
+| Address | Instruction |
+|---|---|
+| 00 | SEND a sound pulse |
+| 01 | MEASURE the echo time and put it in Register A (µs) |
+| 02 | CALCULATE A ÷ 58 and put the distance (cm) in Register B |
+| 03 | IF B is more than 20, JUMP to address 06 |
+| 04 | STOP both motors, then TURN right a little |
+| 05 | JUMP to address 00 |
+| 06 | GO FORWARD |
+| 07 | JUMP to address 00 |
+ 
+A JUMP changes the program counter, so the CPU goes back to address 00 instead of continuing to the next address. That is how the robot repeats forever.
+ 
+Activity 18: From Echo to Distance
+ 
+Goal: Calculate distances from echo times and spot a typical mistake.
+ 
+Preparation: Paper, pen and a calculator. Use distance = 343 m/s × time ÷ 2.
+ 
+Part A: Calculate
+ 
+1. The echo time is 2332 µs. What is the distance?
+2. The echo time is 583 µs. What is the distance?
+3. Use the shortcut (÷ 58) for an echo time of 2900 µs.
+ 
+Part B: Predict
+ 
+4. The wall moves twice as far away. What happens to the echo time?
+5. The robot should react to walls closer than 30 cm. Roughly which echo time is that?
+ 
+Part C: Find the error
+ 
+6. A student writes: "Echo time 1166 µs. Distance = 343 × 0.001166 = 0.4 m, so the wall is 40 cm away." What mistake did the student make, and what would the robot do wrongly?
+ 
+Observe and reflect: Why does the program need the conversion from time to distance before it can decide?
+ 
+Suggested answers:
+1. 343 × 0.002332 = 0.8 m, and 0.8 ÷ 2 = 0.4 m = 40 cm.
+2. 343 × 0.000583 = 0.2 m, and 0.2 ÷ 2 = 0.1 m = 10 cm.
+3. 2900 ÷ 58 = 50 cm (the exact formula gives about 49.7 cm).
+4. The echo time doubles, because the sound has to travel twice the distance.
+5. About 30 × 58 = 1740 µs (the exact formula gives about 1749 µs), so roughly 1750 µs.
+6. The student forgot to divide by 2. The real distance is 20 cm. The robot would think the wall is 40 cm away, keep driving forward, and turn only when the wall is really about 10 cm away, which may be too late.
+ 
+What to learn: the threshold (20 cm) is a distance, but the sensor gives a time, so the units must be converted first.
+ 
+Activity 19: Be the Microcontroller
+ 
+Goal: Trace the robot program and predict what changes if the program or the sensor changes.
+ 
+Preparation: Copy the program table above. Draw a table with the columns Loop, Echo time, Register B, "B more than 20?", Action.
+ 
+Part A: Trace. The sensor gives these echo times in order: 4660, 3500, 1749 and 1166 µs. Use whole-number division (ignore decimals).
+ 
+1. Fill in the table for loops 1 to 4.
+2. Which addresses are executed in loop 1? Which in loop 4?
+3. After the turn, the next echo time is 2332 µs. What does the robot do?
+ 
+Part B: Predict
+ 
+4. The threshold in address 03 is changed from 20 to 30. In which loop does the robot first turn?
+5. The sensor is covered by tape and always reports 0 µs. What does the robot do?
+6. Address 07 is deleted. What happens after the robot drives forward once?
+ 
+Part C: Find the error
+ 
+7. A classmate says: "Address 03 makes the robot turn when the wall is farther than 20 cm." Is the classmate right?
+ 
+Observe and reflect: Which addresses belong to sensing, deciding and acting?
+ 
+Suggested answers:
+1. Loop 1: 4660 ÷ 58 = 80, more than 20, forward. Loop 2: 3500 ÷ 58 = 60, forward. Loop 3: 1749 ÷ 58 = 30, forward. Loop 4: 1166 ÷ 58 = 20, not more than 20, stop and turn.
+2. Loop 1: 00, 01, 02, 03, 06, 07. Loop 4: 00, 01, 02, 03, 04, 05.
+3. 2332 ÷ 58 = 40, more than 20, so it drives forward.
+4. Loop 3: B = 30 is not more than 30, so the robot turns.
+5. B = 0 is not more than 20, so the robot turns in every loop and never drives forward. It is safe but useless.
+6. The program counter moves past the last instruction and nothing sends it back to 00, so the robot stops checking after one pass and no longer reacts.
+7. No. If B is more than 20, the JUMP skips the turn and goes forward. The robot turns when B is 20 or less.
+ 
+What to learn: addresses 00–01 sense, 02–03 decide, 04 and 06 act, and 05 and 07 repeat the loop.
+ 
+Activity 20: Design Challenge: A Parking Sensor
+ 
+Goal: Apply sensors, actuators, thresholds and the sense–decide–act loop to a new device.
+ 
+Preparation: Paper and pen. Work in pairs.
+ 
+Task. Many cars beep when they reverse toward a wall: the closer the wall, the faster the beeps. Design this device for a toy car.
+ 
+1. Name the sensor, the actuator and the computing part, and say what each does.
+2. Write the rules. Use three zones: farther than 100 cm (silent), 30 to 100 cm (slow beeps), closer than 30 cm (fast beeps).
+3. Which echo time (µs) matches 100 cm? Which matches 30 cm? Use the ÷ 58 shortcut.
+4. Write the program as a setup() part and a loop() part, in plain English.
+5. Predict: the readings near 30 cm are noisy (31, 29, 32, 28 cm). What will the driver hear, and how could you make it calmer?
+ 
+Observe and reflect: Which parts of your design are the same as the obstacle-avoiding robot, and which are different?
+ 
+Suggested answers:
+1. Sensor: an ultrasonic sensor measures the distance behind the car. Computing part: a microcontroller converts the echo time to a distance and applies the rules. Actuator: a buzzer makes the beeps.
+2. IF distance > 100 cm THEN silent. IF distance is from 30 to 100 cm THEN slow beeps. IF distance < 30 cm THEN fast beeps.
+3. 100 cm × 58 = 5800 µs; 30 cm × 58 = 1740 µs.
+4. setup(): make the buzzer pin an output and prepare the sensor pins. loop(): measure the echo time, divide by 58, choose the zone with the rules, beep at the matching speed, and repeat.
+5. The beeping would keep switching between slow and fast, which is confusing. Average a few readings, or use two limits (enter "fast" below 30 cm, leave it only above 35 cm), as in the hysteresis idea of the Behaviorist AI chapter.
+ 
+What to learn: the same pattern (sensor → number → rule → actuator, repeated) solves many different problems. Only the sensor, the rules and the actuator change.
+ 
+Section 8 Summary:
+ 
+- A sensor measures the world; an actuator changes it. Digital sensors give 0 or 1; analog sensors give a range of values.
+- A converter turns a smooth signal into numbers by sampling, quantization and encoding. More bits give finer resolution; a higher sampling rate means the robot is "blind" for less time.
+- Real readings contain noise; averaging a few readings helps, but averaging too many makes the robot slow to react.
+- PWM controls how much power a motor gets; an H-bridge in the motor driver controls its direction; two wheels driven differently let the robot steer.
+- A microcontroller is a tiny computer on one chip (CPU, flash, RAM, pins, ADC, timers) that runs one program: setup() once, then loop() forever.
+- Robots repeat the sense–decide–act loop; acting changes what the sensor measures next.
+- The obstacle-avoiding robot turns an echo time into a distance (time × 343 m/s ÷ 2, or µs ÷ 58) and compares it with a threshold.
+ 
+Back to the starting question: the robot "knows" about the wall because the ultrasonic sensor times an echo, the microcontroller converts the time into a distance, and a simple rule compares it with 20 cm, about 20 times every second.
+ 
+How this section is reused:
+ 
+- Study Guide: Figures 8.1–8.8, the converter, resolution and sampling-rate tables, the motor and H-bridge tables, the robot program table and Activities 14–20.
+- PPT idea: "How does a machine sense?" (signal → numbers); "Measure or move?"; PWM with three duty cycles; laptop vs. microcontroller; the sense–decide–act loop; animated echo and formula slides.
+- Video idea: Video 04 "One Robot, Three Ideas" uses the echo calculation, the "pause and predict" at 2332 µs, the forgotten ÷ 2 error and the program trace from this section.
+ 
+Key Terminology: Section 8:
+ 
+| Term | Definition |
+|---|---|
+| Sensor | A device that measures something in the physical world and turns it into a signal. |
+| Actuator | A device that turns a signal into physical action, such as movement or sound. |
+| Digital sensor | A sensor whose output has only two values, such as pressed (1) or not pressed (0). |
+| Analog sensor / signal | A sensor or signal that can take any value in a range. |
+| Sampling | Measuring a signal at regular moments. |
+| Sampling rate | The number of samples taken per second. |
+| Quantization | Rounding each sample to the nearest value the converter can store. |
+| Encoding | Writing a quantized value as a pattern of bits. |
+| Bit depth / resolution | The number of bits per sample, which decides how many different values can be told apart. |
+| Analog-to-digital converter (ADC) | The part that turns an analog voltage into a number. |
+| Noise | Unwanted random variation in sensor readings. |
+| Calibration | Testing a sensor in its real environment to choose correct limits. |
+| DC motor | A motor that spins continuously while it gets power. |
+| Servo motor | A motor that turns to a chosen angle and holds it. |
+| Stepper motor | A motor that moves in small, exact steps. |
+| PWM (pulse-width modulation) | Switching a pin on and off quickly so that the average power can be controlled. |
+| Duty cycle | The fraction of each PWM cycle during which the signal is on. |
+| Motor driver | A circuit between the microcontroller and a motor that switches the larger motor current. |
+| H-bridge | A circuit of four switches that lets current flow through a motor in either direction. |
+| Differential drive | Steering by driving the left and right wheels at different speeds or directions. |
+| Microcontroller | A tiny computer on one chip, built to run one dedicated program. |
+| Embedded system | A computer system built into a device with a dedicated task. |
+| GPIO pin | A general-purpose input/output pin of a microcontroller. |
+| Flash memory | Non-volatile memory that stores the microcontroller's program. |
+| setup() / loop() | The part of a microcontroller program that runs once / the part that repeats forever. |
+| Ultrasonic sensor | A sensor that measures distance by sending a sound pulse and timing its echo. |
+| Echo time | The time between sending a sound pulse and receiving its echo. |
+| Threshold | A limit value; the robot reacts when the distance is at or below it. |
+| Reflex action | A fixed, predetermined response to an input. |
+| Reactive robot | A robot that follows simple rules moment by moment instead of making detailed plans. |
+| Sense–decide–act loop | The repeating cycle of measuring, deciding and acting. |
+ 
+Sources: Section 8:
+ 
+- Brookshear, J. G. (2011). Computer Science: An Overview (11th ed.). Addison-Wesley. Pages 9 (sensors in smartphones), 114 (embedded systems), 462–463 (agents, sensors, actuators, perception, reflex action), 497–499 (robotics, reactive robots).
+- Forouzan, B. A. (2018). Foundations of Computer Science (4th ed.). Cengage Learning. Pages 62–63 (sampling, quantization, encoding, bit rate), 97–98 (input/output subsystem), 105 (connecting I/O devices, controllers), 176 (analog-to-digital conversion).
+- von Neumann, J. (2012). The Computer and the Brain (3rd ed.). Yale University Press. Foreword to the third edition, p. xx; pp. 57–58 (receptors respond once a minimum intensity, a threshold, is reached).
+- Arduino. Arduino Uno Rev3 documentation and the analogWrite()` reference (docs.arduino.cc): 10-bit ADC, 2 KB RAM, 32 KB flash, 16 MHz clock, PWM values 0–255, recommended pin current.
+ 
+Facts not taken from the books (to be checked by a teammate before final submission): the speed of sound (about 343 m/s at 20 °C) and the 58 µs per cm shortcut (standard physics, derived above); the motor types, PWM, H-bridge and motor-driver explanations (general electronics); the Arduino Uno figures (manufacturer's documentation). Diagrams are simplified teaching models drawn for this guide. Section 8 was written by Merey.
+ 
 9. Review and Practice
-
+ 
 9.1 Full Terminology List
 Important terms are introduced near their chapters above. This final list is for students who want to review all of them in one place.
-
+ 
 9.1 Key Terms
-
+ 
 - CPU: The part of the computer that follows instructions and processes data.
 - ALU: The part of the CPU that performs arithmetic, logic, and shift operations.
 - Control Unit: The part of the CPU that coordinates operations using control signals.
@@ -703,12 +1154,17 @@ Important terms are introduced near their chapters above. This final list is for
 - Actuator: A device that turns a control signal into an action.
 - Microcontroller: A small computer on a chip often used to control a specific device.
 - Ultrasonic Sensor: A sensor that estimates distance using the travel time of sound pulses.
-- Sense–Act Loop: A repeated process of reading sensors and responding with actions.
+- Sense–Decide–Act Loop: The repeating cycle of measuring the environment, deciding, and acting.
+- Analog-to-Digital Conversion: Turning an analog signal into digital data by sampling, quantization, and encoding.
+- PWM (Pulse-Width Modulation): Switching a pin on and off quickly so that the average power can be controlled.
+- Motor Driver / H-Bridge: A circuit that switches the larger motor current and lets the motor turn in either direction.
+- Embedded System: A computer system built into a device with a dedicated task.
+- Threshold: A limit value; the robot reacts when the distance is at or below it.
 - GPU: A processor designed for many parallel calculations, especially graphics and some AI tasks.
 - AI Accelerator: Specialized hardware for certain AI calculations.
-
+ 
 9.2 Review Questions
-
+ 
 1. What are the three main subsystems of a computer?
 2. What are the three main parts of the CPU discussed in this chapter?
 3. What does the ALU do?
@@ -727,9 +1183,9 @@ Important terms are introduced near their chapters above. This final list is for
 16. What does a microcontroller do in the obstacle-avoiding robot?
 17. Why is the echo travel time divided by two?
 18. What does the robot do when the measured distance is 12 cm?
-
+ 
 Answer Key
-
+ 
 1. CPU, main memory, and input/output subsystem.
 2. ALU, registers, and control unit.
 3. It performs arithmetic, logic, and shift operations.
@@ -748,27 +1204,30 @@ Answer Key
 16. It reads the distance, applies the rule, and sends commands to the motors through the motor driver.
 17. The pulse travels to the object and back.
 18. It stops and turns.
-
+ 
 9.3 Additional Mini Activities
-
+ 
 Activity A — Match the Component: Match CPU, RAM, SSD, keyboard, and monitor with their roles: processing instructions, working memory, long-term storage, input, and output.
 Activity B — Follow the Instruction: Students arrange the steps of a simple addition: load values, perform addition, store result.
 Activity C — Robot Rule: Students change the robot’s threshold from 20 cm to 30 cm and predict how its behavior changes at 25 cm.
-
+ 
 10. References and Planned Teaching Assets
-
+ 
 References:
 - Forouzan, B. A., Foundations of Computer Science, Cengage Learning, 2018, Chapter 5, “Computer Organization.” Used as a reference for CPU, main memory, input/output, buses, and program execution. Confirm the exact book title and edition against the team’s copy before submission.
 - Course materials and lecture notes provided by the professor. Add exact titles or links.
-- Additional references for GPUs, microcontrollers, and ultrasonic sensors. Add the exact sources actually used before submission.
+- Brookshear, J. G., Computer Science: An Overview, 11th ed., Addison-Wesley, 2011, pp. 9, 114, 462–463, 497–499 (Section 8).
+- von Neumann, J., The Computer and the Brain, 3rd ed., Yale University Press, 2012, p. xx and pp. 57–58 (Section 8).
+- Arduino, Arduino Uno Rev3 documentation and analogWrite() reference, docs.arduino.cc (Section 8).
+- Additional references for GPUs and AI accelerators (Section 7). Add the exact sources actually used before submission.
 The explanations in this Markdown are written in our own words and simplified for beginner students. Figures from the textbook should not be copied into our materials without permission or a suitable license; our team will draw original diagrams based on the concepts.
 How We Will Reuse This Markdown
 - Study Guide: Use the explanations, diagrams, worked examples, key terms, and review questions. Expand examples where students need more detail.
 - PPT Slides: Use short definitions, diagrams, and one main idea per slide. Turn mini activities into questions for the class.
 - Video Tutorials: Animate the CPU addition example, memory access, and the obstacle-avoiding robot. Use the Markdown as the content reference, but explain the examples naturally rather than reading every paragraph.
-
+ 
 Stage 1 Checklist
-
+ 
 Complete Hardware topic structure, including major subtopics +
 Learning goals and measurable learning objectives +
 Developed CPU subsection with example and mini activity +
@@ -780,3 +1239,4 @@ Draw and add the final original diagrams
 Confirm the full bibliography and sources for each section
 Review technical accuracy and consistent terminology with the Quality Lead
 Check that the Hardware content matches the Networks and Behaviorist AI parts
+ 
