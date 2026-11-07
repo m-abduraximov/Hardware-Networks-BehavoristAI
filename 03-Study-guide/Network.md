@@ -345,3 +345,206 @@ A **server** is a computer (often more powerful than a normal PC and running all
 >
 > **Answer:** (a) web server, (b) database server, (c) streaming server, (d) game server, (e) backup server.
 
+---
+
+## 2.4. Security
+
+**Network security** protects data, devices and connections from unauthorised access, changes and attacks. Rover's report travels through the air – so how do we keep it safe?
+
+### 2.4.1. Firewalls
+
+A **firewall** is hardware or software that checks incoming and outgoing traffic and allows or blocks it using **rules**. It works like a guard at the door with a list.
+
+- **Packet-filtering firewall** – checks addresses and ports (Layers 3–4).
+- **Stateful firewall** – remembers connections and allows only packets that belong to them.
+- **Application-layer firewall (proxy)** – checks the content of specific applications, such as HTTP.
+- **Next-generation firewall (NGFW)** – combines the above with intrusion prevention and deep inspection.
+
+### 2.4.2. Privacy
+
+**Privacy (confidentiality)** means only the right people can read the data. Main tools: **encryption** (data is scrambled; HTTPS uses TLS), **access control** (only authorised users see data) and **anonymisation** (removing personal details from data sets). HTTP is like a postcard anyone can read; HTTPS is like a sealed envelope.
+
+### 2.4.3. Authentication
+
+**Authentication** checks that a user or device is who it claims to be.
+
+- **Something you know** – password, PIN.
+- **Something you have** – phone code, security key.
+- **Something you are** – fingerprint, face.
+
+Using two or more of these is **multi-factor authentication (MFA)**. Devices and websites can also prove identity with **digital certificates**, and programs often use **tokens or API keys**.
+
+### 2.4.4. Integrity
+
+**Integrity** means the data was not changed on the way or in storage. **Checksums and hashes** (for example SHA-256) act like a fingerprint of the data: if one character changes, the fingerprint changes. **Digital signatures** also protect integrity.
+
+### 2.4.5. Non-repudiation
+
+**Non-repudiation** means a sender cannot later deny sending a message or doing an action. It is achieved with **digital signatures** (only the owner of the private key can create them) and secure **audit logs**.
+
+| Idea | Protects against | Example |
+| --- | --- | --- |
+| Firewall | Unwanted traffic | Block unknown ports |
+| Privacy | Others reading data | HTTPS padlock |
+| Authentication | Fake users or devices | Password + phone code |
+| Integrity | Data being changed | Hash check |
+| Non-repudiation | Denying an action | Digital signature |
+
+> **✔ Quick check 10 – Security**
+>
+> Rover sends "Obstacle: 12 cm, turning left". Which idea helps? (a) A stranger reads the report. (b) Someone changes "12 cm" to "2 cm". (c) A fake device pretends to be Rover. (d) Rover later denies sending the report. (e) An unknown computer tries to connect on a strange port.
+>
+> **Answer:** (a) privacy / encryption, (b) integrity, (c) authentication, (d) non-repudiation, (e) firewall. Real systems combine several ideas.
+
+---
+
+## 2.5. Why Networking Matters
+
+Networking connects devices, systems and people. Without it there would be no Internet, no cloud services, no online learning and no connected robots.
+
+- **Connectivity** – devices can exchange information anywhere in the world.
+- **Speed** – fast transfer makes video, games and AI services possible.
+- **Reliability** – routing and protocols help data arrive correctly.
+- **Collaboration** – cloud computing and many machines working together.
+
+### Mission complete: Rover's message
+
+| Step | Layer | What happens |
+| --- | --- | --- |
+| 1 | Application | Rover's program creates the report and sends it to the phone app (HTTPS). |
+| 2 | Transport | TCP does the handshake, numbers the data and adds the port number of the app. |
+| 3 | Internet | IP adds the addresses: Rover 192.168.1.20 → phone 192.168.1.35. |
+| 4 | Link | Rover's Wi-Fi module sends radio signals to the access point. |
+| 5 | Back up | The phone reverses the layers and shows the message on the screen. |
+
+> **🤖 Rover says...**
+>
+> The sensor saw the wall, my behaviour rules decided to turn, and the network only carried the news. Three different jobs!
+
+> **✏ Back to the mission question**
+>
+> Look at the prediction you wrote at the start. What was correct? Add the missing words: **DNS, IP address, packets, TCP, routers.**
+
+---
+
+## Chapter summary
+
+| Key idea | One-sentence reminder |
+| --- | --- |
+| Network types | PAN, LAN, MAN, WAN and GAN differ mainly by the area they cover. |
+| Media | Data travels as electricity (copper), light (fibre) or radio waves (wireless). |
+| Devices | Switches connect devices in a LAN; routers connect networks; access points add Wi-Fi. |
+| Layers | OSI has 7 layers, TCP/IP has 4; each layer does one job. |
+| Protocols | IP addresses and moves packets; TCP is reliable; UDP is fast; ICMP reports errors. |
+| Addresses | IPv4/IPv6 identify devices; DHCP gives addresses automatically. |
+| Domains and DNS | DNS turns names into IP addresses. |
+| Routing | Routers forward packets hop by hop and can use backup paths. |
+| Security | Firewalls, privacy, authentication, integrity and non-repudiation protect communication. |
+
+## Glossary
+
+| Term | Meaning |
+| --- | --- |
+| Bandwidth | How much data a connection can carry per second. |
+| DHCP | Protocol that gives IP addresses automatically. |
+| DNS | System that translates domain names into IP addresses. |
+| Firewall | Tool that allows or blocks traffic using rules. |
+| Hop | One step of a packet from one router to the next. |
+| IP address | Number that identifies a device on a network. |
+| MAC address | Hardware address of a network interface, used inside a LAN. |
+| Packet | Small piece of data with a header (addresses, number). |
+| Port | Number that tells a device which program should get the data (e.g. 443 for HTTPS). |
+| Protocol | Agreed rules for communication. |
+| Router | Device that connects networks and forwards packets. |
+| Switch | Device that connects devices inside one LAN. |
+
+---
+
+## Quiz
+
+### Networks
+
+*Try the questions without looking back. Then check your answer under each question.*
+
+### Multiple Choice Questions
+
+**1. Which network type is the Wi-Fi in your home?**
+
+- A. PAN
+- B. LAN
+- C. WAN
+- D. GAN
+
+**Answer: B**
+
+**2. Which cable has one central copper wire with insulation and a shield around it?**
+
+- A. Twisted-pair cable
+- B. Fibre-optic cable
+- C. Coaxial cable
+- D. Infrared
+
+**Answer: C**
+
+**3. Which device copies incoming data to all of its ports?**
+
+- A. Hub
+- B. Switch
+- C. Router
+- D. Modem
+
+**Answer: A**
+
+**4. How many layers does the OSI model have?**
+
+- A. 4
+- B. 5
+- C. 7
+- D. 8
+
+**Answer: C**
+
+**5. Which protocol reports errors such as "destination unreachable"?**
+
+- A. TCP
+- B. ICMP
+- C. DNS
+- D. HTTP
+
+**Answer: B**
+
+**6. Which server type keeps often-used data in fast memory to reduce the load on databases?**
+
+- A. Backup server
+- B. Game server
+- C. Cache server
+- D. Web server
+
+**Answer: C**
+
+### True or False Questions
+
+**1. A modem converts signals between your home network and the provider's line.**
+
+**Answer: True**
+
+**2. Switches use MAC addresses to deliver data inside a LAN.**
+
+**Answer: True**
+
+**3. A dynamic IP address can never change.**
+
+**Answer: False**
+
+**4. BGP is used to connect large networks on the Internet.**
+
+**Answer: True**
+
+**5. HTTPS is like a postcard that anyone on the way can read.**
+
+**Answer: False**
+
+**6. Non-repudiation means a sender cannot deny sending a message.**
+
+**Answer: True**
+
