@@ -1,6 +1,49 @@
+[← Chapter 1: Hardware](01-Hardware.md) · [🏠 Start here](00-Start-Here.md) · [Chapter 3: Behaviorist AI →](03-Behaviorist-AI.md)
+
 # Chapter 2. Networks
 
 *How devices talk to each other*
+
+**Contents**
+
+- [Before You Start](#before-you-start)
+  - [What you will learn](#what-you-will-learn)
+  - [What you need to know already](#what-you-need-to-know-already)
+  - [How to use this chapter](#how-to-use-this-chapter)
+- [2.1. Network Fundamentals](#21-network-fundamentals)
+  - [2.1.1. Types of networks](#211-types-of-networks)
+  - [2.1.2. Networking media](#212-networking-media)
+  - [2.1.3. Networking devices](#213-networking-devices)
+- [2.2. Network Architecture](#22-network-architecture)
+  - [Layers: dividing a big job into small jobs](#layers-dividing-a-big-job-into-small-jobs)
+- [2.3. Internet Infrastructure](#23-internet-infrastructure)
+  - [2.3.1. What is the Internet?](#231-what-is-the-internet)
+  - [2.3.2. Core protocols](#232-core-protocols)
+  - [2.3.3. Internet addressing](#233-internet-addressing)
+  - [2.3.4. Domains](#234-domains)
+  - [2.3.5. Routing](#235-routing)
+  - [2.3.6. Servers](#236-servers)
+  - [Network Lab: Look at a Real Network from Your Own Computer](#network-lab-look-at-a-real-network-from-your-own-computer)
+- [2.4. Security](#24-security)
+  - [2.4.1. Firewalls](#241-firewalls)
+  - [2.4.2. Privacy](#242-privacy)
+  - [2.4.3. Authentication](#243-authentication)
+  - [2.4.4. Integrity](#244-integrity)
+  - [2.4.5. Non-repudiation](#245-non-repudiation)
+- [2.5. Why Networking Matters](#25-why-networking-matters)
+  - [Mission complete: Rover’s message](#mission-complete-rovers-message)
+- [Chapter summary](#chapter-summary)
+- [Glossary](#glossary)
+- [References](#references)
+- [Quiz](#quiz)
+  - [Multiple Choice Questions](#multiple-choice-questions)
+  - [True or False Questions](#true-or-false-questions)
+- [Answer Key](#answer-key)
+  - [Quick check answers](#quick-check-answers)
+  - [Network Lab: expected results](#network-lab-expected-results)
+  - [Quiz answers](#quiz-answers)
+
+---
 
 ## Before You Start
 
@@ -73,7 +116,7 @@ Right now I am an island. I can see the wall, but nobody knows about it!
 
 Which type is each one? (a) earbuds connected to your phone; (b) the Wi-Fi in your dormitory; (c) a network linking all libraries of one city; (d) a company linking offices in Beijing and Tashkent; (e) Rover on your home Wi-Fi.
 
-**Answer:** (a) PAN, (b) LAN, (c) MAN, (d) WAN, (e) LAN. The main difference between types is the area they cover.
+> ✅ **Check your answer:** [answer to Quick check 1 – Network types](#answers-qc-1).
 
 ### 2.1.2. Networking media
 
@@ -100,7 +143,7 @@ A **transmission medium** is the path that carries the signal from one device to
 
 Which medium fits best? (a) a desktop PC next to the router; (b) Rover, which moves around the room; (c) a link between two cities 300 km apart; (d) a TV remote control.
 
-**Answer:** (a) twisted-pair Ethernet – stable and cheap; (b) Wi-Fi radio – Rover must move; (c) fibre optic – fast over long distances; (d) infrared – short range, line of sight.
+> ✅ **Check your answer:** [answer to Quick check 2 – Networking media](#answers-qc-2).
 
 ### 2.1.3. Networking devices
 
@@ -126,7 +169,7 @@ End devices are the devices people use: PCs, laptops, smartphones, smart TVs, ne
 
 Name the device: (a) “I send data only to the port where the receiver is.” (b) “I connect your home network to the Internet.” (c) “I copy everything to every port.” (d) “I let phones join without a cable.” (e) “I convert signals for the provider’s line.”
 
-**Answer:** (a) switch, (b) router, (c) hub, (d) access point, (e) modem. Rover’s Wi-Fi message first reaches the access point.
+> ✅ **Check your answer:** [answer to Quick check 3 – Networking devices](#answers-qc-3).
 
 ## 2.2. Network Architecture
 
@@ -172,7 +215,7 @@ Put each item on its TCP/IP layer: HTTP, Wi-Fi, TCP, IP, DNS, UDP, Ethernet cabl
 
 Why is it useful that Wi-Fi and HTTP are on different layers?
 
-**Answer:** Application – HTTP, DNS; Transport – TCP, UDP; Internet – IP, ICMP; Link – Wi-Fi, Ethernet cable. Separate layers let you change the connection (cable → Wi-Fi) without changing the web page or HTTP.
+> ✅ **Check your answer:** [answer to Quick check 4 – Layers](#answers-qc-4).
 
 ## 2.3. Internet Infrastructure
 
@@ -199,7 +242,7 @@ The **Internet** is a global **network of networks**. Millions of private, publi
 
 Is a WhatsApp or WeChat voice call part of the Web?
 
-**Answer:** No. It uses the Internet, but it is not a web page delivered through a browser.
+> ✅ **Check your answer:** [answer to Quick check](#answers-qc-5).
 
 ### 2.3.2. Core protocols
 
@@ -233,7 +276,7 @@ A long message is not sent in one piece. It is cut into small **packets**. Each 
 
 (c) What are the three messages of the TCP handshake?
 
-**Answer:** (a) TCP – it numbers the data and resends missing pieces. (b) UDP – fast, no resending. (c) SYN → SYN-ACK → ACK.
+> ✅ **Check your answer:** [answer to Quick check 5 – Protocols and packets](#answers-qc-6).
 
 ### 2.3.3. Internet addressing
 
@@ -267,7 +310,7 @@ Write private, public or invalid: (a) 192.168.1.20; (b) 10.0.0.5; (c) 8.8.8.8; (
 
 What do the letters DORA mean in DHCP?
 
-**Answer:** (a) private, (b) private, (c) public, (d) invalid – 300 is greater than 255, (e) private – inside 172.16–172.31, (f) public – outside that range. DORA = Discover, Offer, Request, Acknowledge.
+> ✅ **Check your answer:** [answer to Quick check 6 – IP addresses](#answers-qc-7).
 
 ### 2.3.4. Domains
 
@@ -291,7 +334,7 @@ Split https://mail.google.com into protocol, subdomain, second-level domain and 
 
 What does DNS give your computer?
 
-**Answer:** https / mail / google / .com. DNS gives back the IP address of the server.
+> ✅ **Check your answer:** [answer to Quick check 7 – Domains and DNS](#answers-qc-8).
 
 ### 2.3.5. Routing
 
@@ -312,7 +355,7 @@ Look at Figure 2.9. (a) How many hops are on the red path from the home router t
 
 What is the difference between static and dynamic routing?
 
-**Answer:** (a) 3 hops: Home → R1 → R3 → Server. (b) Home → R2 → R4 → Server (or Home → R1 → R4 → Server). Static routes are set by hand; dynamic routes are updated automatically by routers.
+> ✅ **Check your answer:** [answer to Quick check 8 – Routing](#answers-qc-9).
 
 ### 2.3.6. Servers
 
@@ -336,7 +379,7 @@ A **server** is a computer (often more powerful than a normal PC and running all
 
 Which server type is used when: (a) you open a news website; (b) your exam marks are stored; (c) you watch a live stream; (d) you play an online match; (e) files are restored after a computer breaks?
 
-**Answer:** (a) web server, (b) database server, (c) streaming server, (d) game server, (e) backup server.
+> ✅ **Check your answer:** [answer to Quick check 9 – Servers](#answers-qc-10).
 
 ### Network Lab: Look at a Real Network from Your Own Computer
 
@@ -361,17 +404,7 @@ Which server type is used when: (a) you open a news website; (b) your exam marks
 
 **Observe and reflect:** Which step of Rover's message (Section 2.5) did each command show you?
 
-**Suggested Answers**
-
-Your numbers will be different from anyone else's, so the answers describe what you should see.
-
-- Step 1: on a home or school network the IPv4 address is almost always **private** (for example 192.168.1.23 or 10.12.4.57), and the default gateway is usually an address in the same range ending in .1 or .254 – that is the home router.
-- Step 2: `nslookup` prints the DNS server that answered and then the IP address of the website. The name was translated into an IP address before any web page was requested.
-- Step 3: `ping` sends ICMP echo requests and prints one reply per packet with a time such as 20–200 ms. If the firewall blocks ICMP, you may see "Request timed out" even though web pages still work – a firewall rule in action (Section 2.4.1).
-- Step 4: `tracert`/`traceroute` usually shows about 8–20 hops; the first hop is your default gateway. Lines with `* * *` are routers that do not answer, not broken links.
-- A private address means the router translates it to one public address for the whole home or school network, so many devices can share the same Internet connection.
-- `ping` and `tracert` use ICMP; `nslookup` uses DNS.
-- Example: a ping time of 40 ms = 0.04 s, so Rover drives 0.3 m/s × 0.04 s = 0.012 m = 1.2 cm. With a slow connection of 1000 ms it would drive 30 cm – the same reason why the safety decision must be made on the robot itself (Chapter 3, Section 3.5).
+> ✅ **Check your answers:** compare your results with the [expected results for the Network Lab](#answers-network-lab).
 
 ## 2.4. Security
 
@@ -424,7 +457,7 @@ Using two or more of these is **multi-factor authentication (MFA)**. Devices and
 
 Rover sends “Obstacle: 12 cm, turning left”. Which idea helps? (a) A stranger reads the report. (b) Someone changes “12 cm” to “2 cm”. (c) A fake device pretends to be Rover. (d) Rover later denies sending the report. (e) An unknown computer tries to connect on a strange port.
 
-**Answer:** (a) privacy / encryption, (b) integrity, (c) authentication, (d) non-repudiation, (e) firewall. Real systems combine several ideas.
+> ✅ **Check your answer:** [answer to Quick check 10 – Security](#answers-qc-11).
 
 ## 2.5. Why Networking Matters
 
@@ -509,105 +542,151 @@ Look at the prediction you wrote at the start. What was correct? Add the missing
 
 ## Quiz
 
-*Try the questions without looking back. Then check your answer under each question.*
+*Try the questions without looking back. Then check your answers in the [Answer Key](#quiz-answers) at the end of the chapter.*
 
 ### Multiple Choice Questions
 
 **1. Which network type is the Wi-Fi in your home?**
 
-A. PAN
-
-B. LAN
-
-C. WAN
-
-D. GAN
-
-**Answer: B**
+- **A.** PAN
+- **B.** LAN
+- **C.** WAN
+- **D.** GAN
 
 **2. Which cable has one central copper wire with insulation and a shield around it?**
 
-A. Twisted-pair cable
-
-B. Fibre-optic cable
-
-C. Coaxial cable
-
-D. Infrared
-
-**Answer: C**
+- **A.** Twisted-pair cable
+- **B.** Fibre-optic cable
+- **C.** Coaxial cable
+- **D.** Infrared
 
 **3. Which device copies incoming data to all of its ports?**
 
-A. Hub
-
-B. Switch
-
-C. Router
-
-D. Modem
-
-**Answer: A**
+- **A.** Hub
+- **B.** Switch
+- **C.** Router
+- **D.** Modem
 
 **4. How many layers does the OSI model have?**
 
-A. 4
-
-B. 5
-
-C. 7
-
-D. 8
-
-**Answer: C**
+- **A.** 4
+- **B.** 5
+- **C.** 7
+- **D.** 8
 
 **5. Which protocol reports errors such as “destination unreachable”?**
 
-A. TCP
-
-B. ICMP
-
-C. DNS
-
-D. HTTP
-
-**Answer: B**
+- **A.** TCP
+- **B.** ICMP
+- **C.** DNS
+- **D.** HTTP
 
 **6. Which server type keeps often-used data in fast memory to reduce the load on databases?**
 
-A. Backup server
-
-B. Game server
-
-C. Cache server
-
-D. Web server
-
-**Answer: C**
+- **A.** Backup server
+- **B.** Game server
+- **C.** Cache server
+- **D.** Web server
 
 ### True or False Questions
 
 **1. A modem converts signals between your home network and the provider’s line.**
 
-**Answer: True**
-
 **2. Switches use MAC addresses to deliver data inside a LAN.**
-
-**Answer: True**
 
 **3. A dynamic IP address can never change.**
 
-**Answer: False**
-
 **4. BGP is used to connect large networks on the Internet.**
-
-**Answer: True**
 
 **5. HTTPS is like a postcard that anyone on the way can read.**
 
-**Answer: False**
-
 **6. Non-repudiation means a sender cannot deny sending a message.**
 
-**Answer: True**
+---
 
+## Answer Key
+
+*Use this key only after you have tried the activity or question yourself. Each heading links back to the place where the task appears.*
+
+### Quick check answers
+
+<a id="answers-qc-1"></a>
+
+**Quick check 1 – Network types.** (a) PAN, (b) LAN, (c) MAN, (d) WAN, (e) LAN. The main difference between types is the area they cover.
+
+<a id="answers-qc-2"></a>
+
+**Quick check 2 – Networking media.** (a) twisted-pair Ethernet – stable and cheap; (b) Wi-Fi radio – Rover must move; (c) fibre optic – fast over long distances; (d) infrared – short range, line of sight.
+
+<a id="answers-qc-3"></a>
+
+**Quick check 3 – Networking devices.** (a) switch, (b) router, (c) hub, (d) access point, (e) modem. Rover’s Wi-Fi message first reaches the access point.
+
+<a id="answers-qc-4"></a>
+
+**Quick check 4 – Layers.** Application – HTTP, DNS; Transport – TCP, UDP; Internet – IP, ICMP; Link – Wi-Fi, Ethernet cable. Separate layers let you change the connection (cable → Wi-Fi) without changing the web page or HTTP.
+
+<a id="answers-qc-5"></a>
+
+**Quick check.** No. It uses the Internet, but it is not a web page delivered through a browser.
+
+<a id="answers-qc-6"></a>
+
+**Quick check 5 – Protocols and packets.** (a) TCP – it numbers the data and resends missing pieces. (b) UDP – fast, no resending. (c) SYN → SYN-ACK → ACK.
+
+<a id="answers-qc-7"></a>
+
+**Quick check 6 – IP addresses.** (a) private, (b) private, (c) public, (d) invalid – 300 is greater than 255, (e) private – inside 172.16–172.31, (f) public – outside that range. DORA = Discover, Offer, Request, Acknowledge.
+
+<a id="answers-qc-8"></a>
+
+**Quick check 7 – Domains and DNS.** https / mail / google / .com. DNS gives back the IP address of the server.
+
+<a id="answers-qc-9"></a>
+
+**Quick check 8 – Routing.** (a) 3 hops: Home → R1 → R3 → Server. (b) Home → R2 → R4 → Server (or Home → R1 → R4 → Server). Static routes are set by hand; dynamic routes are updated automatically by routers.
+
+<a id="answers-qc-10"></a>
+
+**Quick check 9 – Servers.** (a) web server, (b) database server, (c) streaming server, (d) game server, (e) backup server.
+
+<a id="answers-qc-11"></a>
+
+**Quick check 10 – Security.** (a) privacy / encryption, (b) integrity, (c) authentication, (d) non-repudiation, (e) firewall. Real systems combine several ideas.
+
+### Network Lab: expected results
+
+<a id="answers-network-lab"></a>
+
+Your numbers will be different from anyone else's, so the answers describe what you should see.
+
+- Step 1: on a home or school network the IPv4 address is almost always **private** (for example 192.168.1.23 or 10.12.4.57), and the default gateway is usually an address in the same range ending in .1 or .254 – that is the home router.
+- Step 2: `nslookup` prints the DNS server that answered and then the IP address of the website. The name was translated into an IP address before any web page was requested.
+- Step 3: `ping` sends ICMP echo requests and prints one reply per packet with a time such as 20–200 ms. If the firewall blocks ICMP, you may see "Request timed out" even though web pages still work – a firewall rule in action (Section 2.4.1).
+- Step 4: `tracert`/`traceroute` usually shows about 8–20 hops; the first hop is your default gateway. Lines with `* * *` are routers that do not answer, not broken links.
+- A private address means the router translates it to one public address for the whole home or school network, so many devices can share the same Internet connection.
+- `ping` and `tracert` use ICMP; `nslookup` uses DNS.
+- Example: a ping time of 40 ms = 0.04 s, so Rover drives 0.3 m/s × 0.04 s = 0.012 m = 1.2 cm. With a slow connection of 1000 ms it would drive 30 cm – the same reason why the safety decision must be made on the robot itself (Chapter 3, Section 3.5).
+
+[↩ Back to the Network Lab](#network-lab-look-at-a-real-network-from-your-own-computer)
+
+### Quiz answers
+
+| Part | Question | Answer | Why |
+|---|---|---|---|
+| Multiple choice | 1. Which network type is the Wi-Fi in your home? | **B** |  |
+| Multiple choice | 2. Which cable has one central copper wire with insulation and a shield around it? | **C** |  |
+| Multiple choice | 3. Which device copies incoming data to all of its ports? | **A** |  |
+| Multiple choice | 4. How many layers does the OSI model have? | **C** |  |
+| Multiple choice | 5. Which protocol reports errors such as “destination unreachable”? | **B** |  |
+| Multiple choice | 6. Which server type keeps often-used data in fast memory to reduce the load on databases? | **C** |  |
+| True / False | 1. A modem converts signals between your home network and the provider’s line. | **True** |  |
+| True / False | 2. Switches use MAC addresses to deliver data inside a LAN. | **True** |  |
+| True / False | 3. A dynamic IP address can never change. | **False** | A dynamic address is given by DHCP and may change; a *static* address is set by hand and stays the same. |
+| True / False | 4. BGP is used to connect large networks on the Internet. | **True** |  |
+| True / False | 5. HTTPS is like a postcard that anyone on the way can read. | **False** | HTTP is the postcard; HTTPS encrypts the data, like a sealed envelope. |
+| True / False | 6. Non-repudiation means a sender cannot deny sending a message. | **True** |  |
+
+---
+
+[← Chapter 1: Hardware](01-Hardware.md) · [🏠 Start here](00-Start-Here.md) · [Chapter 3: Behaviorist AI →](03-Behaviorist-AI.md)

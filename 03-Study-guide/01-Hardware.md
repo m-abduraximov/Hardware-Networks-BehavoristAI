@@ -1,6 +1,71 @@
+[🏠 Start here](00-Start-Here.md) · [Chapter 2: Networks →](02-Networks.md)
+
 # Chapter 1. Hardware
 
 *Inside the machine: how a computer is built and follows instructions*
+
+**Contents**
+
+- [Before You Start](#before-you-start)
+- [1.1. Introduction to Computer Hardware](#11-introduction-to-computer-hardware)
+  - [1.1.1. Main Computer Subsystems](#111-main-computer-subsystems)
+  - [1.1.2. How the Subsystems Work Together](#112-how-the-subsystems-work-together)
+  - [Activity 1: Follow a Keyboard Input](#activity-1-follow-a-keyboard-input)
+- [1.2. Central Processing Unit (CPU)](#12-central-processing-unit-cpu)
+  - [1.2.1. What Is the CPU?](#121-what-is-the-cpu)
+  - [1.2.2. The Arithmetic Logic Unit (ALU)](#122-the-arithmetic-logic-unit-alu)
+  - [1.2.3. Registers](#123-registers)
+  - [1.2.4. The Control Unit](#124-the-control-unit)
+  - [Activity 2: Understanding CPU Components](#activity-2-understanding-cpu-components)
+- [1.3. Main Memory](#13-main-memory)
+  - [1.3.1. How Does Computer Memory Work?](#131-how-does-computer-memory-work)
+  - [1.3.2. RAM and ROM](#132-ram-and-rom)
+  - [1.3.3. Memory Hierarchy and Cache](#133-memory-hierarchy-and-cache)
+  - [Activity 3: Memory Detective](#activity-3-memory-detective)
+- [1.4. Input/Output Subsystem and Storage](#14-inputoutput-subsystem-and-storage)
+  - [1.4.1. Input and Output Devices](#141-input-and-output-devices)
+  - [1.4.2. Secondary Storage](#142-secondary-storage)
+  - [1.4.3. Memory vs. Storage](#143-memory-vs-storage)
+  - [Activity 4: What Happens When Power Is Off?](#activity-4-what-happens-when-power-is-off)
+- [1.5. Subsystem Interconnection](#15-subsystem-interconnection)
+  - [1.5.1. Buses](#151-buses)
+  - [1.5.2. Input/Output Controllers](#152-inputoutput-controllers)
+  - [Activity 5: Follow the Data](#activity-5-follow-the-data)
+- [1.6. Program Execution](#16-program-execution)
+  - [1.6.1. Stored-Program Concept](#161-stored-program-concept)
+  - [1.6.2. Fetch–Decode–Execute Cycle](#162-fetchdecodeexecute-cycle)
+  - [1.6.3. Worked Example: Adding Two Numbers](#163-worked-example-adding-two-numbers)
+  - [Activity 6: Be the CPU](#activity-6-be-the-cpu)
+  - [Optional Interactive Lab: See a CPU Execute Instructions](#optional-interactive-lab-see-a-cpu-execute-instructions)
+- [1.7. Sensors, Actuators and Microcontrollers](#17-sensors-actuators-and-microcontrollers)
+  - [1.7.1. Sensors: How a Machine Senses the World](#171-sensors-how-a-machine-senses-the-world)
+  - [Activity 7: Round It Like a Converter](#activity-7-round-it-like-a-converter)
+  - [Activity 8: Fast Enough? Sampling and Noise](#activity-8-fast-enough-sampling-and-noise)
+  - [1.7.2. Actuators: How a Machine Acts](#172-actuators-how-a-machine-acts)
+  - [Activity 9: Sensor or Actuator?](#activity-9-sensor-or-actuator)
+  - [Activity 10: Drive the Motors](#activity-10-drive-the-motors)
+  - [1.7.3. Microcontrollers: The Tiny Computer Inside a Machine](#173-microcontrollers-the-tiny-computer-inside-a-machine)
+  - [1.7.4. The Sense–Decide–Act Loop](#174-the-sensedecideact-loop)
+  - [1.7.5. Worked Example: The Obstacle-Avoiding Robot](#175-worked-example-the-obstacle-avoiding-robot)
+  - [Activity 11: From Echo to Distance](#activity-11-from-echo-to-distance)
+  - [Activity 12: Be the Microcontroller](#activity-12-be-the-microcontroller)
+  - [Activity 13: Design Challenge: A Parking Sensor](#activity-13-design-challenge-a-parking-sensor)
+  - [Section 1.7 Summary](#section-17-summary)
+- [Glossary](#glossary)
+  - [Computer Components](#computer-components)
+  - [Memory and Storage](#memory-and-storage)
+  - [Operations and Communication](#operations-and-communication)
+  - [Program Execution](#program-execution)
+  - [Sensors, Actuators and Microcontrollers](#sensors-actuators-and-microcontrollers)
+- [References](#references)
+- [Quiz](#quiz)
+  - [Multiple Choice Questions](#multiple-choice-questions)
+  - [True or False Questions](#true-or-false-questions)
+- [Answer Key](#answer-key)
+  - [Activity answers](#activity-answers)
+  - [Quiz answers](#quiz-answers)
+
+---
 
 ## Before You Start
 
@@ -108,15 +173,7 @@ Imagine that you type the number 7 on a keyboard and a calculator app shows 7 on
 
 **Observe and reflect:** Which component can still work if the screen stops displaying the result? Why is visible output not the same thing as processing?
 
-**Suggested Answers**
-
-1. Keyboard.
-
-2. RAM.
-
-3. Monitor.
-
-4. The computer could still receive and process information, but the user would not be able to see the result on the screen. Other output methods might still work if available.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 1](#answers-activity-1).
 
 ## 1.2. Central Processing Unit (CPU)
 
@@ -344,23 +401,7 @@ Try to rewrite it in one or two sentences.
 
 **Observe and reflect:** What goes wrong when the ALU and Control Unit are confused? Explain their different responsibilities in one sentence.
 
-**Suggested Answers**
-
-**Part A**
-
-1. Instruction Register.
-
-2. ALU.
-
-3. Data Register.
-
-4. Program Counter.
-
-5. Control Unit.
-
-**Part B**
-
-The ALU performs calculations, while the Control Unit coordinates CPU operations. The Program Counter stores the address of the next instruction to fetch.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 2](#answers-activity-2).
 
 ## 1.3. Main Memory
 
@@ -584,17 +625,7 @@ Cache is much smaller and faster. It keeps copies of data that the CPU is likely
 
 **Observe and reflect:** Which part of the table identifies *where* data is, and which part tells you *what* the data is?
 
-**Suggested Answers**
-
-1. The CPU receives 9.
-
-2. Addresses 00 and 03 both store 12.
-
-3. No. The address remains 01; only its stored value changes.
-
-4. No. Both 00 and 03 contain 12.
-
-**What to learn:** Addresses identify locations, not the actual contents of those locations.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 3](#answers-activity-3).
 
 ## 1.4. Input/Output Subsystem and Storage
 
@@ -778,17 +809,7 @@ Imagine that two students are writing documents on their computers.
 
 **Observe and reflect:** Which change actually keeps the essay for the next day: keeping it open or saving it? Why?
 
-**Suggested Answers**
-
-1. Because unsaved changes may exist only in volatile memory.
-
-2. Because the saved document is stored on a nonvolatile SSD.
-
-3. RAM.
-
-4. Saving a document writes information to nonvolatile storage, while RAM temporarily holds information used by running programs.
-
-Some programs can automatically recover unsaved work, but this should not be taken for granted.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 4](#answers-activity-4).
 
 ## 1.5. Subsystem Interconnection
 
@@ -907,17 +928,7 @@ The memory contains the following information:
 
 **Observe and reflect:** If the address changes, which bus carries the new address, and which bus returns the different value?
 
-**Suggested Answers**
-
-1. Address Bus.
-
-2. Control Bus.
-
-3. Data Bus.
-
-4. The CPU receives 8.
-
-5. The CPU would receive 12 instead of 8 because address 16 contains a different value.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 5](#answers-activity-5).
 
 ## 1.6. Program Execution
 
@@ -1125,27 +1136,7 @@ Now imagine that we change some instructions in our program.
 
 **Observe and reflect:** Which instructions change a value, and which instructions only move or store it?
 
-**Suggested Answers**
-
-**Part A**
-
-1. Register A = 5.
-
-2. Register B = 3.
-
-3. The ALU produces 8.
-
-4. Memory address 20.
-
-5. HALT.
-
-**Part B**
-
-1. The result would become 12 because 5 + 7 = 12.
-
-2. The result would become 2 because 5 - 3 = 2.
-
-3. No. The result would still be stored at memory address 20 because the STORE instruction has not changed.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 6](#answers-activity-6).
 
 ### Optional Interactive Lab: See a CPU Execute Instructions
 
@@ -1189,14 +1180,7 @@ RESULT  DAT 0
 
 **Important limitation:** LMC is an educational model, not a complete picture of a modern processor. Real CPUs have many registers, caches and execution features.
 
-**Suggested Answers**
-
-- After the program is put into memory, boxes 00–07 hold **505, 106, 307, 902, 000, 005, 003, 000**. The first digit is the instruction (5 = LDA, 1 = ADD, 3 = STA, 902 = OUT, 000 = HLT) and the last two digits are the address it uses.
-- Step 1 (LDA FIVE): Program Counter 1, accumulator **5**. Step 2 (ADD THREE): Program Counter 2, accumulator **8** – the only step in which the ALU calculates. Step 3 (STA RESULT): Program Counter 3, accumulator 8, memory box **07 changes from 0 to 8**. Step 4 (OUT): Program Counter 4, the OUTPUT box shows **8**. Step 5 (HLT): the program stops.
-- With `THREE DAT 7` the output is **12**.
-- LDA, STA and OUT only move a value; ADD changes it. Decoding happens inside the control unit every time the simulator reads an instruction number such as 106 and works out that it means "ADD the value at address 06".
-
-*How this lab was checked:* the program and the expected values above were verified with a small LMC emulator (same memory contents, output 8, value 8 in box 07). The controls STEP, RUN and RESET are the ones named in the simulator's help page (https://peterhigginson.co.uk/lmc/help_new.html).
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for the Interactive Lab](#answers-cpu-lab).
 
 ## 1.7. Sensors, Actuators and Microcontrollers
 
@@ -1340,19 +1324,7 @@ A sensor gives these five samples in volts: **0.4, 2.2, 5.7, 6.6, 3.1**.
 
 **Observe and reflect:** Which step loses information, sampling or quantization?
 
-**Suggested Answers**
-
-1. 0, 2, 6, 7, 3.
-
-2. 000, 010, 110, 111, 011.
-
-3. Yes. 1.8 rounds to 2, so it also gets 010. The small difference between 1.8 and 2.2 is lost.
-
-4. 4 bits give 2⁴ = 16 values, so the steps are finer and the rounding error is smaller.
-
-5. Bit rate = samples per second × bits per sample = 10 × 3 = 30 bits per second.
-
-**What to learn:** both steps lose information. Sampling skips what happens between samples, and quantization rounds each value.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 7](#answers-activity-7).
 
 ### Activity 8: Fast Enough? Sampling and Noise
 
@@ -1380,21 +1352,7 @@ A sensor gives these five samples in volts: **0.4, 2.2, 5.7, 6.6, 3.1**.
 
 **Observe and reflect:** Why is there always a trade-off between a steady reading and a fast reaction?
 
-**Suggested Answers**
-
-1. 30 cm/s ÷ 5 readings per second = 6 cm between readings.
-
-2. The robot drives 30 cm between readings. A wall that was 40 cm away at one reading can be only 10 cm away at the next, so the robot may react too late or hit the wall.
-
-3. 34 cm. The robot is not moving, and all the other readings are close to 20 cm.
-
-4. (34 + 19 + 20) ÷ 3 = 73 ÷ 3 ≈ 24.3 cm.
-
-5. (20 + 21 + 34 + 19 + 20) ÷ 5 = 114 ÷ 5 = 22.8 cm.
-
-6. 100 readings at 20 per second take 5 seconds. The average then describes where the wall was over the last 5 seconds, and a robot driving at 30 cm/s covers 150 cm in that time. The reading would be steady but badly out of date.
-
-**What to learn:** averaging a few readings removes noise; averaging too many makes the robot react to the past instead of the present.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 8](#answers-activity-8).
 
 ### 1.7.2. Actuators: How a Machine Acts
 
@@ -1499,13 +1457,7 @@ Then answer: a robot has a camera and wheels but no microcontroller. Can it reac
 
 **Observe and reflect:** What question did you ask yourself for each device?
 
-**Suggested Answers**
-
-1. Labels: 1 S, 2 A, 3 S, 4 A, 5 S, 6 A, 7 S, 8 B (it shows images and also senses touch), 9 A, 10 S.
-
-2. No. The camera produces signals and the wheels can turn, but nothing decides what the wheels should do. A microcontroller (or another processor) running a program is needed in the middle.
-
-**What to learn:** a useful question is "Does it *measure* the world, or *change* it?"
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 9](#answers-activity-9).
 
 ### Activity 10: Drive the Motors
 
@@ -1533,21 +1485,7 @@ Then answer: a robot has a camera and wheels but no microcontroller. Can it reac
 
 **Observe and reflect:** Why does the robot need both PWM (how fast) and the H-bridge (which way)?
 
-**Suggested Answers**
-
-1. 0.5 × 6 V = 3 V.
-
-2. 0.75 × 6 V = 4.5 V.
-
-3. About 64, because 0.25 × 255 ≈ 64.
-
-4. The left wheel turns forward and the right wheel turns backward, so the robot spins on the spot to the right.
-
-5. To the right. The left wheel travels faster than the right wheel, so the robot turns toward the slower side.
-
-6. The pin cannot supply the large current the motor needs. The motor gets too little power to turn, and the attempt can overload the pin and disturb the microcontroller's power supply, which makes it restart. A motor driver must switch the battery current instead.
-
-**What to learn:** PWM controls the amount of power, the H-bridge controls its direction, and the motor driver keeps the large current away from the microcontroller.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 10](#answers-activity-10).
 
 ### 1.7.3. Microcontrollers: The Tiny Computer Inside a Machine
 
@@ -1616,7 +1554,7 @@ It is not a weaker copy. It is designed for a different job: one task, low power
 
 **Check yourself.** (1) Which part of the microcontroller keeps the robot's program when the battery is removed? (2) Which part turns the light sensor's voltage into a number? (3) Which part of the program runs only once?
 
-*Answers:* (1) flash memory; (2) the analog-to-digital converter; (3) setup().
+> ✅ **Check your answers:** [answers to this Check yourself](#answers-check-12).
 
 ### 1.7.4. The Sense–Decide–Act Loop
 
@@ -1706,21 +1644,7 @@ A JUMP changes the program counter, so the CPU goes back to address 00 instead o
 
 **Observe and reflect:** Why does the program need the conversion from time to distance before it can decide?
 
-**Suggested Answers**
-
-1. 343 × 0.002332 = 0.8 m, and 0.8 ÷ 2 = 0.4 m = **40 cm**.
-
-2. 343 × 0.000583 = 0.2 m, and 0.2 ÷ 2 = 0.1 m = **10 cm**.
-
-3. 2900 ÷ 58 = **50 cm** (the exact formula gives about 49.7 cm).
-
-4. The echo time doubles, because the sound has to travel twice the distance.
-
-5. About 30 × 58 = 1740 µs (the exact formula gives about 1749 µs), so roughly 1750 µs.
-
-6. The student forgot to divide by 2. The real distance is 20 cm. The robot would think the wall is 40 cm away, keep driving forward, and turn only when the wall is really about 10 cm away, which may be too late.
-
-**What to learn:** the threshold (20 cm) is a distance, but the sensor gives a time, so the units must be converted first.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 11](#answers-activity-11).
 
 ### Activity 12: Be the Microcontroller
 
@@ -1750,23 +1674,7 @@ A JUMP changes the program counter, so the CPU goes back to address 00 instead o
 
 **Observe and reflect:** Which addresses belong to sensing, deciding and acting?
 
-**Suggested Answers**
-
-1. Loop 1: 4660 ÷ 58 = 80, more than 20, forward. Loop 2: 3500 ÷ 58 = 60, forward. Loop 3: 1749 ÷ 58 = 30, forward. Loop 4: 1166 ÷ 58 = 20, not more than 20, stop and turn.
-
-2. Loop 1: 00, 01, 02, 03, 06, 07. Loop 4: 00, 01, 02, 03, 04, 05.
-
-3. 2332 ÷ 58 = 40, more than 20, so it drives forward.
-
-4. Loop 3: B = 30 is not more than 30, so the robot turns.
-
-5. B = 0 is not more than 20, so the robot turns in every loop and never drives forward. It is safe but useless.
-
-6. The program counter moves past the last instruction and nothing sends it back to 00, so the robot stops checking after one pass and no longer reacts.
-
-7. No. If B is *more* than 20, the JUMP skips the turn and goes forward. The robot turns when B is 20 or less.
-
-**What to learn:** addresses 00–01 sense, 02–03 decide, 04 and 06 act, and 05 and 07 repeat the loop.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 12](#answers-activity-12).
 
 ### Activity 13: Design Challenge: A Parking Sensor
 
@@ -1788,19 +1696,7 @@ A JUMP changes the program counter, so the CPU goes back to address 00 instead o
 
 **Observe and reflect:** Which parts of your design are the same as the obstacle-avoiding robot, and which are different?
 
-**Suggested Answers**
-
-1. Sensor: an ultrasonic sensor measures the distance behind the car. Computing part: a microcontroller converts the echo time to a distance and applies the rules. Actuator: a buzzer makes the beeps.
-
-2. IF distance > 100 cm THEN silent. IF distance is from 30 to 100 cm THEN slow beeps. IF distance < 30 cm THEN fast beeps.
-
-3. 100 cm × 58 = 5800 µs; 30 cm × 58 = 1740 µs.
-
-4. setup(): make the buzzer pin an output and prepare the sensor pins. loop(): measure the echo time, divide by 58, choose the zone with the rules, beep at the matching speed, and repeat.
-
-5. The beeping would keep switching between slow and fast, which is confusing. Average a few readings, or use two limits (enter "fast" below 30 cm, leave it only above 35 cm), as in the hysteresis idea of the Behaviorist AI chapter.
-
-**What to learn:** the same pattern (sensor → number → rule → actuator, repeated) solves many different problems. Only the sensor, the rules and the actuator change.
+> ✅ **Check your answers:** when you have finished, compare your work with the [suggested answers for Activity 13](#answers-activity-13).
 
 ### Section 1.7 Summary
 
@@ -1937,105 +1833,352 @@ The following terms summarize the main concepts introduced in this chapter.
 
 ## Quiz
 
-*Try the questions without looking back. Then check your answer under each question.*
+*Try the questions without looking back. Then check your answers in the [Answer Key](#quiz-answers) at the end of the chapter.*
 
 ### Multiple Choice Questions
 
 **1. Which list shows the three broad categories of subsystems in a computer?**
 
-A. Keyboard, mouse and monitor
-
-B. CPU, Main Memory and the Input/Output subsystem
-
-C. RAM, ROM and cache
-
-D. Data Bus, Address Bus and Control Bus
-
-**Answer: B**
+- **A.** Keyboard, mouse and monitor
+- **B.** CPU, Main Memory and the Input/Output subsystem
+- **C.** RAM, ROM and cache
+- **D.** Data Bus, Address Bus and Control Bus
 
 **2. Which logic operation gives 1 only when both inputs are 1?**
 
-A. NOT
-
-B. OR
-
-C. AND
-
-D. XOR
-
-**Answer: C**
+- **A.** NOT
+- **B.** OR
+- **C.** AND
+- **D.** XOR
 
 **3. In the fetch stage, where is the fetched instruction placed?**
 
-A. Program Counter
-
-B. Instruction Register
-
-C. Cache
-
-D. Data Bus
-
-**Answer: B**
+- **A.** Program Counter
+- **B.** Instruction Register
+- **C.** Cache
+- **D.** Data Bus
 
 **4. During the decode stage, which component interprets the instruction and decides which operation is required?**
 
-A. ALU
-
-B. Control Unit
-
-C. Program Counter
-
-D. Address Bus
-
-**Answer: B**
+- **A.** ALU
+- **B.** Control Unit
+- **C.** Program Counter
+- **D.** Address Bus
 
 **5. Which order goes from the fastest and smallest memory to the slower and larger one?**
 
-A. RAM → Cache → Registers
-
-B. Cache → Registers → RAM
-
-C. Registers → Cache → RAM
-
-D. Registers → RAM → Cache
-
-**Answer: C**
+- **A.** RAM → Cache → Registers
+- **B.** Cache → Registers → RAM
+- **C.** Registers → Cache → RAM
+- **D.** Registers → RAM → Cache
 
 **6. Which part of a microcontroller keeps the robot’s program when the battery is removed?**
 
-A. RAM
-
-B. Flash memory
-
-C. Analog-to-digital converter
-
-D. Timers
-
-**Answer: B**
+- **A.** RAM
+- **B.** Flash memory
+- **C.** Analog-to-digital converter
+- **D.** Timers
 
 ### True or False Questions
 
 **1. The ALU performs arithmetic, logic and shift operations on data.**
 
-**Answer: True**
-
 **2. The Program Counter stores the instruction that the CPU is currently processing.**
-
-**Answer: False**
 
 **3. Eight bits together form one byte.**
 
-**Answer: True**
-
 **4. ROM is normally volatile, so it loses its contents when the power is turned off.**
-
-**Answer: False**
 
 **5. A solid-state drive (SSD) stores information magnetically on spinning disks.**
 
-**Answer: False**
-
 **6. The Address Bus carries information about the memory location the CPU wants to access.**
 
-**Answer: True**
+---
 
+## Answer Key
+
+*Use this key only after you have tried the activity or question yourself. Each heading links back to the place where the task appears.*
+
+### Activity answers
+
+<a id="answers-activity-1"></a>
+
+#### Activity 1: Follow a Keyboard Input
+
+1. Keyboard.
+
+2. RAM.
+
+3. Monitor.
+
+4. The computer could still receive and process information, but the user would not be able to see the result on the screen. Other output methods might still work if available.
+
+[↩ Back to Activity 1](#activity-1-follow-a-keyboard-input)
+
+<a id="answers-activity-2"></a>
+
+#### Activity 2: Understanding CPU Components
+
+**Part A**
+
+1. Instruction Register.
+
+2. ALU.
+
+3. Data Register.
+
+4. Program Counter.
+
+5. Control Unit.
+
+**Part B**
+
+The ALU performs calculations, while the Control Unit coordinates CPU operations. The Program Counter stores the address of the next instruction to fetch.
+
+[↩ Back to Activity 2](#activity-2-understanding-cpu-components)
+
+<a id="answers-activity-3"></a>
+
+#### Activity 3: Memory Detective
+
+1. The CPU receives 9.
+
+2. Addresses 00 and 03 both store 12.
+
+3. No. The address remains 01; only its stored value changes.
+
+4. No. Both 00 and 03 contain 12.
+
+**What to learn:** Addresses identify locations, not the actual contents of those locations.
+
+[↩ Back to Activity 3](#activity-3-memory-detective)
+
+<a id="answers-activity-4"></a>
+
+#### Activity 4: What Happens When Power Is Off?
+
+1. Because unsaved changes may exist only in volatile memory.
+
+2. Because the saved document is stored on a nonvolatile SSD.
+
+3. RAM.
+
+4. Saving a document writes information to nonvolatile storage, while RAM temporarily holds information used by running programs.
+
+Some programs can automatically recover unsaved work, but this should not be taken for granted.
+
+[↩ Back to Activity 4](#activity-4-what-happens-when-power-is-off)
+
+<a id="answers-activity-5"></a>
+
+#### Activity 5: Follow the Data
+
+1. Address Bus.
+
+2. Control Bus.
+
+3. Data Bus.
+
+4. The CPU receives 8.
+
+5. The CPU would receive 12 instead of 8 because address 16 contains a different value.
+
+[↩ Back to Activity 5](#activity-5-follow-the-data)
+
+<a id="answers-activity-6"></a>
+
+#### Activity 6: Be the CPU
+
+**Part A**
+
+1. Register A = 5.
+
+2. Register B = 3.
+
+3. The ALU produces 8.
+
+4. Memory address 20.
+
+5. HALT.
+
+**Part B**
+
+1. The result would become 12 because 5 + 7 = 12.
+
+2. The result would become 2 because 5 - 3 = 2.
+
+3. No. The result would still be stored at memory address 20 because the STORE instruction has not changed.
+
+[↩ Back to Activity 6](#activity-6-be-the-cpu)
+
+<a id="answers-cpu-lab"></a>
+
+#### Optional Interactive Lab: See a CPU Execute Instructions
+
+- After the program is put into memory, boxes 00–07 hold **505, 106, 307, 902, 000, 005, 003, 000**. The first digit is the instruction (5 = LDA, 1 = ADD, 3 = STA, 902 = OUT, 000 = HLT) and the last two digits are the address it uses.
+- Step 1 (LDA FIVE): Program Counter 1, accumulator **5**. Step 2 (ADD THREE): Program Counter 2, accumulator **8** – the only step in which the ALU calculates. Step 3 (STA RESULT): Program Counter 3, accumulator 8, memory box **07 changes from 0 to 8**. Step 4 (OUT): Program Counter 4, the OUTPUT box shows **8**. Step 5 (HLT): the program stops.
+- With `THREE DAT 7` the output is **12**.
+- LDA, STA and OUT only move a value; ADD changes it. Decoding happens inside the control unit every time the simulator reads an instruction number such as 106 and works out that it means "ADD the value at address 06".
+
+*How this lab was checked:* the program and the expected values above were verified with a small LMC emulator (same memory contents, output 8, value 8 in box 07). The controls STEP, RUN and RESET are the ones named in the simulator's help page (https://peterhigginson.co.uk/lmc/help_new.html).
+
+[↩ Back to Optional Interactive Lab: See a CPU Execute Instructions](#optional-interactive-lab-see-a-cpu-execute-instructions)
+
+<a id="answers-activity-7"></a>
+
+#### Activity 7: Round It Like a Converter
+
+1. 0, 2, 6, 7, 3.
+
+2. 000, 010, 110, 111, 011.
+
+3. Yes. 1.8 rounds to 2, so it also gets 010. The small difference between 1.8 and 2.2 is lost.
+
+4. 4 bits give 2⁴ = 16 values, so the steps are finer and the rounding error is smaller.
+
+5. Bit rate = samples per second × bits per sample = 10 × 3 = 30 bits per second.
+
+**What to learn:** both steps lose information. Sampling skips what happens between samples, and quantization rounds each value.
+
+[↩ Back to Activity 7](#activity-7-round-it-like-a-converter)
+
+<a id="answers-activity-8"></a>
+
+#### Activity 8: Fast Enough? Sampling and Noise
+
+1. 30 cm/s ÷ 5 readings per second = 6 cm between readings.
+
+2. The robot drives 30 cm between readings. A wall that was 40 cm away at one reading can be only 10 cm away at the next, so the robot may react too late or hit the wall.
+
+3. 34 cm. The robot is not moving, and all the other readings are close to 20 cm.
+
+4. (34 + 19 + 20) ÷ 3 = 73 ÷ 3 ≈ 24.3 cm.
+
+5. (20 + 21 + 34 + 19 + 20) ÷ 5 = 114 ÷ 5 = 22.8 cm.
+
+6. 100 readings at 20 per second take 5 seconds. The average then describes where the wall was over the last 5 seconds, and a robot driving at 30 cm/s covers 150 cm in that time. The reading would be steady but badly out of date.
+
+**What to learn:** averaging a few readings removes noise; averaging too many makes the robot react to the past instead of the present.
+
+[↩ Back to Activity 8](#activity-8-fast-enough-sampling-and-noise)
+
+<a id="answers-activity-9"></a>
+
+#### Activity 9: Sensor or Actuator?
+
+1. Labels: 1 S, 2 A, 3 S, 4 A, 5 S, 6 A, 7 S, 8 B (it shows images and also senses touch), 9 A, 10 S.
+
+2. No. The camera produces signals and the wheels can turn, but nothing decides what the wheels should do. A microcontroller (or another processor) running a program is needed in the middle.
+
+**What to learn:** a useful question is "Does it *measure* the world, or *change* it?"
+
+[↩ Back to Activity 9](#activity-9-sensor-or-actuator)
+
+<a id="answers-activity-10"></a>
+
+#### Activity 10: Drive the Motors
+
+1. 0.5 × 6 V = 3 V.
+
+2. 0.75 × 6 V = 4.5 V.
+
+3. About 64, because 0.25 × 255 ≈ 64.
+
+4. The left wheel turns forward and the right wheel turns backward, so the robot spins on the spot to the right.
+
+5. To the right. The left wheel travels faster than the right wheel, so the robot turns toward the slower side.
+
+6. The pin cannot supply the large current the motor needs. The motor gets too little power to turn, and the attempt can overload the pin and disturb the microcontroller's power supply, which makes it restart. A motor driver must switch the battery current instead.
+
+**What to learn:** PWM controls the amount of power, the H-bridge controls its direction, and the motor driver keeps the large current away from the microcontroller.
+
+[↩ Back to Activity 10](#activity-10-drive-the-motors)
+
+<a id="answers-check-12"></a>
+
+#### Check yourself – 1.7.3. Microcontrollers: The Tiny Computer Inside a Machine
+
+(1) flash memory; (2) the analog-to-digital converter; (3) setup().
+
+[↩ Back to 1.7.3. Microcontrollers: The Tiny Computer Inside a Machine](#173-microcontrollers-the-tiny-computer-inside-a-machine)
+
+<a id="answers-activity-11"></a>
+
+#### Activity 11: From Echo to Distance
+
+1. 343 × 0.002332 = 0.8 m, and 0.8 ÷ 2 = 0.4 m = **40 cm**.
+
+2. 343 × 0.000583 = 0.2 m, and 0.2 ÷ 2 = 0.1 m = **10 cm**.
+
+3. 2900 ÷ 58 = **50 cm** (the exact formula gives about 49.7 cm).
+
+4. The echo time doubles, because the sound has to travel twice the distance.
+
+5. About 30 × 58 = 1740 µs (the exact formula gives about 1749 µs), so roughly 1750 µs.
+
+6. The student forgot to divide by 2. The real distance is 20 cm. The robot would think the wall is 40 cm away, keep driving forward, and turn only when the wall is really about 10 cm away, which may be too late.
+
+**What to learn:** the threshold (20 cm) is a distance, but the sensor gives a time, so the units must be converted first.
+
+[↩ Back to Activity 11](#activity-11-from-echo-to-distance)
+
+<a id="answers-activity-12"></a>
+
+#### Activity 12: Be the Microcontroller
+
+1. Loop 1: 4660 ÷ 58 = 80, more than 20, forward. Loop 2: 3500 ÷ 58 = 60, forward. Loop 3: 1749 ÷ 58 = 30, forward. Loop 4: 1166 ÷ 58 = 20, not more than 20, stop and turn.
+
+2. Loop 1: 00, 01, 02, 03, 06, 07. Loop 4: 00, 01, 02, 03, 04, 05.
+
+3. 2332 ÷ 58 = 40, more than 20, so it drives forward.
+
+4. Loop 3: B = 30 is not more than 30, so the robot turns.
+
+5. B = 0 is not more than 20, so the robot turns in every loop and never drives forward. It is safe but useless.
+
+6. The program counter moves past the last instruction and nothing sends it back to 00, so the robot stops checking after one pass and no longer reacts.
+
+7. No. If B is *more* than 20, the JUMP skips the turn and goes forward. The robot turns when B is 20 or less.
+
+**What to learn:** addresses 00–01 sense, 02–03 decide, 04 and 06 act, and 05 and 07 repeat the loop.
+
+[↩ Back to Activity 12](#activity-12-be-the-microcontroller)
+
+<a id="answers-activity-13"></a>
+
+#### Activity 13: Design Challenge: A Parking Sensor
+
+1. Sensor: an ultrasonic sensor measures the distance behind the car. Computing part: a microcontroller converts the echo time to a distance and applies the rules. Actuator: a buzzer makes the beeps.
+
+2. IF distance > 100 cm THEN silent. IF distance is from 30 to 100 cm THEN slow beeps. IF distance < 30 cm THEN fast beeps.
+
+3. 100 cm × 58 = 5800 µs; 30 cm × 58 = 1740 µs.
+
+4. setup(): make the buzzer pin an output and prepare the sensor pins. loop(): measure the echo time, divide by 58, choose the zone with the rules, beep at the matching speed, and repeat.
+
+5. The beeping would keep switching between slow and fast, which is confusing. Average a few readings, or use two limits (enter "fast" below 30 cm, leave it only above 35 cm), as in the hysteresis idea of the Behaviorist AI chapter.
+
+**What to learn:** the same pattern (sensor → number → rule → actuator, repeated) solves many different problems. Only the sensor, the rules and the actuator change.
+
+[↩ Back to Activity 13](#activity-13-design-challenge-a-parking-sensor)
+
+### Quiz answers
+
+| Part | Question | Answer | Why |
+|---|---|---|---|
+| Multiple choice | 1. Which list shows the three broad categories of subsystems in a computer? | **B** |  |
+| Multiple choice | 2. Which logic operation gives 1 only when both inputs are 1? | **C** |  |
+| Multiple choice | 3. In the fetch stage, where is the fetched instruction placed? | **B** |  |
+| Multiple choice | 4. During the decode stage, which component interprets the instruction and decides which operation is required? | **B** |  |
+| Multiple choice | 5. Which order goes from the fastest and smallest memory to the slower and larger one? | **C** |  |
+| Multiple choice | 6. Which part of a microcontroller keeps the robot’s program when the battery is removed? | **B** |  |
+| True / False | 1. The ALU performs arithmetic, logic and shift operations on data. | **True** |  |
+| True / False | 2. The Program Counter stores the instruction that the CPU is currently processing. | **False** | The Program Counter holds the *address of the next* instruction; the instruction being processed is in the Instruction Register. |
+| True / False | 3. Eight bits together form one byte. | **True** |  |
+| True / False | 4. ROM is normally volatile, so it loses its contents when the power is turned off. | **False** | ROM is nonvolatile and keeps its contents without power; RAM is the memory that is normally volatile. |
+| True / False | 5. A solid-state drive (SSD) stores information magnetically on spinning disks. | **False** | An SSD stores data in flash memory and has no moving parts; an HDD uses spinning magnetic disks. |
+| True / False | 6. The Address Bus carries information about the memory location the CPU wants to access. | **True** |  |
+
+---
+
+[🏠 Start here](00-Start-Here.md) · [Chapter 2: Networks →](02-Networks.md)
