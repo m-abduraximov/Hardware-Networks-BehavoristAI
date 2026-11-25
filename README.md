@@ -63,6 +63,7 @@ Every chapter starts with a linked contents list and ends with a glossary, refer
 │   └── Test-Bank.md           ← one test bank for all three chapters
 ├── 05-Slides/README.md        ← where the PPT deck is and what it covers
 ├── 06-Videos/README.md        ← where the four video tutorials are and what they cover
+├── tools/verify_content.py    ← re-runs the final checks (links, code, answers)
 └── assets/                    ← all images used by the Markdown files
     ├── branding/
     ├── ch1-hardware/          ← fig-1-01 … fig-1-39
@@ -85,6 +86,7 @@ Every chapter starts with a linked contents list and ends with a glossary, refer
 - **Optional CPU simulator lab (Chapter 1, Section 1.6):** needs a web browser and https://peterhigginson.co.uk/lmc/. The full program, steps and expected results are in the chapter; a paper version needs no Internet.
 - **Network Lab (Chapter 2):** uses the built-in commands `ipconfig`/`ip addr`, `nslookup`, `ping` and `tracert`/`traceroute` in a terminal. The commands only read information. Expected results are in the chapter's answer key.
 - **Python programs (Chapter 3):** copy a program into a file such as `robot.py` and run `python3 robot.py`, or paste it into any online Python editor. Each program is followed by its expected output, so the activity also works on paper.
+- **Checking the content:** `python3 tools/verify_content.py` checks every link, image and anchor, runs the Chapter 3 Python programs against their expected output, re-runs the CPU-lab program and checks that every Test Bank question has one answer.
 - **Slides and videos:** the PPT deck and the four MP4 tutorials are submitted through the course's Learning Center under their own assignments and are not stored in this repository because of their size. See [05-Slides/README.md](05-Slides/README.md) and [06-Videos/README.md](06-Videos/README.md).
 
 ## 6. Version information

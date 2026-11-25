@@ -2020,7 +2020,7 @@ Some programs can automatically recover unsaved work, but this should not be tak
 - With `THREE DAT 7` the output is **12**.
 - LDA, STA and OUT only move a value; ADD changes it. Decoding happens inside the control unit every time the simulator reads an instruction number such as 106 and works out that it means "ADD the value at address 06".
 
-*How this lab was checked:* the program and the expected values above were verified with a small LMC emulator (same memory contents, output 8, value 8 in box 07). The controls STEP, RUN and RESET are the ones named in the simulator's help page (https://peterhigginson.co.uk/lmc/help_new.html).
+*How this lab was checked:* the program and the expected values above were verified with a small LMC emulator in [`tools/verify_content.py`](../tools/verify_content.py) (same memory contents, output 8, value 8 in box 07). The controls STEP, RUN and RESET are the ones named in the simulator's help page (https://peterhigginson.co.uk/lmc/help_new.html).
 
 [↩ Back to Optional Interactive Lab: See a CPU Execute Instructions](#optional-interactive-lab-see-a-cpu-execute-instructions)
 
