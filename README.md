@@ -3,7 +3,7 @@
 
 <p align="center"><img src="assets/branding/deepthink-cover.jpg" alt="DeepThink logo and mascot" width="360"></p>
 
-> **Final version: v3.0 – Stage 3 Final Markdown Content (28 November 2026).**
+> **Final version: v3.0 – Stage 3 Final Markdown Content (25 November 2026).**
 > Start reading at **[03-Study-guide/00-Start-Here.md](03-Study-guide/00-Start-Here.md)**.
 
 ## 1. Team
@@ -95,7 +95,7 @@ Every chapter starts with a linked contents list and ends with a glossary, refer
 |---|---|---|
 | v1.0 (Stage 1–2) | Oct–Nov 2026 | Rough plan, first chapter drafts in Markdown, Study Guide V1.0 and Test Bank V1.0 (Word/PDF). |
 | v2.0 (Stage 2) | 7 Nov 2026 | Chapters rewritten and expanded; Networks chapter and Networks questions added. |
-| **v3.0 (Stage 3, final)** | **28 Nov 2026** | Markdown brought in line with Study Guide V1.0 and all reviewed corrections; 68 figures added to `assets/`; answers moved to answer keys; linked contents; Hardware chapter reformatted as real Markdown; one Test Bank (Q1–Q97) with marking guides; new Network Lab and a tested CPU simulator lab; draft notes, placeholders and duplicate files removed. Details: the Final Revision Summary in the Stage 3 submission report and the commit history of branch `stage3-final`. |
+| **v3.0 (Stage 3, final)** | **25 Nov 2026** | Markdown brought in line with Study Guide V1.0 and all reviewed corrections; 68 figures added to `assets/`; answers moved to answer keys; linked contents; Hardware chapter reformatted as real Markdown; one Test Bank (Q1–Q97) with marking guides; new Network Lab and a tested CPU simulator lab; draft notes, placeholders and duplicate files removed. Details: the Final Revision Summary in the Stage 3 submission report and the commit history of branch `stage3-final`. |
 
 The submitted Stage 3 snapshot is identified by the commit ID given in the submission report. Later commits do not change the submitted version.
 

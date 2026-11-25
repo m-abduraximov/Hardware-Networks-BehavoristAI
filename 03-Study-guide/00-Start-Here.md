@@ -4,7 +4,7 @@
 
 ![DeepThink logo and mascot](../assets/branding/deepthink-cover.jpg)
 
-*A beginner's guide with Rover, the obstacle-avoiding robot · Team DeepThink · Final Markdown content, Stage 3 (version 3.0, 28 November 2026)*
+*A beginner's guide with Rover, the obstacle-avoiding robot · Team DeepThink · Final Markdown content, Stage 3 (version 3.0, 25 November 2026)*
 
 ## Module overview
 

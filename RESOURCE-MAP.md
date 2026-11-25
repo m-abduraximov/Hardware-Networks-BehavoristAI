@@ -2,7 +2,7 @@
 
 # Resource map – where each topic is taught and tested
 
-*Team DeepThink · updated for the Stage 3 final Markdown content (v3.0, 28 November 2026)*
+*Team DeepThink · updated for the Stage 3 final Markdown content (v3.0, 25 November 2026)*
 
 The Markdown chapters in `03-Study-guide/` are the shared foundation. The table shows, for every major topic, where it is used in the Study Guide, the Test Bank, the PPT slides and the video tutorials. **—** means that the topic was deliberately not selected for that medium (it is covered in the guide and test bank instead).
 
