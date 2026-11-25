@@ -4,7 +4,7 @@
 
 ## Before You Start
 
-#### What you will learn
+### What you will learn
 
 - What a network is, and the main types of networks.
 - How data travels through cables, glass fibre and the air.
@@ -13,20 +13,20 @@
 - How the Internet works: protocols, IP addresses, domains, routing and servers.
 - The five basic ideas of network security.
 
-#### What you need to know already
+### What you need to know already
 
 Nothing special. You only need to know that computers, phones and robots are electronic devices. Every new word is explained before it is used, and the glossary at the end repeats the key terms.
 
-#### How to use this chapter
+### How to use this chapter
 
 | **Step** | **What to do** | **Why** |
 |---|---|---|
 | 1. Read | Read one short section. | Learn one idea at a time. |
 | 2. Look | Study the picture next to it. | Pictures make invisible processes visible. |
 | 3. Check | Answer the Quick check without looking back. | Use the idea instead of only reading it. |
-| 4. Compare | Compare your answer with the Answer line. | Find what you still need to review. |
+| 4. Compare | Compare your answer with the Answer Key at the end of the chapter. | Find what you still need to review. |
 
-**Mission question – make a prediction**✏
+**✏ Mission question – make a prediction**
 
 You send a message from your phone to a friend in another city, and it arrives in one second. **How does it find the right phone?** Write your guess in two or three sentences. Keep it: you will check it at the end of the chapter.
 
@@ -164,7 +164,7 @@ The Internet really works with the simpler **TCP/IP model**. Its four layers com
 
 🧠 **Memory trick for OSI (from 1 to 7)**
 
-**P** lease **D** o **N** ot **T** hrow **S** ausage **P** izza **A** way = Physical, Data Link, Network, Transport, Session, Presentation, Application.
+**P**lease **D**o **N**ot **T**hrow **S**ausage **P**izza **A**way = Physical, Data Link, Network, Transport, Session, Presentation, Application.
 
 **✔ Quick check 4 – Layers**
 
@@ -328,7 +328,7 @@ A **server** is a computer (often more powerful than a normal PC and running all
 | Game server | Keeps multiplayer games in sync in real time. | Online game servers |
 | Backup server | Stores copies of data for recovery. | Daily or weekly backups |
 
-**Putting it together**🔗
+**🔗 Putting it together**
 
 **Domain** = the name (example.com) · **DNS** = the phone book that finds the IP · **Routing** = the GPS that finds the path · **Server** = the house where the website lives.
 
@@ -337,6 +337,41 @@ A **server** is a computer (often more powerful than a normal PC and running all
 Which server type is used when: (a) you open a news website; (b) your exam marks are stored; (c) you watch a live stream; (d) you play an online match; (e) files are restored after a computer breaks?
 
 **Answer:** (a) web server, (b) database server, (c) streaming server, (d) game server, (e) backup server.
+
+### Network Lab: Look at a Real Network from Your Own Computer
+
+**Goal:** See IP addresses, DNS, packets and routing on a real network instead of only on paper.
+
+**Preparation:** A Windows, macOS or Linux computer connected to the Internet (about 20 minutes). You can use any website that opens on your network instead of www.baidu.com. You type each command in a terminal: on Windows open **Command Prompt** (press Win + R, type `cmd`, press Enter); on macOS or Linux open **Terminal**. The commands only *read* information; they do not change any settings. If the computer lab blocks some commands, use the expected results in the answer key as a paper version.
+
+**Task**
+
+| Step | Windows | macOS / Linux | What to look for |
+|---|---|---|---|
+| 1. Your own address | `ipconfig` | `ipconfig getifaddr en0` (macOS) or `ip addr` (Linux) | Your IPv4 address and the **default gateway** (your router). |
+| 2. Ask DNS | `nslookup www.baidu.com` | `nslookup www.baidu.com` | The IP address that DNS returns for the name. |
+| 3. Test the path | `ping -n 4 www.baidu.com` | `ping -c 4 www.baidu.com` | Whether replies come back, and the **time** in milliseconds. |
+| 4. Count the hops | `tracert www.baidu.com` | `traceroute www.baidu.com` (on Linux you may first need to install `traceroute`) | One line for each router (hop) on the way. |
+
+1. **Predict first:** Will your IPv4 address be private or public? About how many routers do you think lie between you and the server?
+2. Run the four commands and write down: your IPv4 address, the default gateway, the IP address of the website, the average ping time and the number of hops.
+3. Is your IPv4 address in a private range (10.x.x.x, 172.16–172.31.x.x or 192.168.x.x)? What does that tell you about the router?
+4. Which command uses **ICMP**, and which one uses **DNS**?
+5. Use your ping time to calculate how far Rover (0.3 m/s) would drive while one message travels to the server and back.
+
+**Observe and reflect:** Which step of Rover's message (Section 2.5) did each command show you?
+
+**Suggested Answers**
+
+Your numbers will be different from anyone else's, so the answers describe what you should see.
+
+- Step 1: on a home or school network the IPv4 address is almost always **private** (for example 192.168.1.23 or 10.12.4.57), and the default gateway is usually an address in the same range ending in .1 or .254 – that is the home router.
+- Step 2: `nslookup` prints the DNS server that answered and then the IP address of the website. The name was translated into an IP address before any web page was requested.
+- Step 3: `ping` sends ICMP echo requests and prints one reply per packet with a time such as 20–200 ms. If the firewall blocks ICMP, you may see "Request timed out" even though web pages still work – a firewall rule in action (Section 2.4.1).
+- Step 4: `tracert`/`traceroute` usually shows about 8–20 hops; the first hop is your default gateway. Lines with `* * *` are routers that do not answer, not broken links.
+- A private address means the router translates it to one public address for the whole home or school network, so many devices can share the same Internet connection.
+- `ping` and `tracert` use ICMP; `nslookup` uses DNS.
+- Example: a ping time of 40 ms = 0.04 s, so Rover drives 0.3 m/s × 0.04 s = 0.012 m = 1.2 cm. With a slow connection of 1000 ms it would drive 30 cm – the same reason why the safety decision must be made on the robot itself (Chapter 3, Section 3.5).
 
 ## 2.4. Security
 
@@ -418,7 +453,7 @@ Networking connects devices, systems and people. Without it there would be no In
 
 The sensor saw the wall, my behaviour rules decided to turn, and the network only carried the news. Three different jobs!
 
-**Back to the mission question**✏
+**✏ Back to the mission question**
 
 Look at the prediction you wrote at the start. What was correct? Add the missing words: **DNS, IP address, packets, TCP, routers.**
 
@@ -454,6 +489,13 @@ Look at the prediction you wrote at the start. What was correct? Add the missing
 | Switch | Device that connects devices inside one LAN. |
 
 ## References
+
+**Textbooks used for this chapter**
+
+- Forouzan, B. A. (2018). *Foundations of Computer Science* (4th ed.). Cengage Learning. Chapter 6, "Computer Networks and Internet" (pp. 133–183): overview, application, transport, network, data-link and physical layers, transmission media.
+- Brookshear, J. G. (2011). *Computer Science: An Overview* (11th ed.). Addison-Wesley. Chapter 4, "Networking and the Internet" (pp. 139–180): network fundamentals, the Internet, the World Wide Web, Internet protocols, security.
+
+**Standards and online references**
 
 1. RFC 9293 – Transmission Control Protocol (TCP), IETF, 2022.
 2. RFC 1034 – Domain Names: Concepts and Facilities, IETF, 1987.

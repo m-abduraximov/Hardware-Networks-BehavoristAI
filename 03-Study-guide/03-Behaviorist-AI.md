@@ -76,12 +76,12 @@ You need: pen and paper (or a notes app). A computer with Python 3 is useful for
 | Example | A fully worked example. Follow every step. |
 | Activity | A hands-on task with Goal, Preparation, Task, Observation, Reflection and Feedback. |
 | Misconception alert | A common wrong idea, and the correct version. |
-| Check yourself | Quick questions. Answers are in the Answer key at the end of each unit. |
+| Check yourself | Quick questions. Answers are in the Answer Key at the end of the chapter. |
 | Key idea | The one thing to remember from a section. |
 
 ## 3.1. Behaviorism: Learning from Behavior
 
-**Question for this unit:** *If you cannot see inside a mind, what can you still study?*
+**Question for this section:** *If you cannot see inside a mind, what can you still study?*
 
 ### 3.1.1. Think first
 
@@ -216,7 +216,7 @@ Also remember that behaviorism has limits in psychology: in 1959 the linguist No
 
 ## 3.2. Reactive Agents and the Sense-Act Loop
 
-**Question for this unit:** *Can a robot behave sensibly without any memory, map or plan?*
+**Question for this section:** *Can a robot behave sensibly without any memory, map or plan?*
 
 ### 3.2.1. Think first
 
@@ -252,6 +252,8 @@ A thermostat does not remember yesterday's temperature and does not plan tomorro
 **Reactive agents are useful because** they are simple to design, they react quickly, they are easy to test (each rule can be tested alone), and they work well in **dynamic environments**, meaning environments that change while the agent is working (people walk by, doors open, chairs move).
 
 ### 3.2.4. The sense-act loop
+
+**Same idea, two names.** Chapter 1 (Section 1.7.4) and Video 04 call this cycle the **sense–decide–act loop**. Many AI books shorten it to the **sense–act loop**, because in a reactive agent the "decide" step is only a quick rule, not a plan. Both names describe the same repeating cycle.
 
 A reactive agent repeats the same cycle many times per second:
 
@@ -398,7 +400,7 @@ for n in (10, 20, 100):
 print("Centre square visited after 100 steps?", (3, 3) in run(100))
 ```
 
-*Syntax help.* defines a reusable block of instructions called a function. repeats the indented lines times. chooses between two actions. gives the remainder of a division, so makes the heading wrap from 3 (west) back to 0 (north). A **set** () stores each square once. The set is only used to count squares for us; the robot's rule never looks at it.`def run(steps):``for _ in range(steps):``steps``if... else...``%``% 4``visited``visited`
+*Syntax help.* `def run(steps):` defines a reusable block of instructions called a function. `for _ in range(steps):` repeats the indented lines `steps` times. `if ... else ...` chooses between two actions. `%` gives the remainder of a division, so `% 4` makes the heading wrap from 3 (west) back to 0 (north). A **set** (`visited`) stores each square once. The `visited` set is only used to count squares for us; the robot's rule never looks at it.
 
 **Expected output.**
 
@@ -440,7 +442,7 @@ Centre square visited after 100 steps? False
 
 ## 3.3. Behavior Rules and Priorities
 
-**Question for this unit:** *What should a robot do when two of its rules want different things at the same moment?*
+**Question for this section:** *What should a robot do when two of its rules want different things at the same moment?*
 
 ### 3.3.1. Think first
 
@@ -454,7 +456,7 @@ A **behavior** is a specific way in which an agent responds to a situation (for 
 IF condition THEN action
 ```
 
-A **condition** is something the controller can check with a yes/no answer using sensor data, such as. An **action** is something the actuators can do, such as.`distance < 20 cm``stop and turn right`
+A **condition** is something the controller can check with a yes/no answer using sensor data, such as `distance < 20 cm`. An **action** is something the actuators can do, such as `stop and turn right`.
 
 | **Condition** | **Action** |
 |---|---|
@@ -501,7 +503,7 @@ At moment 3 the robot “wants” to reach the light, but **Avoid wins** because
 
 ### 3.3.5. The same idea as a program
 
-Below is the same robot written in Python. The order of the statements **is** the priority order: Python checks them from top to bottom and stops at the first one that is true.`if``return`
+Below is the same robot written in Python. The order of the `if` statements **is** the priority order: Python checks them from top to bottom and `return` stops at the first one that is true.
 
 ```python
 def choose_behavior(distance_cm, light_ahead):
@@ -522,7 +524,7 @@ for name, dist, light in situations:
     print(name, dist, "cm, light:", light, "->", choose_behavior(dist, light))
 ```
 
-*Syntax help.* is a yes/no test. is either or. ends the function and hands back a result. A list of items in square brackets, such as, is walked through by the loop one item at a time.`distance_cm`` < 20``light_ahead``True``False``return``situations``for`
+*Syntax help.* `distance_cm < 20` is a yes/no test. `light_ahead` is either `True` or `False`. `return` ends the function and hands back a result. A list of items in square brackets, such as `situations`, is walked through by the `for` loop one item at a time.
 
 **Expected output.**
 
@@ -541,7 +543,7 @@ Is “Avoid obstacles” always the most important behavior? Not always. A robot
 
 ### 3.3.7. A common problem: flickering at a threshold
 
-A rule such as has a sharp edge. Suppose the sensor readings (which are always a little noisy) hover around the limit: 22, 21, 19, 21, 19, 22 cm. With a single threshold the robot switches between *Wander* and *Avoid* again and again, which makes it jerk back and forth.`distance < 20 cm`
+A rule such as `distance < 20 cm` has a sharp edge. Suppose the sensor readings (which are always a little noisy) hover around the limit: 22, 21, 19, 21, 19, 22 cm. With a single threshold the robot switches between *Wander* and *Avoid* again and again, which makes it jerk back and forth.
 
 A simple fix is to use **two thresholds** (this idea is called **hysteresis**): *enter* Avoid when the distance is **below 20 cm**, but *leave* Avoid only when the distance is **above 30 cm**.
 
@@ -600,7 +602,7 @@ With one threshold the behavior changes **4 times**. With two thresholds it chan
 
 1. What does it mean when a behavior is *active*?
 2. Why do safety behaviors such as Avoid or Cliff stop normally get rank 1?
-3. In the Python program in 3.3.5, what would change if the first two statements were swapped?`if`
+3. In the Python program in 3.3.5, what would change if the first two `if` statements were swapped?
 4. The distance is 15 cm and there is no light ahead. Which behavior of the three-behavior robot wins?
 5. What problem does hysteresis solve, and how?
 
@@ -643,7 +645,7 @@ The robot enters Avoid at 18 (below 20), stays in Avoid at 24 and 28 (not yet ab
 
 ## 3.4. Brooks's Subsumption Architecture
 
-**Question for this unit:** How can many simple behaviors be organized so that a robot becomes more capable, without a master plan?
+**Question for this section:** How can many simple behaviors be organized so that a robot becomes more capable, without a master plan?
 
 ### 3.4.1. Think first
 
@@ -791,7 +793,7 @@ Moment 4 shows the main strength of layers: if a higher layer fails, the lower l
 
 ## 3.5. Case Study: Hardware, Network and Behavior in One Robot
 
-**Question for this unit:** If a robot is connected to Wi-Fi, which decisions should be made by the robot, and which can be made over the network?
+**Question for this section:** If a robot is connected to Wi-Fi, which decisions should be made by the robot, and which can be made over the network?
 
 ### 3.5.1. Think first
 
@@ -829,7 +831,7 @@ The case-study robot is a small two-wheeled robot that avoids obstacles, follows
 
 ### 3.5.5. The network path (between the robot and the phone)
 
-The robot is a device on a local network: it connects to the Wi-Fi router, and the router also connects the phone. Each device has an IP address, for example the robot and the phone. Data is split into packets.`192.168.1.50``192.168.1.20`
+The robot is a device on a local network: it connects to the Wi-Fi router, and the router also connects the phone. Each device has an IP address, for example the robot `192.168.1.50` and the phone `192.168.1.20`. Data is split into packets.
 
 **What travels from the robot to the phone (telemetry).** A small message, a few times per second, for example:
 
@@ -839,7 +841,7 @@ The robot is a device on a local network: it connects to the Wi-Fi router, and t
 
 It is well under 100 bytes, so one message fits easily in one packet.
 
-**What travels from the phone to the robot (commands).** For example or, each with a time stamp so that the robot can tell how old it is.`STOP``DRIVE forward`
+**What travels from the phone to the robot (commands).** For example `STOP` or `DRIVE forward`, each with a time stamp so that the robot can tell how old it is.
 
 ![Figure 3.14: The case-study robot: fast local decisions on the robot, slower and less reliable messages over the network](../assets/ch3-behaviorist-ai/fig-3-14-case-study-robot.png)
 
@@ -925,7 +927,7 @@ for m in moments:
     print(m[0], decide(*m[1:]))
 ```
 
-**Syntax help.** means "no value" (no command has arrived). checks that a command exists. requires both tests to be true. passes every item of the tuple, except the first (the moment number), to the function.`None``drive_cmd``` `is not None``and``decide(*m[1:])``m`
+**Syntax help.** `None` means "no value" (no command has arrived). `drive_cmd is not None` checks that a command exists. `and` requires both tests to be true. `decide(*m[1:])` passes every item of the tuple `m`, except the first (the moment number), to the function.
 
 **Expected output.**
 
@@ -1013,7 +1015,7 @@ for m in moments:
 
 ## 3.6. Three Short Introductions: Reinforcement Learning, Limits and Ethics
 
-This unit gives a brief introduction to three topics that connect Behaviorist AI to the wider field of AI. You do not need to master them yet. The aim is to know what they are and why they matter.
+This section gives a brief introduction to three topics that connect Behaviorist AI to the wider field of AI. You do not need to master them yet. The aim is to know what they are and why they matter.
 
 ### 3.6.1. Reinforcement learning
 
@@ -1111,7 +1113,7 @@ When an AI system acts in the real world, mistakes can hurt people. Here are fou
 
 1. **Safety and responsibility.** If a robot's rules fail and someone is hurt, who is responsible: the designer, the company, the user? This is one reason why safety behaviors get the highest priority and need careful testing (Section 3.3).
 2. **Badly designed rewards.** A learning system does what the reward *measures*, not what the designer *meant*. In a well-known 2016 experiment by OpenAI, an RL agent was trained to play a boat-racing game, CoastRunners, where points came from hitting targets along the course. The agent found a way to circle in a lagoon and hit the same targets repeatedly, catching fire and crashing on the way, and it scored higher than human players without finishing the race (Clark & Amodei, 2016). A robot rewarded only for "not bumping" might learn never to move.
-3. **Human control.** Can a person stop the system at any time? In Unit 5 a remote STOP is allowed to win, but we also saw that a delayed network message is not enough, so real robots also need a physical stop switch.
+3. **Human control.** Can a person stop the system at any time? In Section 3.5 a remote STOP is allowed to win, but we also saw that a delayed network message is not enough, so real robots also need a physical stop switch.
 4. **Explainability and privacy.** Simple rules are easy to inspect ("it stopped because rule 2 fired"), but learned behavior is much harder to explain. Robots that carry cameras, microphones or network connections also collect data about people, which raises privacy questions.
 
 **A story that connects to priorities.** In his 1942 short story "Runaround", Isaac Asimov imagined robots that obey three ranked laws (do not harm humans; obey humans; protect yourself). In the story, a robot is trapped circling a pool because two laws pull in opposite directions with almost equal strength. This is fiction, not an engineering standard, but it shows the same problem as Section 3.3: rankings between rules must be designed very carefully, or the robot can get stuck.
@@ -1201,7 +1203,7 @@ When an AI system acts in the real world, mistakes can hurt people. Here are fou
 
 ### 3.7.4. Mixed review
 
-Try these without looking back. Answers are in section 3.7.6.
+Try these without looking back. Answers are in the Answer Key at the end of the chapter.
 
 1. In Pavlov’s experiment, which stimulus is unconditioned and which is conditioned (after training)?
 2. A robot has these ranked behaviors: 1 Avoid (distance < 20 cm), 2 Go to light, 3 Wander. The distance is 18 cm and there is bright light ahead. Which behavior wins?

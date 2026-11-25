@@ -21,12 +21,14 @@ By the end of this chapter, students will be able to:
 - Explain the stored-program concept in simple words.
 - Describe the Fetch–Decode–Execute cycle and how the CPU follows instructions.
 - Trace how different hardware components work together when executing a simple program.
+- Explain the difference between sensors and actuators, how a sensor signal becomes numbers, and how a microcontroller controls motors with PWM and a motor driver.
+- Calculate a distance from an ultrasonic echo time and trace how an obstacle-avoiding robot senses, decides and acts.
 
 ### Your Learning Route
 
 **Who is this for?** First-year students and recent high-school graduates. No programming or previous hardware experience is required.
 
-**What you need:** A pen, a sheet of paper, and about 60–90 minutes across multiple short sessions. A computer is useful for the optional simulator, but is not needed for the main activities.
+**What you need:** A pen, a sheet of paper, a calculator, and about 3–4 hours across several short sessions (Sections 1.1–1.6 take about 90 minutes; Section 1.7 takes about 2 hours). A computer is useful for the optional simulator, but is not needed for the main activities.
 
 **How to use this guide:** For every section, make a prediction before reading the example, work through the explanation, complete the activity, and then check the suggested answers. If your answer differs, explain what changed in your thinking.
 
@@ -43,6 +45,8 @@ By the end of this chapter, students will be able to:
 5. **Deliver the message:** Buses and controllers. (Section 1.5)
 
 6. **Run the program:** Trace instructions and predict changes. (Section 1.6)
+
+7. **Build a robot brain:** Sensors, motors, microcontrollers and the obstacle-avoiding robot. (Section 1.7)
 
 **Your mission:** By the end, trace how the computer follows a tiny program and explain which hardware component is responsible for each step.
 
@@ -242,7 +246,7 @@ Older computers often used a small number of registers to store input data and o
 
 Modern computers can use more registers inside the CPU to speed up their work, because the processor can keep frequently used values close to where calculations are performed.
 
-Data registers are labelled as **R₁ … R ₙ** in the figure above.
+Data registers are labelled as **R₁ … Rₙ** in Figure 1.10 below.
 
 For example, if the CPU needs to calculate 5 + 3, the two numbers can be stored in separate data registers before being used by the ALU.
 
@@ -288,7 +292,7 @@ However, the Control Unit does not perform calculations itself. This responsibil
 
 To understand how these components work together, let's imagine that our CPU needs to calculate:
 
-***5 + 3 =?***
+**5 + 3 = ?**
 
 The process can be divided into several steps:
 
@@ -502,15 +506,7 @@ The three main types we will discuss are:
 
 The usual order from fastest and smallest to slower and larger is:
 
-Registers
-
-↓
-
-Cache
-
-↓
-
-RAM
+**Registers → Cache → RAM**
 
 ![Figure 1.18: Memory hierarchy](../assets/ch1-hardware/fig-1-18-memory-hierarchy.png)
 
@@ -857,7 +853,7 @@ This is a simplified explanation, but it shows that different buses have differe
 
 *Figure 1.26 – Data, address, and control buses.*
 
-*Figure: Data, address, and control buses.* **Important:** Modern computers can use more complicated communication systems. However, this simplified model helps us understand the main purpose of buses.
+**Important:** Modern computers can use more complicated communication systems. However, this simplified model helps us understand the main purpose of buses.
 
 ### 1.5.2. Input/Output Controllers
 
@@ -1045,7 +1041,7 @@ Instead of focusing only on CPU components, we will see how a simple program is 
 
 Imagine that the computer needs to calculate:
 
-***5 + 3 = 8***
+**5 + 3 = 8**
 
 The numbers and program instructions are available in memory.
 
@@ -1153,17 +1149,54 @@ Now imagine that we change some instructions in our program.
 
 ### Optional Interactive Lab: See a CPU Execute Instructions
 
-**Resource:** Little Man Computer (LMC), by Peter Higginson.
+**Goal:** Watch a simple educational CPU fetch, decode and execute the same "5 + 3" program that you traced in Activity 6.
 
-**Why use it?** It makes the Program Counter, memory, and instruction execution visible in a simplified educational CPU.
+**Resource:** Little Man Computer (LMC), a free browser simulator by Peter Higginson: https://peterhigginson.co.uk/lmc/ (no account or installation needed).
 
-**Try this:** Open the simulator, select a built-in example program from the program menu, and use the **STEP** control rather than running everything at once. Before each step, predict whether the Program Counter or a memory location will change. Record three consecutive steps and explain what happened. Use the simulator's own help panel if its controls differ.
+**Preparation:** A computer with a web browser (about 15 minutes). LMC has only **one** working register, the **accumulator**, so the program below adds 3 directly to the accumulator instead of using Registers A, B and C.
 
-**Important limitation:** LMC is an educational model, not a complete picture of a modern processor. Real CPUs have additional registers, caches and execution features.
+**Task**
 
-**Offline fallback:** Use the five-instruction program in Section 1.6.3. Copy its table to paper, keep track of Registers A, B and C after each instruction, and check against Activity 6's answers. No account, code installation, or external site is required for the fallback.
+1. Open the simulator. Delete any code in the large program box on the left and type (or paste) this program:
 
-*[RESOURCE CHECK — Before submission, a teammate should test the exact simulator controls and availability using the intended student network and device. Add a screenshot of the tested version here.]*
+```text
+        LDA FIVE     // load the number stored at FIVE into the accumulator
+        ADD THREE    // add the number stored at THREE
+        STA RESULT   // store the accumulator at RESULT
+        OUT          // show the accumulator in the OUTPUT box
+        HLT          // stop
+FIVE    DAT 5
+THREE   DAT 3
+RESULT  DAT 0
+```
+
+2. Put the program into memory. Depending on the version of the page, click **ASSEMBLE INTO RAM**, or the simulator assembles the code automatically as soon as you type it. The memory boxes 00–07 should now contain numbers.
+3. Before you run anything, **predict:** what will the Program Counter show after the first instruction? What will the accumulator hold after the second instruction? Which memory box will change, and to what?
+4. Click **STEP** (not RUN) once for each instruction and watch the Program Counter, the accumulator and the memory boxes. Record what changed after each step in a table like the one below.
+5. Change `THREE DAT 3` to `THREE DAT 7`, put the program into memory again, press **RESET** and run it again. What is the new output?
+
+| Step | Instruction | Program Counter after the step | Accumulator | What else changed? |
+|---|---|---|---|---|
+| 1 | LDA FIVE | | | |
+| 2 | ADD THREE | | | |
+| 3 | STA RESULT | | | |
+| 4 | OUT | | | |
+| 5 | HLT | | | |
+
+**Observe and reflect:** Which instructions only *move* a value, and which one *changes* it? Where is the "decode" step happening, even though you cannot see it?
+
+**If the simulator is not available (offline fallback):** do the same task on paper. Copy the program, draw eight memory boxes (00–07) and one accumulator box, and follow the five instructions by hand. The expected results in the answer key are the same for both versions.
+
+**Important limitation:** LMC is an educational model, not a complete picture of a modern processor. Real CPUs have many registers, caches and execution features.
+
+**Suggested Answers**
+
+- After the program is put into memory, boxes 00–07 hold **505, 106, 307, 902, 000, 005, 003, 000**. The first digit is the instruction (5 = LDA, 1 = ADD, 3 = STA, 902 = OUT, 000 = HLT) and the last two digits are the address it uses.
+- Step 1 (LDA FIVE): Program Counter 1, accumulator **5**. Step 2 (ADD THREE): Program Counter 2, accumulator **8** – the only step in which the ALU calculates. Step 3 (STA RESULT): Program Counter 3, accumulator 8, memory box **07 changes from 0 to 8**. Step 4 (OUT): Program Counter 4, the OUTPUT box shows **8**. Step 5 (HLT): the program stops.
+- With `THREE DAT 7` the output is **12**.
+- LDA, STA and OUT only move a value; ADD changes it. Decoding happens inside the control unit every time the simulator reads an instruction number such as 106 and works out that it means "ADD the value at address 06".
+
+*How this lab was checked:* the program and the expected values above were verified with a small LMC emulator (same memory contents, output 8, value 8 in box 07). The controls STEP, RUN and RESET are the ones named in the simulator's help page (https://peterhigginson.co.uk/lmc/help_new.html).
 
 ## 1.7. Sensors, Actuators and Microcontrollers
 
@@ -1214,7 +1247,7 @@ Some sensors can only say **yes or no**. A bumper switch is either pressed (1) o
 
 Other sensors give a value anywhere in a **range**. A light sensor's voltage rises smoothly as the room gets brighter. We call this an **analog** sensor. Before a computer can use an analog value, it must be turned into a number.
 
-| **Digital sensor** | **Analog sensor** | |
+| | **Digital sensor** | **Analog sensor** |
 |---|---|---|
 | **Output** | only two values: 0 or 1 | any value in a range |
 | **Example** | bumper switch, button | light sensor, temperature sensor |
@@ -1367,7 +1400,7 @@ A sensor gives these five samples in volts: **0.4, 2.2, 5.7, 6.6, 3.1**.
 
 An **actuator** is a device that turns a signal from the computer into a physical action: movement, sound, light or heat. Examples: wheel motors, robot grippers, speakers (including speech output) and LEDs.
 
-| **Sensor** | **Actuator** | |
+| | **Sensor** | **Actuator** |
 |---|---|---|
 | **Direction** | world → computer | computer → world |
 | **Main question** | "What is happening out there?" | "What should happen out there?" |
@@ -1389,13 +1422,13 @@ A microcontroller's output pin is digital: it is either fully **on** (for exampl
 
 The trick is **pulse-width modulation (PWM)**. The pin switches on and off very quickly, hundreds of times per second. The motor cannot follow such fast changes, so it reacts to the **average**. The fraction of time the pin is on is called the **duty cycle**.
 
+```text
 average voltage = duty cycle × supply voltage
 
-25 % duty on 5 V: 0.25 × 5 V = 1.25 V (slow)
-
-50 % duty on 5 V: 0.50 × 5 V = 2.5 V (about half speed)
-
-100 % duty on 5 V: 1.00 × 5 V = 5 V (full speed)
+ 25 % duty on 5 V:  0.25 × 5 V = 1.25 V   (slow)
+ 50 % duty on 5 V:  0.50 × 5 V = 2.5 V    (roughly half power – the motor is slower, but not exactly at half speed)
+100 % duty on 5 V:  1.00 × 5 V = 5 V      (full speed)
+```
 
 ![Figure 1.34: Pulse-width modulation: the longer the "on" part of each cycle, the higher the average voltage](../assets/ch1-hardware/fig-1-34-pulse-width-modulation.png)
 
@@ -1518,7 +1551,7 @@ Then answer: a robot has a camera and wheels but no microcontroller. Can it reac
 
 ### 1.7.3. Microcontrollers: The Tiny Computer Inside a Machine
 
-A **microcontroller** is a tiny computer on a single chip, built to run one dedicated program inside a device. It still follows the model from the earlier sections: CPU, memory, input/output, a stored program, and the fetch– decode–execute cycle.
+A **microcontroller** is a tiny computer on a single chip, built to run one dedicated program inside a device. It still follows the model from the earlier sections: CPU, memory, input/output, a stored program, and the fetch–decode–execute cycle.
 
 Microcontrollers are the heart of **embedded systems**: computer systems built into devices with dedicated tasks, such as home appliances, vehicle electronics, medical devices, toys and phones. They are often expected to save battery power, meet strict timing deadlines, or run for a long time with little or no human attention.
 
@@ -1543,7 +1576,7 @@ Microcontrollers are the heart of **embedded systems**: computer systems built i
 
 *Figure 1.37 – A laptop compared with a microcontroller.*
 
-| **Laptop / PC** | **Microcontroller** | |
+| | **Laptop / PC** | **Microcontroller** |
 |---|---|---|
 | **Purpose** | general-purpose: many different programs | one dedicated program |
 | **Parts** | CPU, RAM, storage, GPU and more, as separate parts on a motherboard | CPU, memory and connection pins together on one chip |
@@ -1560,25 +1593,20 @@ A microcontroller has no operating system that starts and stops different apps. 
 - **setup()** runs **once** when the power comes on. It prepares the hardware, for example "this pin is an output for the motor".
 - **loop()** runs **again and again, forever**. This is where the robot senses, decides and acts.
 
-setup(): # runs once
+```text
+setup():                      # runs once
+    make the motor pins outputs
+    make the sensor's echo pin an input
 
-make the motor pins outputs
+loop():                       # repeats forever
+    distance = read the ultrasonic sensor (cm)
+    if distance > 20:
+        drive forward
+    otherwise:
+        stop, then turn right
+```
 
-make the sensor's echo pin an input
-
-loop(): # repeats forever
-
-distance = read the ultrasonic sensor (cm)
-
-if distance > 20:
-
-drive forward
-
-otherwise:
-
-stop, then turn right
-
-This is the same idea as the robot program in Section 7.5, written in a higher-level language: the JUMP back to the start is hidden inside "loop".
+This is the same idea as the robot program in Section 1.7.5, written in a higher-level language: the JUMP back to the start is hidden inside "loop".
 
 **Common Misconception**
 
@@ -1622,13 +1650,12 @@ The simplest kind of response is a **reflex**: a fixed, predetermined reaction t
 
 **Step 2: Calculate.** The speed of sound in air is about **343 m/s** (at around 20 °C).
 
+```text
 distance = speed of sound × echo time ÷ 2
-
-= 343 m/s × 0.001166 s ÷ 2
-
-= 0.4 m ÷ 2
-
-= 0.2 m = 20 cm
+         = 343 m/s × 0.001166 s ÷ 2
+         = 0.4 m ÷ 2
+         = 0.2 m = 20 cm
+```
 
 Why ÷ 2? The sound travels to the wall **and back**, so the measured time covers the distance twice.
 
@@ -1787,60 +1814,6 @@ A JUMP changes the program counter, so the CPU goes back to address 00 instead o
 
 **Back to the starting question:** the robot "knows" about the wall because the ultrasonic sensor times an echo, the microcontroller converts the time into a distance, and a simple rule compares it with 20 cm, about 20 times every second.
 
-**How this section is reused**
-
-- **Study Guide:** Figures 1.32–7.8, the converter, resolution and sampling-rate tables, the motor and H-bridge tables, the robot program table and Activities 7–13.
-- **PPT idea:** "How does a machine sense?" (signal → numbers); "Measure or move?"; PWM with three duty cycles; laptop vs. microcontroller; the sense–decide–act loop; animated echo and formula slides.
-- **Video idea:** Video 04 "One Robot, Three Ideas" uses the echo calculation, the "pause and predict" at 2332 µs, the forgotten ÷ 2 error and the program trace from this section.
-
-### Key Terminology: Section 1.7
-
-| **Term** | **Definition** |
-|---|---|
-| **Sensor** | A device that measures something in the physical world and turns it into a signal. |
-| **Actuator** | A device that turns a signal into physical action, such as movement or sound. |
-| **Digital sensor** | A sensor whose output has only two values, such as pressed (1) or not pressed (0). |
-| **Analog sensor / signal** | A sensor or signal that can take any value in a range. |
-| **Sampling** | Measuring a signal at regular moments. |
-| **Sampling rate** | The number of samples taken per second. |
-| **Quantization** | Rounding each sample to the nearest value the converter can store. |
-| **Encoding** | Writing a quantized value as a pattern of bits. |
-| **Bit depth / resolution** | The number of bits per sample, which decides how many different values can be told apart. |
-| **Analog-to-digital converter (ADC)** | The part that turns an analog voltage into a number. |
-| **Noise** | Unwanted random variation in sensor readings. |
-| **Calibration** | Testing a sensor in its real environment to choose correct limits. |
-| **DC motor** | A motor that spins continuously while it gets power. |
-| **Servo motor** | A motor that turns to a chosen angle and holds it. |
-| **Stepper motor** | A motor that moves in small, exact steps. |
-| **PWM (pulse-width modulation)** | Switching a pin on and off quickly so that the average power can be controlled. |
-| **Duty cycle** | The fraction of each PWM cycle during which the signal is on. |
-| **Motor driver** | A circuit between the microcontroller and a motor that switches the larger motor current. |
-| **H-bridge** | A circuit of four switches that lets current flow through a motor in either direction. |
-| **Differential drive** | Steering by driving the left and right wheels at different speeds or directions. |
-| **Microcontroller** | A tiny computer on one chip, built to run one dedicated program. |
-| **Embedded system** | A computer system built into a device with a dedicated task. |
-| **GPIO pin** | A general-purpose input/output pin of a microcontroller. |
-
-| **Term** | **Definition** |
-|---|---|
-| **Flash memory** | Non-volatile memory that stores the microcontroller's program. |
-| **setup() / loop()** | The part of a microcontroller program that runs once / the part that repeats forever. |
-| **Ultrasonic sensor** | A sensor that measures distance by sending a sound pulse and timing its echo. |
-| **Echo time** | The time between sending a sound pulse and receiving its echo. |
-| **Threshold** | A limit value; the robot reacts when the distance is at or below it. |
-| **Reflex action** | A fixed, predetermined response to an input. |
-| **Reactive robot** | A robot that follows simple rules moment by moment instead of making detailed plans. |
-| **Sense–decide–act loop** | The repeating cycle of measuring, deciding and acting. |
-
-### Sources: Section 1.7
-
-- Brookshear, J. G. (2011). *Computer Science: An Overview* (11th ed.). Addison-Wesley. Pages 9 (sensors in smartphones), 114 (embedded systems), 462–463 (agents, sensors, actuators, perception, reflex action), 497–499 (robotics, reactive robots).
-- Forouzan, B. A. (2018). *Foundations of Computer Science* (4th ed.). Cengage Learning. Pages 62–63 (sampling, quantization, encoding, bit rate), 97–98 (input/output subsystem), 105 (connecting I/O devices, controllers), 176 (analog-to-digital conversion).
-- von Neumann, J. (2012). *The Computer and the Brain* (3rd ed.). Yale University Press. Foreword to the third edition, p. xx; pp. 57–58 (receptors respond once a minimum intensity, a threshold, is reached).
-- Arduino. *Arduino Uno Rev3* documentation and the analogWrite() reference (docs.arduino.cc): 10-bit ADC, 2 KB RAM, 32 KB flash, 16 MHz clock, PWM values 0–255, recommended pin current.
-
-**Facts not taken from the books (to be checked by a teammate before final submission):** the speed of sound (about 343 m/s at 20 °C) and the 58 µs per cm shortcut (standard physics, derived above); the motor types, PWM, H-bridge and motor-driver explanations (general electronics); the Arduino Uno figures (manufacturer's documentation). Diagrams are simplified teaching models drawn for this guide. Section 1.7 was written by Merey.
-
 ## Glossary
 
 The following terms summarize the main concepts introduced in this chapter.
@@ -1906,21 +1879,61 @@ The following terms summarize the main concepts introduced in this chapter.
 | **Fetch–Decode–Execute Cycle** | A repeating process through which the CPU follows program instructions. |
 | **HALT** | An instruction used to stop program execution. |
 
+### Sensors, Actuators and Microcontrollers
+
+| **Term** | **Definition** |
+|---|---|
+| **Sensor** | A device that measures something in the physical world and turns it into a signal. |
+| **Actuator** | A device that turns a signal into physical action, such as movement or sound. |
+| **Digital sensor** | A sensor whose output has only two values, such as pressed (1) or not pressed (0). |
+| **Analog sensor / signal** | A sensor or signal that can take any value in a range. |
+| **Sampling** | Measuring a signal at regular moments. |
+| **Sampling rate** | The number of samples taken per second. |
+| **Quantization** | Rounding each sample to the nearest value the converter can store. |
+| **Encoding** | Writing a quantized value as a pattern of bits. |
+| **Bit depth / resolution** | The number of bits per sample, which decides how many different values can be told apart. |
+| **Analog-to-digital converter (ADC)** | The part that turns an analog voltage into a number. |
+| **Noise** | Unwanted random variation in sensor readings. |
+| **Calibration** | Testing a sensor in its real environment to choose correct limits. |
+| **DC motor** | A motor that spins continuously while it gets power. |
+| **Servo motor** | A motor that turns to a chosen angle and holds it. |
+| **Stepper motor** | A motor that moves in small, exact steps. |
+| **PWM (pulse-width modulation)** | Switching a pin on and off quickly so that the average power can be controlled. |
+| **Duty cycle** | The fraction of each PWM cycle during which the signal is on. |
+| **Motor driver** | A circuit between the microcontroller and a motor that switches the larger motor current. |
+| **H-bridge** | A circuit of four switches that lets current flow through a motor in either direction. |
+| **Differential drive** | Steering by driving the left and right wheels at different speeds or directions. |
+| **Microcontroller** | A tiny computer on one chip, built to run one dedicated program. |
+| **Embedded system** | A computer system built into a device with a dedicated task. |
+| **GPIO pin** | A general-purpose input/output pin of a microcontroller. |
+| **Flash memory** | Non-volatile memory that stores the microcontroller's program. |
+| **setup() / loop()** | The part of a microcontroller program that runs once / the part that repeats forever. |
+| **Ultrasonic sensor** | A sensor that measures distance by sending a sound pulse and timing its echo. |
+| **Echo time** | The time between sending a sound pulse and receiving its echo. |
+| **Threshold** | A limit value; the robot reacts when the distance is at or below it. |
+| **Reflex action** | A fixed, predetermined response to an input. |
+| **Reactive robot** | A robot that follows simple rules moment by moment instead of making detailed plans. |
+| **Sense–decide–act loop** | The repeating cycle of measuring, deciding and acting. |
+
 ## References
 
-The main explanations in this part were developed from the team's shared Hardware Markdown material and revised for beginning students. Before final submission, the team should compare this draft with **Shared Markdown Content V2.0** and insert its full citations here.
+**Textbooks used for this chapter**
 
-**Suggested verified learning resource:**
+- Forouzan, B. A. (2018). *Foundations of Computer Science* (4th ed.). Cengage Learning. Chapter 5, "Computer Organization": central processing unit (p. 92), main memory (p. 94), input/output subsystem (pp. 97–98), connecting I/O devices and controllers (p. 105), subsystem interconnection (p. 104), program execution (p. 109). Data representation: sampling, quantization, encoding and bit rate (pp. 62–63) and analog-to-digital conversion (p. 176).
+- Brookshear, J. G. (2011). *Computer Science: An Overview* (11th ed.). Addison-Wesley. Pages 9 (sensors in smartphones), 114 (embedded systems), 462–463 (agents, sensors, actuators, perception, reflex action), 497–499 (robotics, reactive robots).
+- von Neumann, J. (2012). *The Computer and the Brain* (3rd ed.). Yale University Press. Foreword to the third edition, p. xx; pp. 57–58 (receptors respond once a minimum intensity, a threshold, is reached).
 
-- Peter Higginson, *Little Man Computer*, https://peterhigginson.co.uk/lmc/ — optional step-by-step CPU simulation used in Section 1.6. The paper activity is provided as a complete fallback.
-- Computer Science Field Guide, *Interactives*, https://www.csfieldguide.org.nz/en/interactives/ — optional supplemental exploration of data representation; use only a specific activity after your team has tested it.
+**Technical documentation**
 
-**Source to complete:**
+- Arduino. *Arduino Uno Rev3* product documentation and the `analogWrite()` language reference, docs.arduino.cc. Used for: 10-bit ADC, 2 KB RAM, 32 KB flash, 16 MHz clock, PWM values 0–255 and the recommended pin current (about 20 mA).
 
-- [Insert the full bibliographic entry for the course textbook/reference used in Shared Markdown Content V2.0, including author, title, edition, year, and relevant pages.]
-- [Add attribution and reuse permissions for every final photograph, diagram and screenshot.]
+**Standard facts used in worked examples:** the speed of sound in air is about 343 m/s at 20 °C; the 58 µs-per-centimetre shortcut is derived from it in Section 1.7.5 (2 ÷ 34,300 s ≈ 58 µs).
 
-**Team quality check before V1.0 submission:** Confirm that a student who did not write the chapter can complete Activities 1–6, that all links and diagram captions work, and that answers match the team's shared content and Test Bank. Record significant AI assistance and reviewer feedback in your project logs.
+**Optional online resources**
+
+- Higginson, P. *Little Man Computer – CPU Simulator*. https://peterhigginson.co.uk/lmc/ (help page: https://peterhigginson.co.uk/lmc/help_new.html). Used in the Optional Interactive Lab in Section 1.6; the paper version of the lab needs no Internet access.
+
+**Figures.** Diagrams in this chapter are simplified teaching models drawn by Team DeepThink for this guide. Figures marked *(illustration)* are photorealistic illustrations that the team added to Study Guide V1.0 to show what the real hardware looks like; they do not show a specific product. Section 1.7 was written by Merey.
 
 ## Quiz
 
