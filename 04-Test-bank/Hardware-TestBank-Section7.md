@@ -1,6 +1,6 @@
 # Test Bank · Section 7: Sensors, Actuators and Microcontrollers
 
-*Team DeepThink · Hardware part · Written by Merey · Draft for the team Test Bank*
+*Team DeepThink · Hardware part · 
 
 This file holds **12 True/False, 12 multiple-choice and 3 open-ended questions** for Section 7 *Sensors, Actuators and Microcontrollers* of the Hardware Study Guide. Add them to the team Test Bank (minimum 20 True/False, 20 multiple-choice and 6 open-ended questions in total).
 
