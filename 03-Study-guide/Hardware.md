@@ -48,8 +48,12 @@ Sensors, Actuators and Microcontrollers
 7.3 Microcontrollers: The Tiny Computer Inside a Machine
 7.4 The Sense–Decide–Act Loop
 7.5 Worked Example: The Obstacle-Avoiding Robot
+A Brief Look at Modern Hardware
+8.1 How Computer Hardware Developed
+8.2 GPUs, AI Accelerators and Parallel Work
+Review and Practice
 
-Key Terminology
+Key Terminology · References
 
 1. Introduction to Computer Hardware
 Goal
@@ -74,7 +78,9 @@ Although each subsystem has its own responsibility, they cannot do everything in
 
 For example, the CPU is capable of performing calculations, but without memory it would not have the instructions and data needed to perform them. The same can be said about input and output devices, because without them it would be much harder for us to interact with the computer.
 
-[DIAGRAM 1 — Three Main Computer Subsystems: Show a keyboard connected to the computer's input system, a CPU connected to Main Memory, and an output connection to a monitor. Use arrows to demonstrate how information moves between the components.]
+The three main computer subsystems
+
+Figure 1.1. The three subsystems work together: input arrives from the keyboard, the CPU works with main memory, and the result goes to the monitor.
 
 Activity 1: Follow a Keyboard Input
 
@@ -117,7 +123,9 @@ Registers
 
 Each of these components has its own responsibility, and together they allow the processor to execute instructions.
 
-[IMAGE 1 — CPU Structure: Insert the existing CPU image (IMG_0072.jpg) if it clearly shows ALU, Control Unit, and Registers. Otherwise use a simplified labelled diagram. Check the relative image path in the final GitHub repository.]
+CPU structure: ALU, Control Unit and registers
+
+Figure 2.1. Inside the CPU: the ALU calculates, the Control Unit coordinates, and registers (R₁ … Rₙ, IR, PC) hold the values in use.
 
 2.2 The Arithmetic Logic Unit (ALU)
 
@@ -182,7 +190,9 @@ For example, imagine that a system has two conditions which must be satisfied be
 
 The AND operation can be used to check whether both conditions are true. If even one of them is false, the result will be 0.
 
-[IMAGE 2 — Logic Operations: Insert an image showing NOT, AND, OR, and XOR with binary inputs and outputs. A visual truth table would work well here.]
+Truth tables for NOT, AND, OR and XOR
+
+Figure 2.2. Truth tables for the four logic operations.
 
 2.3 Registers
 
@@ -245,7 +255,9 @@ Registers: Finally, the result can be stored in another register and later trans
 
 This is a simplified example, but it shows us how the ALU, registers, and Control Unit work together to perform even a simple calculation.
 
-[DIAGRAM 2 — CPU Adding 5 + 3: Show two data registers containing 5 and 3, arrows leading to the ALU, and an output register containing 8. The Control Unit should be shown separately with arrows coordinating the operation.]
+The CPU adds 5 and 3
+
+Figure 2.3. Adding 5 + 3: two data registers feed the ALU, the Control Unit coordinates, and the result 8 goes to a third register.
 
 Activity 2: Understanding CPU Components
 
@@ -347,7 +359,9 @@ If the CPU needs this value, it can request the information stored at that addre
 
 Important: The address tells the computer where the information is stored. The value is the actual information at that location.
 
-[DIAGRAM 3 — Memory Addresses: Create a row of numbered memory locations, each containing a different value. Use an arrow to highlight address 02 and its value 9.]
+Memory addresses and values
+
+Figure 3.1. Memory as numbered boxes: address 02 holds the value 9.
 
 3.2 RAM and ROM
 
@@ -415,7 +429,9 @@ text
             ↓
            RAM
 
-[DIAGRAM 4 — Memory Hierarchy: Show Registers at the top, Cache in the middle, and RAM at the bottom. Add arrows showing that memory generally becomes larger but slower as we move down.]
+Memory hierarchy: registers, cache, RAM
+
+Figure 3.2. The memory hierarchy: higher levels are faster and smaller, lower levels larger and slower.
 
 Example: Understanding Memory Hierarchy
 
@@ -506,7 +522,9 @@ However, not every device belongs to only one category.
 
 For example, a touchscreen can work as both an input and an output device. It displays information while also allowing users to interact with the computer by touching the screen.
 
-[IMAGE 3 — Input and Output Devices: Insert a labelled illustration showing a keyboard, microphone, mouse, monitor, speakers, and touchscreen. Divide them into Input, Output, and Both categories.]
+Input, output and both
+
+Figure 4.1. Input devices, output devices, and a device that is both.
 
 4.2 Secondary Storage
 
@@ -540,7 +558,9 @@ These devices use laser technology to read information stored on discs.
 
 Although they are less common in modern computers, they are still an example of how information can be stored using different technologies.
 
-[IMAGE 4 — Types of Secondary Storage: Show HDD, SSD, and optical disc side by side with labels.]
+HDD, SSD and optical disc
+
+Figure 4.2. Three kinds of secondary storage: HDD, SSD and optical disc.
 
 4.3 Memory vs. Storage
 
@@ -663,7 +683,9 @@ Data Bus: The requested data is transferred from memory to the CPU.
 
 This is a simplified explanation, but it shows that different buses have different responsibilities.
 
-[DIAGRAM 5 — CPU and Memory Communication: Show CPU on the left and Main Memory on the right, connected by three labelled paths: Address Bus, Data Bus, and Control Bus. Use arrows to show the direction of communication in the reading example.]
+CPU and memory communicate through three buses
+
+Figure 5.1. Reading from memory: the address bus says where, the control bus says "read", and the data bus brings the value back.
 
 Important: Modern computers can use more complicated communication systems. However, this simplified model helps us understand the main purpose of buses.
 
@@ -798,7 +820,9 @@ However, some instructions, such as jumps, can change which instruction comes ne
 
 Fetch–Decode–Execute Diagram
 
-[DIAGRAM 6 — Fetch–Decode–Execute Cycle: Draw a circular diagram containing Fetch → Decode → Execute → Fetch. Show the Program Counter and Instruction Register next to Fetch, the Control Unit next to Decode, and the ALU as an example of a component used during Execute.]
+The fetch-decode-execute cycle
+
+Figure 6.1. The fetch–decode–execute cycle repeats for every instruction.
 
 Common Misconception
 
@@ -859,7 +883,9 @@ Finally, the result is stored at memory address 20, and the program stops.
 
 HALT is an instruction that tells the processor to stop executing this program.
 
-[DIAGRAM 7 — A Simple Program: Show the instruction table on the left, CPU with registers and ALU in the centre, and a memory location containing the result 8 on the right. Use numbered arrows to show the steps of execution.]
+A simple program: 5 + 3 stored at address 20
+
+Figure 6.2. The five-instruction program: load 5, load 3, add, store the result 8 at address 20, halt.
 
 Activity 5: Be the CPU
 
@@ -1428,6 +1454,94 @@ How this section is reused
 Study Guide: Figures 7.1–7.8, the converter, resolution and sampling-rate tables, the motor and H-bridge tables, the robot program table and Activities 6–12.
 PPT idea: "How does a machine sense?" (signal → numbers); "Measure or move?"; PWM with three duty cycles; laptop vs. microcontroller; the sense–decide–act loop; animated echo and formula slides.
 Video idea: Video 04 "One Robot, Three Ideas" uses the echo calculation, the "pause and predict" at 2332 µs, the forgotten ÷ 2 error and the program trace from this section.
+8. A Brief Look at Modern Hardware
+Goal
+
+To show how computer hardware developed and why some tasks use specialized processors.
+
+8.1 How Computer Hardware Developed
+
+Early electronic computers were large and used many separate electronic components. Over time, transistors and integrated circuits made computers smaller, faster and more reliable. The development of microprocessors allowed many CPU functions to fit on a single chip. The microcontroller in Section 7 takes the same idea further: a whole small computer on one chip.
+
+Today, computers can contain several CPU cores, large amounts of RAM and fast storage. We only introduce this history briefly, because the main focus of this chapter is how hardware works.
+
+8.2 GPUs, AI Accelerators and Parallel Work
+
+A CPU is designed to handle many different kinds of tasks and instructions, one after another, very quickly. A GPU (Graphics Processing Unit) is designed to perform many similar calculations in parallel, at the same time. This is useful for graphics, where millions of pixels need the same kind of calculation, and for some AI tasks.
+
+An AI accelerator is specialized hardware designed to make certain AI calculations faster or more energy-efficient. Many machine-learning tasks repeat similar mathematical operations on large amounts of data, so GPUs and AI accelerators suit them well.
+
+	CPU	GPU / AI accelerator
+Best at	many different tasks, one after another	many similar calculations at the same time
+Example	running the operating system and a browser	drawing a game scene, training an AI model
+Still needed?	yes: it runs the program and coordinates the work	only for the tasks it is good at
+
+We do not study the internal design of these processors here. The important idea is that computers sometimes use different processors for different tasks.
+
+Activity 13: Which Hardware Would You Choose?
+
+Goal: Match a task to the processor that suits it.
+
+Task: You need to apply the same brightness change to 10 million pixels of an image. Which hardware would be useful, a CPU or a GPU? Explain why we still need the CPU.
+
+<details> <summary><b>Suggested Answers</b></summary>
+
+A GPU is useful, because it can perform the same calculation on many pixels in parallel. The CPU is still needed to run the program, load the image and coordinate the work. Different tasks benefit from different hardware.
+
+</details>
+9. Review and Practice
+9.1 Review Questions
+What are the three main subsystems of a computer?
+What are the three main parts of the CPU discussed in this chapter?
+What does the ALU do?
+What is the difference between the instruction register and the program counter?
+Why does memory need addresses?
+What is the difference between RAM and ROM?
+Why does a computer use cache memory?
+What is the difference between RAM and an SSD?
+What do the data, address and control buses carry?
+What is the role of an input/output controller?
+What does the stored-program concept mean?
+What are the three steps of the fetch–decode–execute cycle?
+Which CPU component performs the addition in 5 + 3?
+Why can GPUs be useful for AI tasks?
+What is the difference between a sensor and an actuator?
+What does a microcontroller do in the obstacle-avoiding robot?
+Why is the echo time divided by two?
+What does the robot do when the measured distance is 12 cm?
+<details> <summary><b>Answer Key</b></summary>
+CPU, main memory, and the input/output subsystem.
+ALU, registers, and Control Unit.
+It performs arithmetic, logic, and shift operations.
+The instruction register holds the current instruction; the program counter holds the address of the next instruction to fetch.
+So that each location can be identified and accessed.
+RAM is normally volatile working memory; ROM is non-volatile memory traditionally used for information that is not normally changed.
+It keeps copies of information the CPU may need soon, so the CPU waits less for RAM.
+RAM is temporary working memory; an SSD is long-term storage that keeps data without power.
+Data, addresses, and control signals (such as read or write), respectively.
+It manages communication between the computer and a device that works differently or more slowly.
+Program instructions and data are both stored in memory, so the same computer can run different programs.
+Fetch, decode, execute.
+The ALU.
+They can perform many similar calculations in parallel.
+A sensor measures the world; an actuator changes it (movement, sound, light).
+It reads the echo time, converts it to a distance, applies the 20 cm rule, and sends commands to the motors through the motor driver.
+The sound travels to the object and back, so the time covers the distance twice.
+It stops and turns, because 12 cm is closer than the 20 cm threshold.
+</details>
+9.2 Mini Activities
+
+Activity A — Match the Component. Match CPU, RAM, SSD, keyboard and monitor with their roles: processing instructions, working memory, long-term storage, input, output.
+
+Activity B — Follow the Instruction. Put the steps of a simple addition in order: perform the addition, store the result, load the values.
+
+Activity C — Robot Rule. The robot's threshold changes from 20 cm to 30 cm. What does it do when the sensor measures 25 cm? Did any hardware need to change?
+
+<details> <summary><b>Suggested Answers</b></summary>
+A: CPU → processing instructions; RAM → working memory; SSD → long-term storage; keyboard → input; monitor → output.
+B: Load the values → perform the addition → store the result.
+C: It stops and turns, because 25 cm is now closer than the 30 cm threshold. No hardware changed, only the number in the program's rule.
+</details>
 Key Terminology: Section 7
 Term	Definition
 Sensor	A device that measures something in the physical world and turns it into a signal.
@@ -1467,7 +1581,7 @@ Forouzan, B. A. (2018). Foundations of Computer Science (4th ed.). Cengage Learn
 von Neumann, J. (2012). The Computer and the Brain (3rd ed.). Yale University Press. Foreword to the third edition, p. xx; pp. 57–58 (receptors respond once a minimum intensity, a threshold, is reached).
 Arduino. Arduino Uno Rev3 documentation and the analogWrite() reference (docs.arduino.cc): 10-bit ADC, 2 KB RAM, 32 KB flash, 16 MHz clock, PWM values 0–255, recommended pin current.
 
-Facts not taken from the books (to be checked by a teammate before final submission): the speed of sound (about 343 m/s at 20 °C) and the 58 µs per cm shortcut (standard physics, derived above); the motor types, PWM, H-bridge and motor-driver explanations (general electronics); the Arduino Uno figures (manufacturer's documentation). Diagrams are simplified teaching models drawn for this guide. Section 7 was written by Merey.
+Facts not taken from the books: the speed of sound (about 343 m/s at 20 °C) and the 58 µs per cm shortcut (standard physics, derived above); the motor types, PWM, H-bridge and motor-driver explanations (general electronics); the Arduino Uno figures (manufacturer's documentation). Diagrams are simplified teaching models drawn for this guide. Section 7 was written by Merey.
 
 Key Terminology
 
@@ -1531,3 +1645,12 @@ OR	Gives 1 when at least one bit is 1.
 XOR	Gives 1 when the two bits are different.
 
 Terms for sensors, actuators and microcontrollers are listed at the end of Section 7.
+
+References
+Forouzan, B. A. (2018). Foundations of Computer Science (4th ed.). Cengage Learning. Chapter 5, "Computer Organization" (CPU, main memory, input/output, subsystem interconnection, program execution): Sections 1–6. Pages 62–63, 97–98, 105 and 176: Section 7.
+Brookshear, J. G. (2011). Computer Science: An Overview (11th ed.). Addison-Wesley. Chapter 2, "Data Manipulation" (CPU architecture, stored-program concept, machine cycle): Sections 2 and 6. Pages 9, 114, 462–463 and 497–499: Section 7.
+von Neumann, J. (2012). The Computer and the Brain (3rd ed.). Yale University Press. Page xx and pages 57–58: Section 7.
+Arduino. Arduino Uno Rev3 documentation and analogWrite() reference. docs.arduino.cc: Section 7.
+Course lecture materials, Computer Science and AI Programming, Beijing Institute of Technology, 2026: Sections 1–8.
+
+All explanations are written in our own words for beginners. All diagrams in this chapter (assets/hw-*.svg and .png) are original drawings made for this guide; no textbook figures were copied.
